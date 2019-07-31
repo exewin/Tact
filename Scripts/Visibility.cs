@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FindHostile : MonoBehaviour
+public class Visibility : MonoBehaviour
 {
 
 	public int id;
@@ -22,15 +22,20 @@ public class FindHostile : MonoBehaviour
 		{
 			if (Physics.Linecast(transform.position, enemies[i].transform.position, layers))
 			{
-				//enemies[i].GetComponent<Renderer>().enabled = false;
 				if(id==GlobalScript.mercActive)
+				{
 					enemies[i].GetComponent<Renderer>().material.color = Color.black;
+					
+				}
 			}
 			else
 			{
 				enemies[i].GetComponent<Renderer>().enabled = true;
 				if(id==GlobalScript.mercActive)
+				{
 					enemies[i].GetComponent<Renderer>().material.color = Color.red;
+					
+				}
 			}
 		}
 	}

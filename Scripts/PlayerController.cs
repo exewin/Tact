@@ -31,6 +31,6 @@ public class PlayerController : MonoBehaviour
 	
 	void OnMouseDown()
 	{
-		//GlobalScript.SelectMerc(id); TO DO
+		//GlobalScript.SelectMerc(id); TODO
 	}
 }
