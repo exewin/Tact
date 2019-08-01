@@ -11,8 +11,20 @@ public class Item : ScriptableObject
 	
 	public Sprite image;
 	
+	public float weigth;
+	
 	public bool stackable;
-	public int quantity; //?
+	[Range(1,999)]
+	int _quantity = 1; //?
+	
+	
+	public int quantity
+	{
+		get { return (stackable ? _quantity : 1);}
+		set { _quantity = value; }
+	}
+	
+	
 	
 
 }

@@ -14,9 +14,11 @@ MonoBehaviour:
   name: Desert Eagle
   desc: .44 magnum handgun.
   image: {fileID: 21300000, guid: f5ec0581a1fe05f418cda0261e7b4301, type: 3}
+  weigth: 2
   stackable: 0
   quantity: 1
   power: 35
   capacity: 9
   accuracy: 50
   apCost: 25
+  ammoType: 0

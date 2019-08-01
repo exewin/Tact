@@ -11,7 +11,8 @@ public class GlobalScript : MonoBehaviour
 	public static int mercActive = 0;
 	public GameObject highlight;
 	
-	public List<MercStats> mercs = new List<MercStats>();
+	public List<GameObject> mercs = new List<GameObject>();
+	MercStats mercScript;
 	
 	//UI
 	public Image[] UITeam = new Image[6];
@@ -20,19 +21,19 @@ public class GlobalScript : MonoBehaviour
 	public Text UIHpText;
 	public RectTransform UIHpBar;
 	
+	public GameObject backpack;
+	
 	void Start()
 	{
 		//Store mercs in List
+		int i = 0;
 		foreach(GameObject e in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			mercs.Add(e.GetComponent<MercStats>());
-		}	
-		for(int i=0;i<Mathf.Min(TEAM_LIMIT,mercs.Count);i++)
-		{
-			UITeam[i].sprite = mercs[i].portrait;
+			mercs.Add(e);
+			mercScript = e.GetComponent<MercStats>();
+			UITeam[i].sprite = mercScript.portrait;
+			i++;
 		}
-		
-		
 		
 		UIControl();
 	}
@@ -44,21 +45,32 @@ public class GlobalScript : MonoBehaviour
 		{
 			if(Input.GetKeyDown(""+(i+1)))
 			{
-				mercActive=i;
+				SelectMerc(i);
 				SetActiveMercHighlight(i);
 			}
+		}
+		//Show backpack (key i)
+		if(Input.GetKeyDown(KeyCode.I))
+		{
+			Backpack();
 		}
 	}
 	
 	//Select merc by UI portaits
-	public void SelectMerc(int i)
+	public void SelectMercByPortrait(int i)
 	{
-		mercActive=i;
+		SelectMerc(i);
 		SetActiveMercHighlight(i);
 	}
 	
+	private void SelectMerc(int i)
+	{
+		mercActive=i;
+		mercScript=mercs[i].GetComponent<MercStats>();
+	}
+	
 	//Highlight portrait in UI
-	void SetActiveMercHighlight(int i)
+	private void SetActiveMercHighlight(int i)
 	{
 		if(i<3)
 			highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(82*i,0);
@@ -68,14 +80,30 @@ public class GlobalScript : MonoBehaviour
 		UIControl();
 	}
 	
-	//Update UI
-	public void UIControl()
+	//Backpack button
+	public void Backpack()
 	{
-		UINickname.text = mercs[mercActive].nickname;
-		UIPortrait.sprite = mercs[mercActive].portrait;
+		if(!backpack.active)
+			backpack.SetActive(true);
+		else
+			backpack.SetActive(false);
+	}
+	
+	private void SendInventory()
+	{
+		GetComponent<InventoryController>().GetInventory(mercs[mercActive].GetComponent<Inventory>().items);
+	}
+	
+	//Update UI
+	private void UIControl()
+	{
+		UINickname.text = mercScript.nickname;
+		UIPortrait.sprite = mercScript.portrait;
 		
-		UIHpText.text = mercs[mercActive].hp + "/"+ mercs[mercActive].maxHp;
-		UIHpBar.localScale = new Vector3((float)mercs[mercActive].hp/(float)mercs[mercActive].maxHp,1f,1f);
+		UIHpText.text = mercScript.hp + "/"+ mercScript.maxHp;
+		UIHpBar.localScale = new Vector3((float)mercScript.hp/(float)mercScript.maxHp,1f,1f);
+		
+		SendInventory();
 		
 	}
 	

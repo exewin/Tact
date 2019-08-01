@@ -5,8 +5,10 @@ using UnityEngine;
 public class MercStats : MonoBehaviour 
 {
 	
+	//personal info
 	public string nickname;
 	public Sprite portrait;
+	public string desc;
 
 	//stats
 	public int hp;
