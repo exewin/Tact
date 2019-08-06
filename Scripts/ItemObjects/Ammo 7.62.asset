@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d15f081f64b94b47b43109ecc9726e8, type: 3}
-  m_Name: Ammo 44
+  m_Name: Ammo 7.62
   m_EditorClassIdentifier: 
-  name: .44 Rounds
-  desc: Caliber 44 magnum bullets
-  image: {fileID: 21300000, guid: e2cd8cf977032594aae8ac14cf717f9b, type: 3}
-  weigth: 0.03
+  name: 7.62x39mm rounds
+  desc: pociski
+  image: {fileID: 21300000, guid: dc38e93c6a454ec42839efd131f8ffd0, type: 3}
+  weigth: 0.02
   stackable: 1
-  quantity: 5
-  ammoType: 7
+  _quantity: 30
+  ammoType: 0

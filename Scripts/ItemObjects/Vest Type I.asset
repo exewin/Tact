@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2837b3eb29f1dc6478cb177f5b247c27, type: 3}
+  m_Name: Vest Type I
+  m_EditorClassIdentifier: 
+  name: Vest Type I
+  desc: Standard chest protection
+  image: {fileID: 21300000, guid: f12c0a6639680814ab27020e9263c128, type: 3}
+  weigth: 3
+  stackable: 0
+  _quantity: 1
+  defense: 30
+  type: 0

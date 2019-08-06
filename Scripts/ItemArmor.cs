@@ -7,6 +7,8 @@ public class ItemArmor : Item
 {
 	
 	public int defense;
-	public int type;
+	public Type type;
 	
 }
+
+public enum Type{vest, helmet};

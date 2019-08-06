@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupItem : MonoBehaviour 
+public class PickupItem : Inventory
 {
 	
-	public InventoryController inv; // TEMP TODO
+	public InventoryController inv;
 
 	void OnMouseDown()
 	{
-		Debug.Log("sd");
-		inv.TakeItem(GetComponent<Inventory>().items);
+		inv.TakeItem(items);
 	}
 
 }

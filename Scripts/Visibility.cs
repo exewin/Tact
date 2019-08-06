@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Visibility : MonoBehaviour
 {
-
-	public int id;
-	public List<GameObject> enemies = new List<GameObject>();
+	int id;
+	List<GameObject> enemies = new List<GameObject>();
 	public LayerMask layers;
 	void Start()
 	{
@@ -22,21 +21,25 @@ public class Visibility : MonoBehaviour
 		{
 			if (Physics.Linecast(transform.position, enemies[i].transform.position, layers))
 			{
-				if(id==GlobalScript.mercActive)
+				if(id==GameController.mercActive)
 				{
 					enemies[i].GetComponent<Renderer>().material.color = Color.black;
-					
 				}
 			}
 			else
 			{
 				enemies[i].GetComponent<Renderer>().enabled = true;
-				if(id==GlobalScript.mercActive)
+				if(id==GameController.mercActive)
 				{
 					enemies[i].GetComponent<Renderer>().material.color = Color.red;
 					
 				}
 			}
 		}
+	}
+	
+	public void SetID(int i)
+	{
+		id = i;
 	}
 }
