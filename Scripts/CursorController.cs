@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class CursorController : MonoBehaviour 
 {
@@ -18,33 +19,35 @@ public class CursorController : MonoBehaviour
 	
 	void Update()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		
-		if(Physics.Raycast(ray, out hit))
+		if (EventSystem.current.IsPointerOverGameObject(-1)==false)    // is the touch on the GUI
 		{
-			if(hit.transform.tag=="MouseClickable")
-			{
-				if(Input.GetMouseButtonDown(0))
-				{
-					mercs[GameController.mercActive].Shoot();
-					Debug.Log("trying to shoot enemy's "+hit.transform.name);
-				}
-				
-				Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.Auto);
-			}		
-		}
-	
-
-		if(Input.GetMouseButtonDown(1))
-		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			
 			if(Physics.Raycast(ray, out hit))
 			{
-				mercs[GameController.mercActive].GetComponent<NavMeshAgent>().SetDestination(hit.point);
+				if(hit.transform.tag=="Shootable")
+				{
+					if(Input.GetMouseButtonDown(0))
+					{
+						mercs[GameController.mercActive].Shoot(hit.transform);
+					}
+					
+					Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.Auto);
+				}		
 			}
+		
+
+			if(Input.GetMouseButtonDown(1))
+			{
+				if(Physics.Raycast(ray, out hit))
+				{
+					mercs[GameController.mercActive].GetComponent<NavMeshAgent>().SetDestination(hit.point);
+				}
+			}
+					//GetComponent<Renderer>().material.color = Color.yellow;			
+					//GetComponent<Renderer>().material.color = Color.white;
 		}
-				//GetComponent<Renderer>().material.color = Color.yellow;			
-				//GetComponent<Renderer>().material.color = Color.white;
 		
 	}
 }
