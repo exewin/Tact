@@ -82,6 +82,9 @@ public class StatsMerc : Stats
 		if(!ammo||!weapon)
 			return;
 		
+		if(ammo.ammo != weapon.ammo)
+			return;
+		
 		int need = weapon.capacity - weapon.bulletsLeft;
 		int have = Mathf.Min(ammo.quantity,need);
 		weapon.bulletsLeft += have;
@@ -99,9 +102,17 @@ public class StatsMerc : Stats
 	
 	public void EjectAmmo()
 	{
+		if(!ammo)
+		{
+			//create object ammo
+		}
+		
 		if(!ammo||!weapon)
 			return;
-		//check ammo type
+		
+		if(ammo.ammo!=weapon.ammo)
+			return;
+		
 		ammo.quantity += weapon.bulletsLeft;
 		weapon.bulletsLeft = 0;
 		

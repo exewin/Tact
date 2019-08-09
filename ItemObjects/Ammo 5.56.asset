@@ -17,4 +17,4 @@ MonoBehaviour:
   weight: 0.02
   stackable: 1
   _quantity: 30
-  ammoType: 2
+  ammo: 5

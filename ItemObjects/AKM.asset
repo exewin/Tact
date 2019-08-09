@@ -23,5 +23,6 @@ MonoBehaviour:
   bulletsLeft: 0
   accuracy: 65
   apCost: 22
+  ammo: 6
   velocity: 50
   shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}
