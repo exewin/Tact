@@ -13,6 +13,8 @@ public class InventoryController : MonoBehaviour
 	List<GameObject> backpackSlots = new List<GameObject>();
 	public UIController UIControl;
 	
+	bool autoEquipAmmo;
+	
 	
 	//UI
 	public Text item_name;
@@ -23,7 +25,7 @@ public class InventoryController : MonoBehaviour
 	public Text item_stat3;
 	public Text item_stat4;
 	
-	public Text total_weigth;
+	public Text total_weight;
 	
 	
 	public void GetMerc(GameObject merc)
@@ -37,7 +39,7 @@ public class InventoryController : MonoBehaviour
 	{
 		ClearSlots(); //delete existing slots
 		CreateSlots(); //create new slots
-		CalculateWeigth(); //calculate weigth
+		Calculateweight(); //calculate weight
 	}
 	
 	private void ClearSlots()
@@ -102,7 +104,7 @@ public class InventoryController : MonoBehaviour
 	
 	public void EquipItem(int index)
 	{
-		if(items[index] is ItemWeapon) //weapon
+		if(items[index] is ItemWeapon)
 		{
 			if(stats.weapon)
 			{
@@ -113,37 +115,28 @@ public class InventoryController : MonoBehaviour
 			UIControl.UIControl();
 			//auto equip ammo TODO
 		}
-		else if(items[index] is ItemArmor) //armor
+		else if(items[index] is ItemArmor)
 		{
-		
-			ItemArmor o = (ItemArmor)items[index];
-			
-			
-			
-			
-			if(o.type==Type.vest) //vest
+			if(stats.armor)
 			{
-				if(stats.armor)
-				{
-					UnequipItem(stats.armor);
-				}
-				stats.EquipArmor(items[index]);
-				DropItem(index);
-				UIControl.UIControl();
+				UnequipItem(stats.armor);
 			}
-			else if(true) //helmet
+			stats.EquipArmor(items[index]);
+			DropItem(index);
+			UIControl.UIControl();
+		}
+		else if(items[index] is ItemHelmet)
+		{
+			if(stats.helmet)
 			{
-				if(stats.helmet)
-				{
-					UnequipItem(stats.helmet);
-				}
-				stats.EquipHelmet(items[index]);
-				DropItem(index);
-				UIControl.UIControl();
+				UnequipItem(stats.helmet);
 			}
+			stats.EquipHelmet(items[index]);
+			DropItem(index);
+			UIControl.UIControl();
 		}
 			
-		else if(items[index] is ItemAmmo) //ammo
+		else if(items[index] is ItemAmmo)
 		{
 			if(stats.ammo)
 			{
@@ -163,6 +156,14 @@ public class InventoryController : MonoBehaviour
 		}
 	}
 	
+	public void EjectAmmoButton()
+	{
+		stats.EjectAmmo();
+	}
+	public void ReloadWeaponButton()
+	{
+		stats.ReloadWeapon();
+	}
 	
 	private bool FindItemInInventory(string s)
 	{
@@ -176,24 +177,24 @@ public class InventoryController : MonoBehaviour
 		return false;
 	}	
 	
-	void CalculateWeigth()
+	void Calculateweight()
 	{
-		float weigth=0f;
+		float weight=0f;
 		for(int i = 0; i<items.Count;i++)
 		{
-			weigth+=items[i].weigth*items[i].quantity;
+			weight+=items[i].weight*items[i].quantity;
 		}
 		List<Item> equiped = stats.ReturnItems();
 		
 		if(equiped.Count!=0)
 			for(int i = 0; i<equiped.Count;i++)
 			{
-				weigth+=equiped[i].weigth*equiped[i].quantity;
+				weight+=equiped[i].weight*equiped[i].quantity;
 			}
 			
-		total_weigth.text = weigth + " / " + stats.StrengthFormula() + "kg";
+		total_weight.text = weight + " / " + Formulas.Weight(stats) + "kg";
 		
-		if(weigth > stats.StrengthFormula())
+		if(weight > Formulas.Weight(stats))
 		{
 			//TODO
 			Debug.Log(stats.nickname+" is overloaded");

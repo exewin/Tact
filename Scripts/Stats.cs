@@ -5,16 +5,20 @@ using UnityEngine.AI;
 
 public class Stats : MonoBehaviour 
 {
+	//necessary gameObjects
+	[SerializeField] protected Transform head;
 	
-	
+	//UIs
+	[SerializeField] protected Log log;
+	[SerializeField] protected UIController UIControl;
 	
 	//personal info
 	public string nickname;
 	public Sprite portrait;
-	public string desc;
+	[TextArea(4,3)] public string desc;
 
 	//stats
-	public int hp;
+	[HideInInspector] public int hp;
 	public int maxHp;
 	public int accuracy;
 	public int strength;
@@ -22,19 +26,52 @@ public class Stats : MonoBehaviour
 	public int agility;
 	
 	//equipment
-	public ItemWeapon weapon;
-	public ItemArmor armor;
-	public ItemArmor helmet;
-	public ItemAmmo ammo;
+	[HideInInspector] public ItemWeapon weapon;
+	[HideInInspector] public ItemArmor armor;
+	[HideInInspector] public ItemHelmet helmet;
+	[HideInInspector] public ItemAmmo ammo;
 	
 	protected AudioSource audioSource;
 	
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
+		
+		
+		hp = maxHp;
 	}
 	
-	
+	public void Injury(int dmg, part bodyPart)
+	{
+		
+		hp-=dmg;
+		string stringPart = "";
+		if(bodyPart==part.head)
+		{
+			stringPart = "head";
+		}
+		else if(bodyPart==part.chest)
+		{
+			stringPart = "chest";
+		}
+		else if(bodyPart==part.legs)
+		{
+			stringPart = "legs";
+		}
+		
+		log.Send(nickname + " has been hit in "+stringPart+" lost " + dmg + " HP");
+		
+		if(hp<1)
+		{
+			log.Send(nickname + " has died");
+
+			//TODO death
+			GameController.RemoveFromList(gameObject);
+			Destroy(gameObject);
+		}
+		
+		UIControl.UIControl();
+	}
 	
 	
 	public void EquipWeapon(Item item)
@@ -51,7 +88,7 @@ public class Stats : MonoBehaviour
 	
 	public void EquipHelmet(Item item)
 	{
-		helmet = (ItemArmor)item;
+		helmet = (ItemHelmet)item;
 		//armor f
 	}
 	
@@ -60,6 +97,9 @@ public class Stats : MonoBehaviour
 		ammo = (ItemAmmo)item;
 		//dmg f
 	}
+	
+	
+	
 	
 	public List<Item> ReturnItems()
 	{

@@ -15,12 +15,13 @@ MonoBehaviour:
   desc: 7.62 assault rifle. In service since 1959. It was officially replaced in Soviet
     frontline service by the AK-74 in the late 1970s, but remains in use worldwide.
   image: {fileID: 21300000, guid: 12cf538f85168f8449ee27b722fcb064, type: 3}
-  weigth: 3.43
+  weight: 3
   stackable: 0
   _quantity: 1
   power: 32
   capacity: 30
-  ammoLoaded: 0
+  bulletsLeft: 0
   accuracy: 65
   apCost: 22
+  velocity: 50
   shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}

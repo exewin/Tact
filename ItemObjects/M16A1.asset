@@ -9,16 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a62932ef714cbde4bad7ac06bd6ae47d, type: 3}
-  m_Name: SW500
+  m_Name: M16A1
   m_EditorClassIdentifier: 
-  name: SW500 Revolver
-  desc: Slow, but powerful revolver.
-  image: {fileID: 21300000, guid: 9a29ed6523116a842b139d3e299b28a4, type: 3}
-  weigth: 1.8
+  name: M16A1
+  desc: Weapon also known as XM16E1
+  image: {fileID: 21300000, guid: 080abe515e7c3ea4791b4cbead03edfd, type: 3}
+  weight: 3.4
   stackable: 0
-  quantity: 1
-  power: 45
-  capacity: 5
-  accuracy: 50
-  apCost: 40
-  ammoType: 0
+  _quantity: 1
+  power: 30
+  capacity: 30
+  bulletsLeft: 0
+  accuracy: 70
+  apCost: 24
+  velocity: 68.57143
+  shootSound: {fileID: 8300000, guid: 28884463763cee84aaa4ec838ac2548d, type: 3}

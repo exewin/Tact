@@ -1,21 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class CursorController : MonoBehaviour 
 {
 	
-	public Texture2D cursorTexture;
-    private Vector2 hotSpot = Vector2.zero;
-	
+	[SerializeField]
+	private GameObject UIChance;
+	[HideInInspector]
 	public StatsMerc[] mercs = new StatsMerc[6];
-	
-	void Start()
-	{
-		hotSpot = new Vector2 (cursorTexture.width / 2, cursorTexture.height / 2);
-	}
 	
 	void Update()
 	{
@@ -33,8 +29,21 @@ public class CursorController : MonoBehaviour
 						mercs[GameController.mercActive].Shoot(hit.transform);
 					}
 					
-					Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.Auto);
-				}		
+					if(mercs[GameController.mercActive].weapon) //UI CtH
+					{
+						Vector3 screenPoint = Camera.main.WorldToScreenPoint (hit.point);
+						UIChance.transform.position = screenPoint;
+						
+						int CtH = (int)Formulas.ChanceToHit(Formulas.Distance(mercs[GameController.mercActive].transform, hit.transform),
+						mercs[GameController.mercActive].accuracy,mercs[GameController.mercActive].weapon.accuracy);
+						
+						UIChance.GetComponent<Text>().text = hit.collider.name + "\nCtH:"+CtH+"%";
+					}
+				}
+				else
+				{
+					UIChance.transform.position = new Vector3(-100,0,0);
+				}			
 			}
 		
 
@@ -48,6 +57,7 @@ public class CursorController : MonoBehaviour
 					//GetComponent<Renderer>().material.color = Color.yellow;			
 					//GetComponent<Renderer>().material.color = Color.white;
 		}
+
 		
 	}
 }

@@ -2,26 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Common_Item", menuName = "Item/Generic")]
+[CreateAssetMenu(fileName = "Common Item", menuName = "Item/Generic")]
 public class Item : ScriptableObject
 {
 	
 	public new string name;
-	[SerializeField]
-	[TextArea(4,3)]
-	public string desc;
-	
-	[SerializeField]
+	[TextArea(4,3)] public string desc;
 	public Sprite image;
-	
-	[SerializeField]
-	public float weigth;
-	
-	[SerializeField]
+	public float weight;
 	public bool stackable;
-	[HideInInspector]
-	[SerializeField]
-	public int _quantity = 1; //?
+	[HideInInspector] public int _quantity = 1;
 	
 	
 	public int quantity

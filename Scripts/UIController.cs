@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
 	
 	//UI Equipment
 	public Image UIWeapon;
+	public Text UIWeaponCapacity;
 	public Image UIArmor;
 	public Image UIHelmet;
 	public Image UIAmmo;
@@ -126,9 +127,15 @@ public class UIController : MonoBehaviour
 		UIStatReflex.text = mercScript.reflex + "";
 		
 		if(mercScript.weapon)
+		{
 			UIWeapon.sprite = mercScript.weapon.image;
+			UIWeaponCapacity.text = mercScript.weapon.bulletsLeft + "/" + mercScript.weapon.capacity;
+		}
 		else
+		{
 			UIWeapon.sprite = transparent;
+			UIWeaponCapacity.text = "";
+		}
 		if(mercScript.armor)
 			UIArmor.sprite = mercScript.armor.image;
 		else
