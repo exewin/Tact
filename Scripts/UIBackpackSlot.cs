@@ -40,7 +40,7 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerDownH
 		}
 		else if(Input.GetMouseButtonDown(1))
 		{
-			inv.DropItem(index);
+			inv.RemoveItem(index);
 		}
 	}
 

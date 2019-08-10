@@ -25,3 +25,5 @@ MonoBehaviour:
   ammo: 2
   velocity: 33.57
   shootSound: {fileID: 8300000, guid: dcfaa478ec0160f47aa211ace30b75e4, type: 3}
+  reloadSound: {fileID: 8300000, guid: 742566a2a9bc915418b3782de39c137f, type: 3}
+  ammoUsed: {fileID: 0}

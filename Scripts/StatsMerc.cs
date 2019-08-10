@@ -21,7 +21,7 @@ public class StatsMerc : Stats
 			return;
 		}
 		
-		audioSource.PlayOneShot(weapon.shootSound); //HERE?
+		audioSource.PlayOneShot(weapon.shootSound);
 		weapon.bulletsLeft--;
 		float distance = Formulas.Distance(head, target);
 		float chanceToHit = Formulas.ChanceToHit(distance, accuracy, weapon.accuracy);
@@ -85,26 +85,27 @@ public class StatsMerc : Stats
 		if(ammo.ammo != weapon.ammo)
 			return;
 		
+		weapon.ammoUsed = ammo;
 		int need = weapon.capacity - weapon.bulletsLeft;
 		int have = Mathf.Min(ammo.quantity,need);
 		weapon.bulletsLeft += have;
 		ammo.quantity -= have;
-		
-		//reload sound TODO
-		
 		if(ammo.quantity==0)
 		{
-			Destroy(ammo);
 			ammo = null;
 		}
+		
+		audioSource.PlayOneShot(weapon.reloadSound);
 		UIControl.UIControl();
 	}
 	
 	public void EjectAmmo()
 	{
-		if(!ammo)
+		if(!ammo&&weapon&&weapon.bulletsLeft>0)
 		{
 			//create object ammo
+			Item a = Instantiate(weapon.ammoUsed);
+			EquipAmmo(a);
 		}
 		
 		if(!ammo||!weapon)
@@ -116,6 +117,7 @@ public class StatsMerc : Stats
 		ammo.quantity += weapon.bulletsLeft;
 		weapon.bulletsLeft = 0;
 		
+		audioSource.PlayOneShot(weapon.reloadSound);
 		UIControl.UIControl();
 	}
 	

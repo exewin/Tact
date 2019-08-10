@@ -61,7 +61,7 @@ public class InventoryController : MonoBehaviour
 		}
 	}
 	
-	public void DropItem(int index)
+	public void RemoveItem(int index)
 	{
 		items.RemoveAt(index);
 		Destroy(backpackSlots[index]);
@@ -111,7 +111,7 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.weapon);
 			}
 			stats.EquipWeapon(items[index]);
-			DropItem(index);
+			RemoveItem(index);
 			UIControl.UIControl();
 			//auto equip ammo TODO
 		}
@@ -122,7 +122,7 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.armor);
 			}
 			stats.EquipArmor(items[index]);
-			DropItem(index);
+			RemoveItem(index);
 			UIControl.UIControl();
 		}
 		else if(items[index] is ItemHelmet)
@@ -132,7 +132,7 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.helmet);
 			}
 			stats.EquipHelmet(items[index]);
-			DropItem(index);
+			RemoveItem(index);
 			UIControl.UIControl();
 		}
 			
@@ -143,7 +143,7 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.ammo);
 			}
 			stats.EquipAmmo(items[index]);
-			DropItem(index);
+			RemoveItem(index);
 			UIControl.UIControl();
 		}
 	}

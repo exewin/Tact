@@ -3990,7 +3990,6 @@ GameObject:
   - component: {fileID: 803254808}
   - component: {fileID: 803254807}
   - component: {fileID: 803254809}
-  - component: {fileID: 803254810}
   m_Layer: 9
   m_Name: Merc
   m_TagString: Player
@@ -4244,17 +4243,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &803254810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 803254799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c514f3bcce198e4aba63d462a06d18b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &817464440
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,7 +4676,6 @@ GameObject:
   - component: {fileID: 870471682}
   - component: {fileID: 870471681}
   - component: {fileID: 870471680}
-  - component: {fileID: 870471679}
   m_Layer: 9
   m_Name: Merc
   m_TagString: Player
@@ -4696,17 +4683,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &870471679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 870471678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c514f3bcce198e4aba63d462a06d18b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &870471680
 AudioSource:
   m_ObjectHideFlags: 0

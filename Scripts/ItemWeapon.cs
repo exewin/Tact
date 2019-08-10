@@ -17,6 +17,9 @@ public class ItemWeapon : Item
 	public float velocity;
 	
 	public AudioClip shootSound;
+	public AudioClip reloadSound;
+	
+	[HideInInspector] public ItemAmmo ammoUsed; 
 	
 }
 

@@ -15,7 +15,7 @@ public class CursorController : MonoBehaviour
 	
 	void Update()
 	{
-		if (EventSystem.current.IsPointerOverGameObject(-1)==false)    // is the touch on the GUI
+		if (EventSystem.current.IsPointerOverGameObject(-1)==false) // is the touch on the GUI
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -54,8 +54,6 @@ public class CursorController : MonoBehaviour
 					mercs[GameController.mercActive].GetComponent<NavMeshAgent>().SetDestination(hit.point);
 				}
 			}
-					//GetComponent<Renderer>().material.color = Color.yellow;			
-					//GetComponent<Renderer>().material.color = Color.white;
 		}
 
 		
