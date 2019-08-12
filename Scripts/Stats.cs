@@ -29,7 +29,6 @@ public class Stats : MonoBehaviour
 	[HideInInspector] public ItemWeapon weapon;
 	[HideInInspector] public ItemArmor armor;
 	[HideInInspector] public ItemHelmet helmet;
-	[HideInInspector] public ItemAmmo ammo;
 	
 	protected AudioSource audioSource;
 	
@@ -92,13 +91,6 @@ public class Stats : MonoBehaviour
 		//armor f
 	}
 	
-	public void EquipAmmo(Item item)
-	{
-		ammo = (ItemAmmo)item;
-		//dmg f
-	}
-	
-	
 	
 	
 	public List<Item> ReturnItems()
@@ -110,8 +102,7 @@ public class Stats : MonoBehaviour
 			i.Add(armor);
 		if(helmet)
 			i.Add(helmet);
-		if(ammo)
-			i.Add(ammo);
+
 		return i;
 	}
 	

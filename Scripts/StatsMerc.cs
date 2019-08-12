@@ -17,7 +17,15 @@ public class StatsMerc : Stats
 		}
 		if(weapon.bulletsLeft == 0)
 		{
-			ReloadWeapon(); //?
+			if(weapon.ammoUsed)
+			{
+				ReloadWeapon(weapon.ammoUsed);
+			}
+			else
+			{
+				Debug.Log("No Ammo!");
+				//sound? TODO
+			}
 			return;
 		}
 		
@@ -77,9 +85,9 @@ public class StatsMerc : Stats
 		}
 	}
 	
-	public void ReloadWeapon()
+	public void ReloadWeapon(ItemAmmo ammo)
 	{
-		if(!ammo||!weapon)
+		if(!weapon)
 			return;
 		
 		if(ammo.ammo != weapon.ammo)
@@ -99,16 +107,9 @@ public class StatsMerc : Stats
 		UIControl.UIControl();
 	}
 	
-	public void EjectAmmo()
+	public void EjectAmmo(ItemAmmo ammo)
 	{
-		if(!ammo&&weapon&&weapon.bulletsLeft>0)
-		{
-			//create object ammo
-			Item a = Instantiate(weapon.ammoUsed);
-			EquipAmmo(a);
-		}
-		
-		if(!ammo||!weapon)
+		if(!weapon)
 			return;
 		
 		if(ammo.ammo!=weapon.ammo)

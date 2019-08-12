@@ -19,6 +19,7 @@ public class Hostile : MonoBehaviour
 	void FixedUpdate()
 	{
 		rend.enabled = false;
+		gameObject.layer = 10;
 	}
 	
 	

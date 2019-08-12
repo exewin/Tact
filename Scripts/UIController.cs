@@ -29,8 +29,6 @@ public class UIController : MonoBehaviour
 	public Text UIWeaponCapacity;
 	public Image UIArmor;
 	public Image UIHelmet;
-	public Image UIAmmo;
-	public Text UIAmmoQuantity;
 	
 	public Sprite transparent; //using blank transparent sprite for empty equipment slot
 	public GameObject highlight; //UI team highlight
@@ -144,16 +142,6 @@ public class UIController : MonoBehaviour
 			UIHelmet.sprite = mercScript.helmet.image;
 		else
 			UIHelmet.sprite = transparent;
-		if(mercScript.ammo)
-		{
-			UIAmmo.sprite = mercScript.ammo.image;
-			UIAmmoQuantity.text = ""+mercScript.ammo.quantity;
-		}
-		else
-		{
-			UIAmmo.sprite = transparent;
-			UIAmmoQuantity.text = "";
-		}
 		
 	}
 	

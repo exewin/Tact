@@ -13,6 +13,9 @@ public class CursorController : MonoBehaviour
 	[HideInInspector]
 	public StatsMerc[] mercs = new StatsMerc[6];
 	
+	[SerializeField]
+	private LayerMask layers;
+	
 	void Update()
 	{
 		if (EventSystem.current.IsPointerOverGameObject(-1)==false) // is the touch on the GUI
@@ -22,8 +25,12 @@ public class CursorController : MonoBehaviour
 			
 			if(Physics.Raycast(ray, out hit))
 			{
+				Debug.Log(hit.collider.gameObject.layer);
 				if(hit.transform.tag=="Shootable")
 				{
+					if(hit.collider.GetComponent<BodyPart>().owner==mercs[GameController.mercActive])
+						return;
+					
 					if(Input.GetMouseButtonDown(0))
 					{
 						mercs[GameController.mercActive].Shoot(hit.transform);

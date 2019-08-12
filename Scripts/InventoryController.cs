@@ -30,7 +30,7 @@ public class InventoryController : MonoBehaviour
 	
 	public void GetMerc(GameObject merc)
 	{
-		items = merc.GetComponent<Inventory>().items; //reference instead of creating new list
+		items = merc.GetComponent<Inventory>().items;
 		stats = merc.GetComponent<StatsMerc>();
 		UpdateInventory();
 	}	
@@ -55,7 +55,7 @@ public class InventoryController : MonoBehaviour
 		for(int i = 0; i<items.Count;i++)
 		{
 			GameObject slot = Instantiate(slotPrefab);
-			slot.transform.SetParent(gridParent,false); //false sets localScale to (1,1,1)
+			slot.transform.SetParent(gridParent,false);
 			slot.GetComponent<UIBackpackSlot>().Assign(items[i], i);
 			backpackSlots.Add(slot);
 		}
@@ -111,9 +111,11 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.weapon);
 			}
 			stats.EquipWeapon(items[index]);
-			RemoveItem(index);
-			UIControl.UIControl();
-			//auto equip ammo TODO
+			ItemAmmo tmp = FindAmmoInInventory(stats.weapon.ammo);
+			if(tmp!=null)
+			{
+				stats.weapon.ammoUsed = tmp;
+			}
 		}
 		else if(items[index] is ItemArmor)
 		{
@@ -122,8 +124,6 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.armor);
 			}
 			stats.EquipArmor(items[index]);
-			RemoveItem(index);
-			UIControl.UIControl();
 		}
 		else if(items[index] is ItemHelmet)
 		{
@@ -132,20 +132,12 @@ public class InventoryController : MonoBehaviour
 				UnequipItem(stats.helmet);
 			}
 			stats.EquipHelmet(items[index]);
-			RemoveItem(index);
-			UIControl.UIControl();
 		}
-			
-		else if(items[index] is ItemAmmo)
-		{
-			if(stats.ammo)
-			{
-				UnequipItem(stats.ammo);
-			}
-			stats.EquipAmmo(items[index]);
-			RemoveItem(index);
-			UIControl.UIControl();
-		}
+		else
+			return;
+		
+		RemoveItem(index);
+		UIControl.UIControl();
 	}
 	
 	public void UnequipItem(Item item)
@@ -158,11 +150,19 @@ public class InventoryController : MonoBehaviour
 	
 	public void EjectAmmoButton()
 	{
-		stats.EjectAmmo();
+		if(stats.weapon.ammoUsed!=null && stats.weapon.bulletsLeft > 0)
+		{
+			stats.EjectAmmo(stats.weapon.ammoUsed);
+			UpdateInventory();
+		}
 	}
 	public void ReloadWeaponButton()
 	{
-		stats.ReloadWeapon();
+		if(stats.weapon.ammoUsed!=null && stats.weapon.ammoUsed.quantity > 0)
+		{
+			stats.ReloadWeapon(stats.weapon.ammoUsed);
+			UpdateInventory();
+		}
 	}
 	
 	private bool FindItemInInventory(string s)
@@ -175,9 +175,25 @@ public class InventoryController : MonoBehaviour
 			}
 		}
 		return false;
+	}
+	
+	private ItemAmmo FindAmmoInInventory(ammoType s)
+	{
+		for(int i = 0; i < items.Count; i++)
+		{
+			if(items[i] is ItemAmmo)
+			{
+				ItemAmmo item = (ItemAmmo)items[i];
+				if(item.ammo == s)
+				{
+					return item;
+				}
+			}
+		}
+		return null;
 	}	
 	
-	void Calculateweight()
+	private void Calculateweight()
 	{
 		float weight=0f;
 		for(int i = 0; i<items.Count;i++)
@@ -189,10 +205,10 @@ public class InventoryController : MonoBehaviour
 		if(equiped.Count!=0)
 			for(int i = 0; i<equiped.Count;i++)
 			{
-				weight+=equiped[i].weight*equiped[i].quantity;
+				weight+=equiped[i].weight;
 			}
 			
-		total_weight.text = weight + " / " + Formulas.Weight(stats) + "kg";
+		total_weight.text = weight + " / " + Formulas.Weight(stats) + "kg"; //F2? TODO
 		
 		if(weight > Formulas.Weight(stats))
 		{

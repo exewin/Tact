@@ -7,7 +7,7 @@ public class BodyPart : MonoBehaviour
 	[SerializeField]
 	private part bodyPart;
 	[SerializeField]
-	private Stats owner;
+	public Stats owner;
 	
 	public void Hit(int dmg)
 	{

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Visibility : MonoBehaviour
 {
-	int id;
-	public LayerMask layers;
+	private int id;
+	[SerializeField]
+	private LayerMask layers;
 	
 	public void SetID(int i)
 	{
@@ -27,10 +28,10 @@ public class Visibility : MonoBehaviour
 			else
 			{
 				GameController.enemies[i].GetComponent<Renderer>().enabled = true;
+				GameController.enemies[i].layer = 9;
 				if(id==GameController.mercActive)
 				{
 					GameController.enemies[i].GetComponent<Renderer>().material.color = Color.red;
-					
 				}
 			}
 		}
