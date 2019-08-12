@@ -113,6 +113,8 @@ public class UIController : MonoBehaviour
 	public void UIControl()
 	{
 		
+		GetComponent<InventoryController>().UpdateInventory();
+		
 		UINickname.text = mercScript.nickname;
 		UIPortrait.sprite = mercScript.portrait;
 		

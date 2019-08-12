@@ -6,9 +6,7 @@ public class Hostile : MonoBehaviour
 {
 	
 	public Transform[] bodyParts;
-	
-	public bool sawByActive;
-	public Renderer rend;
+	private  Renderer rend;
 	
 	void Start()
 	{
@@ -20,12 +18,25 @@ public class Hostile : MonoBehaviour
 	{
 		rend.enabled = false;
 		gameObject.layer = 10;
+		for(int i = 0; i < bodyParts.Length; i++)
+		{
+			bodyParts[i].gameObject.layer = 10;
+		}
 	}
 	
-	
-	void Saw(bool mode)
+	public void Visible()
 	{
-		rend.material.color = Color.black;
+		rend.enabled = true;
+		gameObject.layer = 9;
+		for(int i = 0; i < bodyParts.Length; i++)
+		{
+			bodyParts[i].gameObject.layer = 9;
+		}
+	}
+	
+	public void ChangeColor(Color c)
+	{
+		rend.material.color = c;
 	}
 
 }

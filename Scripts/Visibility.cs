@@ -8,6 +8,9 @@ public class Visibility : MonoBehaviour
 	[SerializeField]
 	private LayerMask layers;
 	
+	[SerializeField]
+	private Transform head;
+	
 	public void SetID(int i)
 	{
 		id = i;
@@ -18,20 +21,19 @@ public class Visibility : MonoBehaviour
 	{
 		for(int i = 0; i<GameController.enemies.Count;i++)
 		{
-			if (Physics.Linecast(transform.position, GameController.enemies[i].transform.position, layers))
+			if (!Physics.Linecast(head.transform.position, GameController.enemies[i].transform.position,layers))
 			{
+				GameController.enemies[i].GetComponent<Hostile>().Visible();
 				if(id==GameController.mercActive)
 				{
-					GameController.enemies[i].GetComponent<Renderer>().material.color = Color.black;
+					GameController.enemies[i].GetComponent<Hostile>().ChangeColor(Color.red);
 				}
 			}
 			else
 			{
-				GameController.enemies[i].GetComponent<Renderer>().enabled = true;
-				GameController.enemies[i].layer = 9;
 				if(id==GameController.mercActive)
 				{
-					GameController.enemies[i].GetComponent<Renderer>().material.color = Color.red;
+					GameController.enemies[i].GetComponent<Hostile>().ChangeColor(Color.black);
 				}
 			}
 		}

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour 
 {
-
+	[HideInInspector]
 	public List<Item> items = new List<Item>();
+	[HideInInspector]
 	public StatsMerc stats;
 	public GameObject slotPrefab;
 	public Transform gridParent;
@@ -27,6 +28,18 @@ public class InventoryController : MonoBehaviour
 	
 	public Text total_weight;
 	
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			ReloadWeaponButton();
+		}
+		if(Input.GetKeyDown(KeyCode.E))
+		{
+			EjectAmmoButton();
+		}
+	}
+	
 	
 	public void GetMerc(GameObject merc)
 	{
@@ -35,7 +48,7 @@ public class InventoryController : MonoBehaviour
 		UpdateInventory();
 	}	
 	
-	private void UpdateInventory()
+	public void UpdateInventory()
 	{
 		ClearSlots(); //delete existing slots
 		CreateSlots(); //create new slots
@@ -150,7 +163,7 @@ public class InventoryController : MonoBehaviour
 	
 	public void EjectAmmoButton()
 	{
-		if(stats.weapon.ammoUsed!=null && stats.weapon.bulletsLeft > 0)
+		if(stats.weapon&&stats.weapon.ammoUsed!=null && stats.weapon.bulletsLeft > 0)
 		{
 			stats.EjectAmmo(stats.weapon.ammoUsed);
 			UpdateInventory();
@@ -158,7 +171,7 @@ public class InventoryController : MonoBehaviour
 	}
 	public void ReloadWeaponButton()
 	{
-		if(stats.weapon.ammoUsed!=null && stats.weapon.ammoUsed.quantity > 0)
+		if(stats.weapon&&stats.weapon.ammoUsed!=null && stats.weapon.ammoUsed.quantity > 0)
 		{
 			stats.ReloadWeapon(stats.weapon.ammoUsed);
 			UpdateInventory();

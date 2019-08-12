@@ -17,7 +17,7 @@ public class StatsMerc : Stats
 		}
 		if(weapon.bulletsLeft == 0)
 		{
-			if(weapon.ammoUsed)
+			if(weapon.ammoUsed && weapon.ammoUsed.quantity>0)
 			{
 				ReloadWeapon(weapon.ammoUsed);
 			}

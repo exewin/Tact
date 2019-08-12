@@ -23,7 +23,7 @@ public class CursorController : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
-			if(Physics.Raycast(ray, out hit))
+			if(Physics.Raycast(ray, out hit)) ///LAYERY KURWY
 			{
 				Debug.Log(hit.collider.gameObject.layer);
 				if(hit.transform.tag=="Shootable")
@@ -40,10 +40,16 @@ public class CursorController : MonoBehaviour
 					{
 						Vector3 screenPoint = Camera.main.WorldToScreenPoint (hit.point);
 						UIChance.transform.position = screenPoint;
-						
-						int CtH = (int)Formulas.ChanceToHit(Formulas.Distance(mercs[GameController.mercActive].transform, hit.transform),
-						mercs[GameController.mercActive].accuracy,mercs[GameController.mercActive].weapon.accuracy);
-						
+						int CtH;
+						if(Physics.Linecast(mercs[GameController.mercActive].GetComponent<Stats>().head.position, hit.transform.position,layers))
+						{
+							CtH = 0;
+						}
+						else
+						{
+							CtH = (int)Formulas.ChanceToHit(Formulas.Distance(mercs[GameController.mercActive].GetComponent<Stats>().head, hit.transform),
+							mercs[GameController.mercActive].accuracy,mercs[GameController.mercActive].weapon.accuracy);
+						}
 						UIChance.GetComponent<Text>().text = hit.collider.name + "\nCtH:"+CtH+"%";
 					}
 				}

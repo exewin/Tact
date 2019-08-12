@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Stats : MonoBehaviour 
 {
 	//necessary gameObjects
-	[SerializeField] protected Transform head;
+	public Transform head;
 	
 	//UIs
 	[SerializeField] protected Log log;
