@@ -9,21 +9,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a62932ef714cbde4bad7ac06bd6ae47d, type: 3}
-  m_Name: Desert Eagle 44
+  m_Name: Walther PP
   m_EditorClassIdentifier: 
-  name: Desert Eagle 44
-  desc: .44 magnum handgun.
-  image: {fileID: 21300000, guid: f5ec0581a1fe05f418cda0261e7b4301, type: 3}
-  weight: 1.7
+  name: Walther PP
+  desc: 
+  image: {fileID: 21300000, guid: eab3979ee62f2a34f837b9c2bce38ea1, type: 3}
+  weight: 0.66
   stackable: 0
   _quantity: 1
-  power: 35
-  capacity: 9
+  power: 15
+  capacity: 8
   bulletsLeft: 0
-  accuracy: 40
-  apCost: 25
+  accuracy: 50
+  apCost: 20
   ammo: 2
-  velocity: 469.98
-  shootSound: {fileID: 8300000, guid: dcfaa478ec0160f47aa211ace30b75e4, type: 3}
-  reloadSound: {fileID: 8300000, guid: 742566a2a9bc915418b3782de39c137f, type: 3}
+  velocity: 320
+  shootSound: {fileID: 8300000, guid: 044c04e98986c3047a397566aaa3c62b, type: 3}
+  reloadSound: {fileID: 8300000, guid: 4cd872d099e589d4e9c4f783c20f0419, type: 3}
   ammoUsed: {fileID: 0}

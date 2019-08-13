@@ -61,14 +61,14 @@ public class StatsMerc : Stats
 	{
 		GameObject line = Instantiate(trace,head.position,transform.rotation);
 		line.transform.forward = lineDir;
-		line.GetComponent<Trace>().Info(weapon.velocity);
+		line.GetComponent<Trace>().Info(weapon.velocity/14f);
 		RaycastHit hit;
 		
 		//real distance ray
 		if(Physics.Raycast(head.position, lineDir, out hit))
 		{
 			float realDistance = Vector3.Distance(head.position,hit.point);
-			yield return new WaitForSeconds(realDistance/weapon.velocity);
+			yield return new WaitForSeconds(realDistance/(weapon.velocity/14f)); //velocity const
 		}
 		
 		if(Physics.Raycast(head.position, lineDir, out hit))

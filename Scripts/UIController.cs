@@ -6,9 +6,8 @@ using UnityEngine.AI;
 
 public class UIController : MonoBehaviour 
 {
-
-	List<GameObject> mercs = new List<GameObject>();
-	StatsMerc mercScript;
+	private List<GameObject> mercs = new List<GameObject>();
+	private StatsMerc mercScript;
 	public CursorController cursorControl;
 	
 	//UI
@@ -76,6 +75,8 @@ public class UIController : MonoBehaviour
 	
 	private void SelectMerc(int i)
 	{
+		if(i>=mercs.Count)
+			return;
 		GameController.mercActive=i;
 		mercScript=mercs[i].GetComponent<StatsMerc>();
 		SetActiveMercHighlight(i);
