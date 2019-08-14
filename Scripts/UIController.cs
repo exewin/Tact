@@ -29,13 +29,12 @@ public class UIController : MonoBehaviour
 	public Image UIArmor;
 	public Image UIHelmet;
 	
-	public Sprite transparent; //using blank transparent sprite for empty equipment slot
+	public Sprite transparent; //blank transparent sprite for empty equipment slot
 	public GameObject highlight; //UI team highlight
 	public GameObject backpack; //inventory gameobject
 	
 	void Start()
 	{
-		//Store mercs in List
 		int i = 0;
 		foreach(GameObject e in GameObject.FindGameObjectsWithTag("Player"))
 		{
@@ -48,6 +47,11 @@ public class UIController : MonoBehaviour
 		}
 		SelectMerc(0);
 		UIControl();
+	}
+	
+	public void RemoveMerc(GameObject g)
+	{
+		mercs.Remove(g);
 	}
 	
 	void Update()

@@ -5,11 +5,17 @@ using UnityEngine;
 public class PickupItem : Inventory
 {
 	
-	public InventoryController inv;
-
+	private InventoryController inv;
+	
+	void Start()
+	{
+		inv = Camera.main.GetComponent<InventoryController>();
+	}
+	
 	void OnMouseDown()
 	{
 		inv.TakeItem(items);
+		Destroy(gameObject);
 	}
 
 }

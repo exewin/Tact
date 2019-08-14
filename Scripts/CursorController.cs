@@ -23,9 +23,8 @@ public class CursorController : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
-			if(Physics.Raycast(ray, out hit)) ///LAYERY KURWY
+			if(Physics.Raycast(ray, out hit)) ///LAYERY KURWA TODO
 			{
-				Debug.Log(hit.collider.gameObject.layer);
 				if(hit.transform.tag=="Shootable")
 				{
 					if(hit.collider.GetComponent<BodyPart>().owner==mercs[GameController.mercActive])

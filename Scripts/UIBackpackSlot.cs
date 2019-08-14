@@ -38,10 +38,7 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerDownH
 		{
 			inv.EquipItem(index);
 		}
-		else if(Input.GetMouseButtonDown(1))
-		{
-			inv.RemoveItem(index);
-		}
+		//remove item? TODO
 	}
 
 

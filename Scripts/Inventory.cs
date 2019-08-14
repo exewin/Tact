@@ -5,9 +5,8 @@ using UnityEngine;
 public class Inventory : MonoBehaviour 
 {
 
-	public List<Item> startItems = new List<Item>();
-	[HideInInspector]
-	public List<Item> items = new List<Item>();
+	[SerializeField] private List<Item> startItems = new List<Item>();
+	[HideInInspector] public List<Item> items = new List<Item>();
 	
 	private void Awake()
 	{
@@ -19,5 +18,15 @@ public class Inventory : MonoBehaviour
 				items.Add(j);
 			}
 		}
+	}
+	
+	public void AddItem(Item item)
+	{
+		items.Add(item);
+	}
+	
+	public void RemoveItem(Item item)
+	{
+		items.Remove(item);
 	}
 }
