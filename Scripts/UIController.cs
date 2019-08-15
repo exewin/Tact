@@ -8,30 +8,39 @@ public class UIController : MonoBehaviour
 {
 	private List<GameObject> mercs = new List<GameObject>();
 	private StatsMerc mercScript;
-	public CursorController cursorControl;
+	[SerializeField] private CursorController cursorControl;
 	
 	//UI
-	public Image[] UITeam = new Image[6];
-	public Text UINickname;
-	public Image UIPortrait;
-	public Text UIHpText;
-	public RectTransform UIHpBar;
+	[SerializeField] private Image[] UITeam = new Image[6];
+	[SerializeField] private Text UINickname;
+	[SerializeField] private Image UIPortrait;
+	[SerializeField] private Text UIHpText;
+	[SerializeField] private RectTransform UIHpBar;
 	
 	//UI Stats
-	public Text UIStatStrength;
-	public Text UIStatAccuracy;
-	public Text UIStatAgility;
-	public Text UIStatReflex;
+	[SerializeField] private Text UIStatStrength;
+	[SerializeField] private Text UIStatAccuracy;
+	[SerializeField] private Text UIStatAgility;
+	[SerializeField] private Text UIStatReflex;
 	
 	//UI Equipment
-	public Image UIWeapon;
-	public Text UIWeaponCapacity;
-	public Image UIArmor;
-	public Image UIHelmet;
+	[SerializeField] private Image UIWeapon;
+	[SerializeField] private Text UIWeaponCapacity;
+	[SerializeField] private Image UIArmor;
+	[SerializeField] private Image UIHelmet;
 	
-	public Sprite transparent; //blank transparent sprite for empty equipment slot
-	public GameObject highlight; //UI team highlight
-	public GameObject backpack; //inventory gameobject
+	[SerializeField] private Button UIBurstSingle;
+	[SerializeField] private Button UIBurstBurst;
+	[SerializeField] private Button UIBurstAuto;
+	
+	[SerializeField] private Text UIBurstSingleText;
+	[SerializeField] private Text UIBurstBurstText;
+	[SerializeField] private Text UIBurstAutoText;
+
+	
+	[SerializeField] private Sprite transparent; //blank transparent sprite for empty equipment slot
+	[SerializeField] private GameObject highlight; //UI team highlight
+	[SerializeField] private GameObject backpack; //inventory gameobject
 	
 	void Start()
 	{
@@ -131,10 +140,33 @@ public class UIController : MonoBehaviour
 		UIStatAgility.text = mercScript.agility + "";
 		UIStatReflex.text = mercScript.reflex + "";
 		
+		UIBurstSingleText.color = Color.white;
+		UIBurstBurstText.color = Color.white;
+		UIBurstAutoText.color = Color.white;
+		UIBurstSingle.interactable = false;
+		UIBurstBurst.interactable = false;
+		UIBurstAuto.interactable = false;
+		
 		if(mercScript.weapon)
 		{
 			UIWeapon.sprite = mercScript.weapon.image;
 			UIWeaponCapacity.text = mercScript.weapon.bulletsLeft + "/" + mercScript.weapon.capacity;
+			if(mercScript.weapon.single)
+				UIBurstSingle.interactable = true;
+
+			if(mercScript.weapon.burst)
+				UIBurstBurst.interactable = true;
+		
+			if(mercScript.weapon.auto)
+				UIBurstAuto.interactable = true;
+
+			
+			if(mercScript.weapon.mode == burstMode.single)
+				UIBurstSingleText.color = Color.red;
+			else if(mercScript.weapon.mode == burstMode.burst)
+				UIBurstBurstText.color = Color.red;
+			else if(mercScript.weapon.mode == burstMode.auto)
+				UIBurstAutoText.color = Color.red;
 		}
 		else
 		{

@@ -8,13 +8,9 @@ using UnityEngine.EventSystems;
 public class CursorController : MonoBehaviour 
 {
 	
-	[SerializeField]
-	private GameObject UIChance;
-	[HideInInspector]
-	public StatsMerc[] mercs = new StatsMerc[6];
-	
-	[SerializeField]
-	private LayerMask layers;
+	[SerializeField] private GameObject UIChance;
+	[HideInInspector] public StatsMerc[] mercs = new StatsMerc[6];
+	[SerializeField] private LayerMask layers;
 	
 	void Update()
 	{
@@ -23,8 +19,9 @@ public class CursorController : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
-			if(Physics.Raycast(ray, out hit)) ///LAYERY KURWA TODO
+			if(Physics.Raycast(ray, out hit,Mathf.Infinity,layers)) //TODO LAYER
 			{
+				Debug.Log(hit.collider.name);
 				if(hit.transform.tag=="Shootable")
 				{
 					if(hit.collider.GetComponent<BodyPart>().owner==mercs[GameController.mercActive])
@@ -32,7 +29,7 @@ public class CursorController : MonoBehaviour
 					
 					if(Input.GetMouseButtonDown(0))
 					{
-						mercs[GameController.mercActive].Shoot(hit.transform);
+						mercs[GameController.mercActive].ShootCheck(hit.transform);
 					}
 					
 					if(mercs[GameController.mercActive].weapon) //UI CtH

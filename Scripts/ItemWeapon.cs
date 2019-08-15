@@ -19,8 +19,16 @@ public class ItemWeapon : Item
 	public AudioClip shootSound;
 	public AudioClip reloadSound;
 	
+	public weaponType type;
+	
+	public burstMode mode;
+	public bool single = true;
+	public bool burst;
+	public bool auto;
+	
 	[HideInInspector] public ItemAmmo ammoUsed; 
 	
 }
 
 	public enum burstMode{single, burst, auto}
+	public enum weaponType{pistol, revolver, submachine_pistol, rifle, shotgun, assault_rifle}

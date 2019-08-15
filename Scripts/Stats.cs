@@ -30,6 +30,7 @@ public class Stats : MonoBehaviour
 	[HideInInspector] public ItemHelmet helmet;
 	
 	protected AudioSource audioSource;
+	[SerializeField] private AudioClip emptyGun;
 	
 	//UIs
 	[SerializeField] protected Log log;
@@ -122,7 +123,7 @@ public class Stats : MonoBehaviour
 	
 	
 	#region shooting
-	public virtual void Shoot(Transform target)
+	public void ShootCheck(Transform target)
 	{
 		if(!weapon)
 		{
@@ -137,14 +138,37 @@ public class Stats : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("No Ammo!");
-				//sound? TODO
+				audioSource.PlayOneShot(emptyGun);
 			}
 			return;
 		}
 		
+		if(weapon.mode == burstMode.burst)
+			StartCoroutine(Burst(target));
+		else
+			SingleShoot(target);
+		
+		//TODO AUTO
+	}
+	public IEnumerator Burst(Transform target)
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			if(weapon.bulletsLeft == 0)
+			{
+				audioSource.PlayOneShot(emptyGun);
+				break;
+			}
+			SingleShoot(target);
+			yield return new WaitForSeconds(0.1f); //fire rate? TODO
+		}
+	}
+	
+	public virtual void SingleShoot(Transform target)
+	{
 		audioSource.PlayOneShot(weapon.shootSound);
 		weapon.bulletsLeft--;
+		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);
 		float chanceToHit = Formulas.ChanceToHit(distance, accuracy, weapon.accuracy);
 		
@@ -216,11 +240,11 @@ public class Stats : MonoBehaviour
 			stringPart = "legs";
 		}
 		
-		log.Send(nickname + " has been hit in "+stringPart+" lost " + dmg + " HP");
+		log.Send(nickname + " was hit in the "+stringPart+" for " + dmg + " HP");
 		
 		if(hp<1)
 		{
-			log.Send(nickname + " has died");
+			log.Send(nickname + " was killed");
 
 			//TODO death
 			UnequipEverything();
@@ -237,7 +261,7 @@ public class Stats : MonoBehaviour
 		}
 	}
 	
-	#region reload/eject
+	#region reload/eject/bursts
 	public virtual void ReloadWeapon(ItemAmmo ammo)
 	{
 		if(!weapon)
@@ -249,6 +273,7 @@ public class Stats : MonoBehaviour
 		weapon.ammoUsed = ammo;
 		int need = weapon.capacity - weapon.bulletsLeft;
 		int have = Mathf.Min(ammo.quantity,need);
+		weapon.weight += (have*ammo.weight);
 		weapon.bulletsLeft += have;
 		ammo.quantity -= have;
 		if(ammo.quantity==0)
@@ -268,9 +293,15 @@ public class Stats : MonoBehaviour
 			return;
 		
 		ammo.quantity += weapon.bulletsLeft;
+		weapon.weight -= (weapon.bulletsLeft*ammo.weight);
 		weapon.bulletsLeft = 0;
 		
 		audioSource.PlayOneShot(weapon.reloadSound);
+	}
+	
+	public void SwitchWeaponMode(burstMode mode)
+	{
+		weapon.mode = mode;
 	}
 	#endregion
 }

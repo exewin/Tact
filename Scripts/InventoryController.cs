@@ -5,30 +5,34 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour 
 {
-	[HideInInspector]
-	public List<Item> items = new List<Item>();
-	[HideInInspector]
-	public StatsMerc stats;
-	public GameObject slotPrefab;
-	public Transform gridParent;
-	List<GameObject> backpackSlots = new List<GameObject>();
-	public UIController UIControl;
+	[HideInInspector] public List<Item> items = new List<Item>();
+	[HideInInspector] public StatsMerc stats;
+	[SerializeField] private GameObject slotPrefab;
+	[SerializeField] private Transform gridParent;
+	private List<GameObject> backpackSlots = new List<GameObject>();
+	[SerializeField] private UIController UIControl;
 	
-	bool autoEquipAmmo;
+	bool autoEquipAmmo; //TODO button
 	
 	
 	//UI
-	public Text item_name;
-	public Image item_icon;
-	public Text item_desc;
-	public Text item_stat1;
-	public Text item_stat2;
-	public Text item_stat3;
-	public Text item_stat4;
+	[SerializeField] private Text item_name;
+	[SerializeField] private Image item_icon;
+	[SerializeField] private Text item_desc;
+	[SerializeField] private Text item_statA;
+	[SerializeField] private Text item_stat1;
+	[SerializeField] private Text item_stat2;
+	[SerializeField] private Text item_stat3;
+	[SerializeField] private Text item_stat4;
+	[SerializeField] private Text item_stat5;
+	[SerializeField] private Sprite transparent;
+	[SerializeField] private Text total_weight;
 	
-	public Text total_weight;
-	
-	void Update()
+	private void Start()
+	{
+		ClearHover();
+	}
+	private void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.R))
 		{
@@ -49,7 +53,6 @@ public class InventoryController : MonoBehaviour
 	}	
 	
 	#region UpdateInv
-	
 	public void UpdateInventory()
 	{
 		ClearSlots(); //delete existing slots
@@ -76,6 +79,12 @@ public class InventoryController : MonoBehaviour
 		}
 	}
 	
+	private void RemoveSlot(int index)
+	{
+		Destroy(backpackSlots[index]);
+		UpdateInventory();
+	}
+	
 	private void CalculateWeight()
 	{
 		float weight=0f;
@@ -99,14 +108,7 @@ public class InventoryController : MonoBehaviour
 			Debug.Log(stats.nickname+" is overloaded");
 		}
 	}
-	
 	#endregion
-	
-	public void RemoveSlot(int index)
-	{
-		Destroy(backpackSlots[index]);
-		UpdateInventory();
-	}
 	
 	public void TakeItem(List<Item> takenItems)
 	{
@@ -215,6 +217,12 @@ public class InventoryController : MonoBehaviour
 			UpdateInventory();
 		}
 	}
+	
+	public void BurstModeButton(int mode)
+	{
+		stats.SwitchWeaponMode((burstMode)mode);
+		UIControl.UIControl();
+	}
 	#endregion
 	
 	#region find
@@ -249,9 +257,39 @@ public class InventoryController : MonoBehaviour
 	
 	public void HoverItemInfo(Item info)
 	{
+		ClearHover();
+		
 		item_name.text = info.name;
 		item_icon.sprite = info.image;
 		item_desc.text = info.desc;
+		item_stat1.text = "Weight: "+(info.weight*info.quantity)+" kg";
+		
+		if(info.stackable)
+			item_statA.text = ""+info.quantity;
+		
+		
+		if(info is ItemWeapon)
+		{
+			ItemWeapon weapon = (ItemWeapon) info;
+			item_statA.text = weapon.bulletsLeft +" / "+weapon.capacity;
+			item_stat2.text = "Caliber: "+"5.56";
+			item_stat3.text = "Power: "+weapon.power;
+			item_stat4.text = "Accuracy Bonus: "+weapon.accuracy+"%";
+			item_stat5.text = "Velocity: "+weapon.velocity+"m/s";
+		}
+	}
+	
+	private void ClearHover()
+	{
+		item_name.text = "";
+		item_icon.sprite = transparent;
+		item_desc.text = "";
+		item_statA.text = "";
+		item_stat1.text = "";
+		item_stat2.text = "";
+		item_stat3.text = "";
+		item_stat4.text = "";
+		item_stat5.text = "";
 	}
 	
 	

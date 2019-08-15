@@ -29,9 +29,9 @@ public class StatsMerc : Stats
 		UIControl.UIControl();
 	}
 	
-	public override void Shoot(Transform target)
+	public override void SingleShoot(Transform target)
 	{
-		base.Shoot(target);
+		base.SingleShoot(target);
 		UIControl.UIControl();
 	}
 	
