@@ -10,7 +10,8 @@ public class CursorController : MonoBehaviour
 	
 	[SerializeField] private GameObject UIChance;
 	[HideInInspector] public StatsMerc[] mercs = new StatsMerc[6];
-	[SerializeField] private LayerMask layers;
+	[SerializeField] private LayerMask mouseLayers;
+	[SerializeField] private LayerMask chanceToHitLayers;
 	
 	void Update()
 	{
@@ -19,9 +20,8 @@ public class CursorController : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
-			if(Physics.Raycast(ray, out hit,Mathf.Infinity,layers)) //TODO LAYER
+			if(Physics.Raycast(ray, out hit,Mathf.Infinity,mouseLayers))
 			{
-				Debug.Log(hit.collider.name);
 				if(hit.transform.tag=="Shootable")
 				{
 					if(hit.collider.GetComponent<BodyPart>().owner==mercs[GameController.mercActive])
@@ -37,7 +37,7 @@ public class CursorController : MonoBehaviour
 						Vector3 screenPoint = Camera.main.WorldToScreenPoint (hit.point);
 						UIChance.transform.position = screenPoint;
 						int CtH;
-						if(Physics.Linecast(mercs[GameController.mercActive].GetComponent<Stats>().head.position, hit.transform.position,layers))
+						if(Physics.Linecast(mercs[GameController.mercActive].GetComponent<Stats>().head.position, hit.transform.position,chanceToHitLayers))
 						{
 							CtH = 0;
 						}

@@ -1755,9 +1755,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  layers:
+  mouseLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294966271
+  chanceToHitLayers:
+    serializedVersion: 2
+    m_Bits: 4294965759
 --- !u!1 &309685634
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,6 +4675,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 8c2d6305600d6aa4e9c5b03c2a021176,
         type: 2}
+    - target: {fileID: 114858570738906612, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: layers.m_Bits
+      value: 4294965759
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
   m_IsPrefabParent: 0
@@ -5465,6 +5473,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 7a67a74abba27b943944f71050b6e39e,
         type: 2}
+    - target: {fileID: 114858570738906612, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: layers.m_Bits
+      value: 4294965759
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
   m_IsPrefabParent: 0
@@ -5922,6 +5935,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: e17a71cdd335d8446871b8e837239c86,
         type: 2}
+    - target: {fileID: 114858570738906612, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: layers.m_Bits
+      value: 4294965759
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
   m_IsPrefabParent: 0

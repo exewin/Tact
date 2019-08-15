@@ -5,16 +5,29 @@ using UnityEngine;
 public class Hostile : MonoBehaviour 
 {
 	
-	public Transform[] bodyParts;
-	private  Renderer rend;
+	[SerializeField] private Transform[] bodyParts;
+	[SerializeField] private LayerMask layers;
+	private Renderer rend;
 	
-	void Start()
+	private void Start()
 	{
 		rend=GetComponent<Renderer>();
 	}
-
-	//?
-	void FixedUpdate()
+	
+	private void Update()
+	{
+		for(int i = 0; i<GameController.mercs.Count;i++)
+		{
+			if (!Physics.Linecast(transform.position, GameController.mercs[i].transform.position,layers))
+			{
+				Visible();
+				return;
+			}
+		}
+		Hide();
+	}
+	
+	private void Hide()
 	{
 		rend.enabled = false;
 		gameObject.layer = 10;
