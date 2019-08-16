@@ -5,24 +5,30 @@ using UnityEngine;
 public class GameController : MonoBehaviour 
 {
 	public static int mercActive = 0;
-	public static List<GameObject> enemies = new List<GameObject>();
-	public static List<GameObject> mercs = new List<GameObject>();
+	public static List<Visibility> humans = new List<Visibility>();
+	private int idAllocator=1;
 		
 	void Awake()
 	{
 		Application.targetFrameRate = 60;
-		foreach(GameObject e in GameObject.FindGameObjectsWithTag("Hostile"))
+		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			enemies.Add(e);
+			Visibility e = g.GetComponent<Visibility>();
+			humans.Add(e);
+			e.SetID(idAllocator, humans);
+			idAllocator++;
 		}
-		foreach(GameObject e in GameObject.FindGameObjectsWithTag("Player"))
+		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Hostile"))
 		{
-			mercs.Add(e);
+			Visibility e = g.GetComponent<Visibility>();
+			humans.Add(e);
+			e.SetID(idAllocator, humans);
+			idAllocator++;
 		}
 	}
 	
 	public static void RemoveFromList(GameObject g)
 	{
-		enemies.Remove(g);
+		humans.Remove(g.GetComponent<Visibility>());
 	}
 }

@@ -4,36 +4,45 @@ using UnityEngine;
 
 public class Visibility : MonoBehaviour
 {
-	private int id;
+	public int id;
 	[SerializeField] private LayerMask layers;
-	
 	[SerializeField] private Transform head;
+	[SerializeField] public Transform[] bodyParts;
+	public List<Visibility> humans = new List<Visibility>();
 	
-	public void SetID(int i)
+	public void SetID(int i, List<Visibility> list)
 	{
+		humans = list;
 		id = i;
 	}
 
 
-	void Update () 
+	protected virtual void Update() 
 	{
-		for(int i = 0; i<GameController.enemies.Count;i++)
+		if(id!=0)
 		{
-			if (!Physics.Linecast(head.transform.position, GameController.enemies[i].transform.position,layers))
+			for(int i = 0; i<humans.Count;i++)
 			{
-				//GameController.enemies[i].GetComponent<Hostile>().Visible();
-				if(id==GameController.mercActive)
+				Visibility human = humans[i].GetComponent<Visibility>();
+				bool canSee = false;
+				if(id==human.id)
+					continue;
+				
+				for(int j = 0; j<3; j++)
 				{
-					GameController.enemies[i].GetComponent<Hostile>().ChangeColor(Color.red);
+					if (!Physics.Linecast(head.transform.position, humans[i].bodyParts[j].transform.position,layers))
+					{
+						canSee = true;
+					}
 				}
-			}
-			else
-			{
-				if(id==GameController.mercActive)
-				{
-					GameController.enemies[i].GetComponent<Hostile>().ChangeColor(Color.black);
-				}
+				if(canSee)
+					ActionTrue(humans[i]);
+				else
+					ActionFalse(humans[i]);
 			}
 		}
 	}
+	
+	protected virtual void ActionTrue(Visibility human){ }
+	protected virtual void ActionFalse(Visibility human){ }
 }

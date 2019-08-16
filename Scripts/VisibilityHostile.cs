@@ -2,30 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hostile : MonoBehaviour 
+public class VisibilityHostile : Visibility
 {
-	
-	[SerializeField] private Transform[] bodyParts;
-	[SerializeField] private LayerMask layers;
+
 	private Renderer rend;
+	float hideTimer = 0;
 	
 	private void Start()
 	{
 		rend=GetComponent<Renderer>();
-	}
-	
-	private void Update()
-	{
-		for(int i = 0; i<GameController.mercs.Count;i++)
-		{
-			if (!Physics.Linecast(transform.position, GameController.mercs[i].transform.position,layers))
-			{
-				Visible();
-				return;
-			}
-		}
 		Hide();
 	}
+	
+	protected override void Update()
+	{
+		base.Update();
+		if(hideTimer>0)
+		{
+			hideTimer -= Time.deltaTime*1;
+		
+			if(hideTimer<=0)
+				Hide();
+		}
+	}
+	
+	
+	
 	
 	private void Hide()
 	{
@@ -39,6 +41,7 @@ public class Hostile : MonoBehaviour
 	
 	public void Visible()
 	{
+		hideTimer = 1;
 		rend.enabled = true;
 		gameObject.layer = 9;
 		for(int i = 0; i < bodyParts.Length; i++)

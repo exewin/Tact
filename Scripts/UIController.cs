@@ -38,9 +38,9 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Text UIBurstAutoText;
 
 	
-	[SerializeField] private Sprite transparent; //blank transparent sprite for empty equipment slot
-	[SerializeField] private GameObject highlight; //UI team highlight
-	[SerializeField] private GameObject backpack; //inventory gameobject
+	[SerializeField] private Sprite transparent;
+	[SerializeField] private GameObject highlight;
+	[SerializeField] private GameObject backpack;
 	
 	void Start()
 	{
@@ -48,7 +48,6 @@ public class UIController : MonoBehaviour
 		foreach(GameObject e in GameObject.FindGameObjectsWithTag("Player"))
 		{
 			mercs.Add(e);
-			mercs[i].SendMessage("SetID", i);
 			mercScript = e.GetComponent<StatsMerc>();
 			cursorControl.mercs[i]=mercScript;
 			UITeam[i].sprite = mercScript.portrait;
