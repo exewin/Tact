@@ -98,18 +98,18 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
-    agentHeight: 2
+    agentRadius: 0.3
+    agentHeight: 1
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.3
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    minRegionArea: 2
+    minRegionArea: 0
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.1
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    accuratePlacement: 1
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -4029,6 +4029,21 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 195334759270332938, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 195334759270332938, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: m_BaseOffset
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 195334759270332938, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
   m_IsPrefabParent: 0
@@ -4346,11 +4361,11 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.45
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &803254801
@@ -5220,11 +5235,11 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.45
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!23 &870471686
@@ -5812,6 +5827,21 @@ Prefab:
       propertyPath: head
       value: 
       objectReference: {fileID: 1115852015}
+    - target: {fileID: 195334759270332938, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 195334759270332938, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: m_BaseOffset
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 195334759270332938, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 2}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
   m_IsPrefabParent: 0
@@ -7772,7 +7802,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 3e3d1bfd2c64c71479d8401f9622189f, type: 2}
 --- !u!4 &1522737849

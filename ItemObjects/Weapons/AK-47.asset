@@ -9,21 +9,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a62932ef714cbde4bad7ac06bd6ae47d, type: 3}
-  m_Name: M1911
+  m_Name: AK-47
   m_EditorClassIdentifier: 
-  name: M1911
+  name: AK-47
   desc: 
-  image: {fileID: 21300000, guid: 476e30113404afe4697fce5465c958e5, type: 3}
-  weight: 1.1
+  image: {fileID: 21300000, guid: 8146be16fbdcf8c4eb2bff7d48cdbeb4, type: 3}
+  weight: 3.6
   stackable: 0
   _quantity: 1
-  power: 18
-  capacity: 7
+  power: 32
+  capacity: 30
   bulletsLeft: 0
   accuracy: 40
-  apCost: 24
-  ammo: 4
-  velocity: 253
-  shootSound: {fileID: 8300000, guid: dcfaa478ec0160f47aa211ace30b75e4, type: 3}
-  reloadSound: {fileID: 8300000, guid: 4cd872d099e589d4e9c4f783c20f0419, type: 3}
+  apCost: 25
+  ammo: 9
+  velocity: 715
+  shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}
+  reloadSound: {fileID: 8300000, guid: 1822efb89bf68a84db0098ed391dbe1c, type: 3}
+  type: 5
+  mode: 0
+  single: 1
+  burst: 1
+  auto: 1
   ammoUsed: {fileID: 0}

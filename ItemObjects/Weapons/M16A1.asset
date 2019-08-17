@@ -26,4 +26,9 @@ MonoBehaviour:
   velocity: 960
   shootSound: {fileID: 8300000, guid: 28884463763cee84aaa4ec838ac2548d, type: 3}
   reloadSound: {fileID: 8300000, guid: ba34ca7de7566354a98fd6fbba68508d, type: 3}
+  type: 0
+  mode: 0
+  single: 1
+  burst: 0
+  auto: 0
   ammoUsed: {fileID: 0}
