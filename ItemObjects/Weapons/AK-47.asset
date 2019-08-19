@@ -14,14 +14,14 @@ MonoBehaviour:
   name: AK-47
   desc: 
   image: {fileID: 21300000, guid: 8146be16fbdcf8c4eb2bff7d48cdbeb4, type: 3}
-  weight: 3.6
+  weight: 4.3
   stackable: 0
   _quantity: 1
   power: 32
   capacity: 30
   bulletsLeft: 0
-  accuracy: 40
-  apCost: 25
+  accuracy: 35
+  apCost: 30
   ammo: 9
   velocity: 715
   shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}
@@ -29,6 +29,6 @@ MonoBehaviour:
   type: 5
   mode: 0
   single: 1
-  burst: 1
+  burst: 0
   auto: 1
   ammoUsed: {fileID: 0}
