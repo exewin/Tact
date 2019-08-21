@@ -24,6 +24,7 @@ MonoBehaviour:
   apCost: 24
   ammo: 12
   velocity: 735
+  rateOfFire: 700
   shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}
   reloadSound: {fileID: 8300000, guid: 1822efb89bf68a84db0098ed391dbe1c, type: 3}
   type: 5

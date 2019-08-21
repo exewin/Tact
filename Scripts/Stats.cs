@@ -24,6 +24,13 @@ public class Stats : MonoBehaviour
 	public int reflex;
 	public int agility;
 	
+	public float ap;
+	public int maxAp;
+	
+	public Transform currentTarget;
+	
+	public float burnOut = 0;
+	
 	//equipment
 	[HideInInspector] public ItemWeapon weapon;
 	[HideInInspector] public ItemArmor armor;
@@ -40,6 +47,26 @@ public class Stats : MonoBehaviour
 		audioSource = GetComponent<AudioSource>();
 		inv = GetComponent<Inventory>();
 		hp = maxHp;
+	}
+	
+	void Update()
+	{
+		if(burnOut>0)
+			burnOut-=Time.deltaTime*1;
+		
+		if(currentTarget)
+		{
+			if(burnOut<=0)
+				ShootCheck(currentTarget);
+		}
+		
+		if(ap<maxAp)
+			ap+=Time.deltaTime*10;
+	}
+	
+	public void SetTarget(Transform target)
+	{
+		currentTarget = target;
 	}
 	
 	#region equip/unequip
@@ -125,9 +152,11 @@ public class Stats : MonoBehaviour
 	#region shooting
 	public void ShootCheck(Transform target)
 	{
+		float accuracyModifer = 1;
 		if(!weapon)
 		{
 			Debug.Log("Merc has no weapon!"); //?
+			SetTarget(null);
 			return;
 		}
 		if(weapon.bulletsLeft == 0)
@@ -135,22 +164,38 @@ public class Stats : MonoBehaviour
 			if(weapon.ammoUsed && weapon.ammoUsed.quantity>0)
 			{
 				ReloadWeapon(weapon.ammoUsed);
+				burnOut = 1.5f; //TODO reload cost and burn out
+				ap-=weapon.apCost;
 			}
 			else
 			{
 				audioSource.PlayOneShot(emptyGun);
+				SetTarget(null);
 			}
 			return;
 		}
-		
-		if(weapon.mode == burstMode.burst)
-			StartCoroutine(Burst(target));
-		else
-			SingleShoot(target);
-		
-		//TODO AUTO
+		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
+		{
+			StartCoroutine(Burst(target,accuracyModifer));
+			burnOut = 60/(weapon.rateOfFire*2.5f);
+			ap-=weapon.apCost*2.5f;
+			accuracyModifer = 0.8f;
+		}
+		else if(weapon.mode == burstMode.single && ap>=weapon.apCost)
+		{
+			SingleShoot(target,accuracyModifer);
+			burnOut = 60/weapon.rateOfFire;
+			ap-=weapon.apCost;
+		}
+		else if(weapon.mode == burstMode.auto && ap>=weapon.apCost/5)
+		{
+			SingleShoot(target,accuracyModifer);
+			burnOut = 60/weapon.rateOfFire;
+			ap-=weapon.apCost/5;
+			accuracyModifer = 0.2f;
+		}
 	}
-	public IEnumerator Burst(Transform target)
+	public IEnumerator Burst(Transform target, float accuracyModifer)
 	{
 		for(int i = 0; i < 3; i++)
 		{
@@ -159,18 +204,18 @@ public class Stats : MonoBehaviour
 				audioSource.PlayOneShot(emptyGun);
 				break;
 			}
-			SingleShoot(target);
+			SingleShoot(target,accuracyModifer);
 			yield return new WaitForSeconds(0.1f); //fire rate? TODO
 		}
 	}
 	
-	public virtual void SingleShoot(Transform target)
+	public virtual void SingleShoot(Transform target, float accuracyModifer)
 	{
 		audioSource.PlayOneShot(weapon.shootSound);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);
-		float chanceToHit = Formulas.ChanceToHit(distance, accuracy, weapon.accuracy);
+		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer), weapon.accuracy);
 		
 		transform.LookAt(target);
 		Color col;

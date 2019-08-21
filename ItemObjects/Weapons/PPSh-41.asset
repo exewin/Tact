@@ -9,27 +9,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a62932ef714cbde4bad7ac06bd6ae47d, type: 3}
-  m_Name: AKMS
+  m_Name: PPSh-41
   m_EditorClassIdentifier: 
-  name: AKMS
+  name: PPSh-41
   desc: 
-  image: {fileID: 21300000, guid: f3be5d0c907e3624c8dee9176e807bc7, type: 3}
-  weight: 3.2
+  image: {fileID: 21300000, guid: 8022d19b42cb8824c9c13f25155caab7, type: 3}
+  weight: 3.63
   stackable: 0
   _quantity: 1
-  power: 31
-  capacity: 30
+  power: 16
+  capacity: 71
   bulletsLeft: 0
-  accuracy: 42
-  apCost: 25
+  accuracy: 0
+  apCost: 19
   ammo: 9
-  velocity: 715
-  rateOfFire: 600
-  shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}
-  reloadSound: {fileID: 8300000, guid: 1822efb89bf68a84db0098ed391dbe1c, type: 3}
-  type: 5
-  mode: 0
+  velocity: 488
+  rateOfFire: 900
+  shootSound: {fileID: 8300000, guid: a9819805117b3fd4ebed1f4187a3d80b, type: 3}
+  reloadSound: {fileID: 8300000, guid: 1b70d89b813a56e458fc4c247ff399ba, type: 3}
+  type: 2
+  mode: 2
   single: 1
-  burst: 1
+  burst: 0
   auto: 1
   ammoUsed: {fileID: 0}

@@ -29,7 +29,7 @@ public class CursorController : MonoBehaviour
 					
 					if(Input.GetMouseButtonDown(0))
 					{
-						mercs[GameController.mercActive].ShootCheck(hit.transform);
+						mercs[GameController.mercActive].SetTarget(hit.transform);
 					}
 					
 					if(mercs[GameController.mercActive].weapon) //UI CtH

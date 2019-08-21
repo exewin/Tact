@@ -21,9 +21,10 @@ MonoBehaviour:
   capacity: 30
   bulletsLeft: 0
   accuracy: 72
-  apCost: 26
+  apCost: 27
   ammo: 12
   velocity: 900
+  rateOfFire: 600
   shootSound: {fileID: 8300000, guid: 3bbfda3e61113d7438ac161a2908b051, type: 3}
   reloadSound: {fileID: 8300000, guid: 1822efb89bf68a84db0098ed391dbe1c, type: 3}
   type: 5

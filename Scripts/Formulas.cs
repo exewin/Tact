@@ -15,7 +15,7 @@ public class Formulas : MonoBehaviour
 	{
 		//TODO
 		//CHECK BODYPART
-		float chanceToHit = Mathf.Sqrt(weaponAccuracy) * accuracy / distance; 
+		float chanceToHit = (weaponAccuracy + accuracy) / distance; 
 		
 		if(chanceToHit > 100)
 			chanceToHit = 100;

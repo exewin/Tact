@@ -6,15 +6,16 @@ using UnityEngine;
 public class ItemWeapon : Item 
 {
 	
-	public int power;
-	public int capacity;
-	[HideInInspector] public int bulletsLeft;
-	public int accuracy;
-	public int apCost;
+	public int power = 30;
+	public int capacity = 30;
+	[HideInInspector] public int bulletsLeft = 0;
+	public int accuracy = 0;
+	public int apCost = 20;
 	
 	public ammoType ammo;
 	
-	public float velocity;
+	public float velocity = 400;
+	public float rateOfFire = 40;
 	
 	public AudioClip shootSound;
 	public AudioClip reloadSound;

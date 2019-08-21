@@ -106,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220512648815124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4280556711647030}
@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1576446691627862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4280556711647030}
@@ -191,7 +191,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.2, z: 1}
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65305098166579796
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -215,7 +215,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.3, z: 1}
-  m_Center: {x: 0, y: -0.35, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114018671723457352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,8 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b443e0624b35ca6419bc103282d31d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  log: {fileID: 0}
-  UIControl: {fileID: 0}
+  head: {fileID: 4494462146310172}
+  drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
+  trace: {fileID: 1184904475076604, guid: 98649547f10b94b4b9b8919547c415ff, type: 2}
   nickname: Jackson
   portrait: {fileID: 0}
   desc: Hostile soldier
@@ -277,10 +278,15 @@ MonoBehaviour:
   strength: 45
   reflex: 45
   agility: 45
+  ap: 0
+  maxAp: 0
+  currentTarget: {fileID: 0}
+  burnOut: 0
   weapon: {fileID: 0}
   armor: {fileID: 0}
   helmet: {fileID: 0}
-  ammo: {fileID: 0}
+  emptyGun: {fileID: 0}
+  log: {fileID: 0}
 --- !u!114 &114858570738906612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,12 +298,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea489e51e2f13e449dcae8cbb55a54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294965759
+  head: {fileID: 4494462146310172}
   bodyParts:
   - {fileID: 4494462146310172}
   - {fileID: 4809327868958464}
   - {fileID: 4832358652689722}
-  sawByActive: 0
-  rend: {fileID: 0}
+  humans: []
 --- !u!114 &114946029402432200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startItems:
-  - {fileID: 11400000, guid: 954177b2b3c3c0640bfe23a769ba8f59, type: 2}
+  - {fileID: 11400000, guid: e17a71cdd335d8446871b8e837239c86, type: 2}
   - {fileID: 11400000, guid: 31877365d85b6134e90eaa1f242dd2bd, type: 2}
   - {fileID: 11400000, guid: 5ccaa93540ed31142984cdd9d4aaf9cf, type: 2}
   items: []
@@ -328,10 +338,10 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.45
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 4
