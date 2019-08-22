@@ -544,13 +544,13 @@ Prefab:
         type: 2}
       propertyPath: startItems.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 8e07283aedf7b3947aee7f85204a2dda,
+      objectReference: {fileID: 11400000, guid: 39e1d4c6171fdf3489adbd88bbd4cf69,
         type: 2}
     - target: {fileID: 114593350548517352, guid: f941f32bbbe567d40886389c49f8a2ae,
         type: 2}
       propertyPath: startItems.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 5361b8977d4acb84db672964b3eaeedc,
+      objectReference: {fileID: 11400000, guid: ed55606ed23690b498c209a439d1ced9,
         type: 2}
     - target: {fileID: 114593350548517352, guid: f941f32bbbe567d40886389c49f8a2ae,
         type: 2}
@@ -4572,7 +4572,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 1808139268}
   drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
-  trace: {fileID: 1184904475076604, guid: 98649547f10b94b4b9b8919547c415ff, type: 2}
   nickname: Robert
   portrait: {fileID: 21300000, guid: 156c38ed2b1ee4842963b2d018ed08d3, type: 3}
   desc: 
@@ -4582,7 +4581,7 @@ MonoBehaviour:
   strength: 67
   reflex: 45
   agility: 67
-  ap: 100
+  ap: 999999
   maxAp: 100
   currentTarget: {fileID: 0}
   burnOut: 0
@@ -5280,7 +5279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 1804600163}
   drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
-  trace: {fileID: 1184904475076604, guid: 98649547f10b94b4b9b8919547c415ff, type: 2}
   nickname: Brad
   portrait: {fileID: 21300000, guid: 8f6411dd5cd150340be3e6a399fad31d, type: 3}
   desc: 

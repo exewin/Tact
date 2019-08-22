@@ -8,7 +8,6 @@ public class Stats : MonoBehaviour
 	//necessary gameObjects
 	public Transform head;
 	[SerializeField] private GameObject drop;
-	[SerializeField] private GameObject trace; //ItemWeapon?
 	protected Inventory inv;
 	
 	//personal info
@@ -177,14 +176,14 @@ public class Stats : MonoBehaviour
 		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
 		{
 			StartCoroutine(Burst(target,accuracyModifer));
-			burnOut = 60/(weapon.rateOfFire*2.5f);
+			burnOut = 1.2f;
 			ap-=weapon.apCost*2.5f;
 			accuracyModifer = 0.8f;
 		}
 		else if(weapon.mode == burstMode.single && ap>=weapon.apCost)
 		{
 			SingleShoot(target,accuracyModifer);
-			burnOut = 60/weapon.rateOfFire;
+			burnOut = 1;
 			ap-=weapon.apCost;
 		}
 		else if(weapon.mode == burstMode.auto && ap>=weapon.apCost/5)
@@ -240,7 +239,7 @@ public class Stats : MonoBehaviour
 	
 	private IEnumerator ShotDelay(Vector3 lineDir,float distance)
 	{
-		GameObject line = Instantiate(trace,head.position,transform.rotation);
+		GameObject line = Instantiate(weapon.trace,head.position,transform.rotation);
 		line.transform.forward = lineDir;
 		line.GetComponent<Trace>().Info(weapon.velocity/14f); //velocity const
 		RaycastHit hit;

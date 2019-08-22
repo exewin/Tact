@@ -24,7 +24,8 @@ MonoBehaviour:
   apCost: 20
   ammo: 0
   velocity: 350
-  shootSound: {fileID: 8300000, guid: 1752b6063e98696478f959c92cc1abee, type: 3}
+  rateOfFire: 40
+  shootSound: {fileID: 8300000, guid: 0b5a59bac8970df45ab7f392989e58bb, type: 3}
   reloadSound: {fileID: 8300000, guid: 4cd872d099e589d4e9c4f783c20f0419, type: 3}
   type: 0
   mode: 0
@@ -32,3 +33,4 @@ MonoBehaviour:
   burst: 0
   auto: 0
   ammoUsed: {fileID: 0}
+  trace: {fileID: 1151471528821504, guid: e271db98780c8794b8dd81b770faf955, type: 2}

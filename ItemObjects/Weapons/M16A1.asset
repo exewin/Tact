@@ -25,7 +25,7 @@ MonoBehaviour:
   ammo: 7
   velocity: 960
   rateOfFire: 700
-  shootSound: {fileID: 8300000, guid: 28884463763cee84aaa4ec838ac2548d, type: 3}
+  shootSound: {fileID: 8300000, guid: 385e43a4959477e4dbb008c4d85c9798, type: 3}
   reloadSound: {fileID: 8300000, guid: ba34ca7de7566354a98fd6fbba68508d, type: 3}
   type: 5
   mode: 0
@@ -33,3 +33,4 @@ MonoBehaviour:
   burst: 1
   auto: 1
   ammoUsed: {fileID: 0}
+  trace: {fileID: 1184904475076604, guid: 98649547f10b94b4b9b8919547c415ff, type: 2}

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62932ef714cbde4bad7ac06bd6ae47d, type: 3}
+  m_Name: Remington 1100
+  m_EditorClassIdentifier: 
+  name: Remington 1100
+  desc: 
+  image: {fileID: 21300000, guid: 6d47ae28d0fdcfd419246b7cf7b9cff8, type: 3}
+  weight: 3.6
+  stackable: 0
+  _quantity: 1
+  power: 50
+  capacity: 4
+  bulletsLeft: 0
+  accuracy: 15
+  apCost: 40
+  ammo: 9
+  velocity: 548
+  rateOfFire: 60
+  shootSound: {fileID: 8300000, guid: 6eb2ec28162342746ae6965df2d87f95, type: 3}
+  reloadSound: {fileID: 8300000, guid: 1b70d89b813a56e458fc4c247ff399ba, type: 3}
+  type: 4
+  mode: 0
+  single: 1
+  burst: 0
+  auto: 0
+  ammoUsed: {fileID: 0}
+  trace: {fileID: 1213462966147360, guid: 3a08413b83d8469498fcfd6594f015e2, type: 2}

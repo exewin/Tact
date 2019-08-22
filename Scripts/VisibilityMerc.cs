@@ -9,7 +9,6 @@ public class VisibilityMerc : Visibility
 	{
 		if(human.tag == "Hostile")
 		{
-			Debug.Log(gameObject.name+" can see "+human.name);
 			VisibilityHostile hostile = (VisibilityHostile) human; 
 			hostile.Visible();
 			if(id-1==GameController.mercActive)

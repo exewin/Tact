@@ -28,6 +28,7 @@ public class ItemWeapon : Item
 	public bool auto;
 	
 	[HideInInspector] public ItemAmmo ammoUsed; 
+	public GameObject trace;
 	
 }
 

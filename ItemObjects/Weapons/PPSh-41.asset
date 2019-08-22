@@ -33,3 +33,4 @@ MonoBehaviour:
   burst: 0
   auto: 1
   ammoUsed: {fileID: 0}
+  trace: {fileID: 1665058351029620, guid: 1d9b72b42244cd0428d6af58875495f6, type: 2}
