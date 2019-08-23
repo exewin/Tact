@@ -26,7 +26,7 @@ public class Stats : MonoBehaviour
 	public float ap;
 	public int maxAp;
 	
-	public Transform currentTarget;
+	private Transform currentTarget;
 	
 	public float burnOut = 0;
 	
@@ -41,14 +41,14 @@ public class Stats : MonoBehaviour
 	//UIs
 	[SerializeField] protected Log log;
 	
-	void Start()
+	protected void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
 		inv = GetComponent<Inventory>();
 		hp = maxHp;
 	}
 	
-	void Update()
+	protected void Update()
 	{
 		if(burnOut>0)
 			burnOut-=Time.deltaTime*1;
@@ -60,7 +60,7 @@ public class Stats : MonoBehaviour
 		}
 		
 		if(ap<maxAp)
-			ap+=Time.deltaTime*10;
+			ap+=Time.deltaTime*10; //? TODO
 	}
 	
 	public void SetTarget(Transform target)
@@ -76,7 +76,7 @@ public class Stats : MonoBehaviour
 		
 		inv.RemoveItem(item);
 		weapon = (ItemWeapon)item;
-		//dmg f
+		FindAmmo();
 	}
 	
 	public void EquipArmor(Item item)
@@ -86,7 +86,6 @@ public class Stats : MonoBehaviour
 		
 		inv.RemoveItem(item);
 		armor = (ItemArmor)item;
-		//armor f
 	}
 	
 	public void EquipHelmet(Item item)
@@ -96,7 +95,22 @@ public class Stats : MonoBehaviour
 		
 		inv.RemoveItem(item);
 		helmet = (ItemHelmet)item;
-		//armor f
+	}
+	
+	public void FindAmmo()
+	{
+		for(int i = 0; i < inv.items.Count; i++)
+		{
+			if(inv.items[i] is ItemAmmo)
+			{
+				ItemAmmo item = (ItemAmmo)inv.items[i];
+				if(item.ammo == weapon.ammo)
+				{
+					weapon.ammoUsed = item;
+				}
+			}
+		}
+		Debug.Log("I DID NOT FIND AMMO FOR THIS WEAPON!");
 	}
 	
 	public void UnequipWeapon()
@@ -168,7 +182,9 @@ public class Stats : MonoBehaviour
 			}
 			else
 			{
+				transform.LookAt(target); // look at
 				audioSource.PlayOneShot(emptyGun);
+				burnOut = 1;
 				SetTarget(null);
 			}
 			return;
@@ -208,15 +224,14 @@ public class Stats : MonoBehaviour
 		}
 	}
 	
-	public virtual void SingleShoot(Transform target, float accuracyModifer)
+	protected virtual void SingleShoot(Transform target, float accuracyModifer)
 	{
+		transform.LookAt(target);
 		audioSource.PlayOneShot(weapon.shootSound);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);
-		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer), weapon.accuracy);
-		
-		transform.LookAt(target);
+		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer), weapon, target.GetComponent<BodyPart>().bodyPart);
 		Color col;
 		Vector3 lineDir;
 		bool aimed;

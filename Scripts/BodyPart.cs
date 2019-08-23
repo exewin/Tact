@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BodyPart : MonoBehaviour 
 {
-	[SerializeField]
-	private part bodyPart;
-	[SerializeField]
+	public part bodyPart;
 	public Stats owner;
 	
 	public void Hit(int dmg)

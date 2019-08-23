@@ -25,6 +25,7 @@ MonoBehaviour:
   ammo: 3
   velocity: 440
   rateOfFire: 40
+  effectiveRange: 201
   shootSound: {fileID: 8300000, guid: 53098d45bdf297546a85708c850aff31, type: 3}
   reloadSound: {fileID: 8300000, guid: 742566a2a9bc915418b3782de39c137f, type: 3}
   type: 0

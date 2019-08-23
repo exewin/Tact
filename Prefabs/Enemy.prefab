@@ -74,8 +74,9 @@ GameObject:
   - component: {fileID: 23320209795802850}
   - component: {fileID: 195334759270332938}
   - component: {fileID: 114858570738906612}
-  - component: {fileID: 114782355761814702}
   - component: {fileID: 114946029402432200}
+  - component: {fileID: 82262321121815348}
+  - component: {fileID: 114083275520735884}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Hostile
@@ -216,6 +217,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82262321121815348
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1681640495281064}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114018671723457352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,7 +324,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 0
-  owner: {fileID: 114782355761814702}
+  owner: {fileID: 114083275520735884}
+--- !u!114 &114083275520735884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1681640495281064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ec76c412c55e0409684289e039293a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 4494462146310172}
+  drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
+  nickname: Vietcong Soldier
+  portrait: {fileID: 0}
+  desc: MAO
+  hp: 0
+  maxHp: 62
+  accuracy: 45
+  strength: 46
+  reflex: 34
+  agility: 60
+  ap: 80
+  maxAp: 80
+  burnOut: 0
+  weapon: {fileID: 0}
+  armor: {fileID: 0}
+  helmet: {fileID: 0}
+  emptyGun: {fileID: 8300000, guid: 83ded76a09a49864aa85e965f9c0dcb7, type: 3}
+  log: {fileID: 0}
 --- !u!114 &114384387185879920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,7 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 1
-  owner: {fileID: 114782355761814702}
+  owner: {fileID: 114083275520735884}
 --- !u!114 &114434778513833206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,39 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 2
-  owner: {fileID: 114782355761814702}
---- !u!114 &114782355761814702
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1681640495281064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b443e0624b35ca6419bc103282d31d80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  head: {fileID: 4494462146310172}
-  drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
-  trace: {fileID: 1184904475076604, guid: 98649547f10b94b4b9b8919547c415ff, type: 2}
-  nickname: Jackson
-  portrait: {fileID: 0}
-  desc: Hostile soldier
-  hp: 55
-  maxHp: 55
-  accuracy: 45
-  strength: 45
-  reflex: 45
-  agility: 45
-  ap: 0
-  maxAp: 0
-  currentTarget: {fileID: 0}
-  burnOut: 0
-  weapon: {fileID: 0}
-  armor: {fileID: 0}
-  helmet: {fileID: 0}
-  emptyGun: {fileID: 0}
-  log: {fileID: 0}
+  owner: {fileID: 114083275520735884}
 --- !u!114 &114858570738906612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,8 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startItems:
-  - {fileID: 11400000, guid: e17a71cdd335d8446871b8e837239c86, type: 2}
-  - {fileID: 11400000, guid: 31877365d85b6134e90eaa1f242dd2bd, type: 2}
+  - {fileID: 11400000, guid: 2cb9ade2b219eb6499f95e9b6284a592, type: 2}
+  - {fileID: 11400000, guid: 3856b7b31accdb943a1781a96f4b7524, type: 2}
   - {fileID: 11400000, guid: 5ccaa93540ed31142984cdd9d4aaf9cf, type: 2}
   items: []
 --- !u!195 &195334759270332938

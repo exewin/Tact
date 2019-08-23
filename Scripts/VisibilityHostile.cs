@@ -26,7 +26,21 @@ public class VisibilityHostile : Visibility
 		}
 	}
 	
+	protected override void ActionTrue(Visibility human)
+	{
+		if(human.tag == "Player")
+		{
+			GetComponent<StatsHostile>().SetTarget(human.bodyParts[1].transform); // chest
+		}
+	}		
 	
+	protected override void ActionFalse(Visibility human)
+	{
+		if(human.tag == "Player")
+		{
+			//can't see one of the targets, send signal
+		}
+	}	
 	
 	
 	private void Hide()

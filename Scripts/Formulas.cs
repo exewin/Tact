@@ -16,11 +16,15 @@ public class Formulas : MonoBehaviour
 		return distance;
 	}
 	
-	public static float ChanceToHit(float distance, int accuracy, int weaponAccuracy)
+	public static float ChanceToHit(float distance, int accuracy, ItemWeapon weapon, part bodyPart)
 	{
-		//TODO
-		//CHECK BODYPART
-		float chanceToHit = (weaponAccuracy + accuracy) / (distance/10); 
+		float chanceToHit = (((float)weapon.accuracy/100+1) * accuracy*4) / (distance/7); 
+		
+		if(weapon.effectiveRange / RANGE_SCALER < distance)
+			chanceToHit /= 2;
+		
+		if(bodyPart == part.head)
+			chanceToHit /= 2;
 		
 		if(chanceToHit > 200)
 			chanceToHit = 100;

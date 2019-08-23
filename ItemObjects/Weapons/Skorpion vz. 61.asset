@@ -22,13 +22,14 @@ MonoBehaviour:
   bulletsLeft: 0
   accuracy: 5
   apCost: 18
-  ammo: 9
+  ammo: 0
   velocity: 320
   rateOfFire: 850
+  effectiveRange: 50
   shootSound: {fileID: 8300000, guid: 53098d45bdf297546a85708c850aff31, type: 3}
   reloadSound: {fileID: 8300000, guid: 4cd872d099e589d4e9c4f783c20f0419, type: 3}
   type: 2
-  mode: 0
+  mode: 2
   single: 1
   burst: 0
   auto: 1

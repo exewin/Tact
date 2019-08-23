@@ -147,13 +147,6 @@ public class InventoryController : MonoBehaviour
 		if(items[index] is ItemWeapon)
 		{
 			stats.EquipWeapon(items[index]);
-			ItemAmmo tmp = FindAmmoInInventory(stats.weapon.ammo);
-			if(tmp!=null)
-			{
-				stats.weapon.ammoUsed = tmp;
-			}
-			else
-				Debug.Log("didn't find ammo"); //this should be in inventory script TODO
 		}
 		else if(items[index] is ItemArmor)
 		{
@@ -236,22 +229,6 @@ public class InventoryController : MonoBehaviour
 			}
 		}
 		return false;
-	}
-	
-	private ItemAmmo FindAmmoInInventory(ammoType s)
-	{
-		for(int i = 0; i < items.Count; i++)
-		{
-			if(items[i] is ItemAmmo)
-			{
-				ItemAmmo item = (ItemAmmo)items[i];
-				if(item.ammo == s)
-				{
-					return item;
-				}
-			}
-		}
-		return null;
 	}
 	#endregion	
 	
