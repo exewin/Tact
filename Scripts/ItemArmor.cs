@@ -5,5 +5,7 @@ public class ItemArmor : Item
 {
 	
 	public int defense;
+	public int flatDefense;
+	public bool protectLegs;
 	
 }

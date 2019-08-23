@@ -16,6 +16,7 @@ public class ItemWeapon : Item
 	
 	public float velocity = 400;
 	public float rateOfFire = 40;
+	public float effectiveRange = 350;
 	
 	public AudioClip shootSound;
 	public AudioClip reloadSound;

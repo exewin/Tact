@@ -241,14 +241,15 @@ public class Stats : MonoBehaviour
 	{
 		GameObject line = Instantiate(weapon.trace,head.position,transform.rotation);
 		line.transform.forward = lineDir;
-		line.GetComponent<Trace>().Info(weapon.velocity/14f); //velocity const
+		line.GetComponent<Trace>().Info(weapon.velocity/Formulas.VELOCITY_SCALER);
 		RaycastHit hit;
+		float realDistance = 0;
 		
 		//real distance ray
 		if(Physics.Raycast(head.position, lineDir, out hit))
 		{
-			float realDistance = Vector3.Distance(head.position,hit.point);
-			yield return new WaitForSeconds(realDistance/(weapon.velocity/14f)); //velocity const
+			realDistance = Vector3.Distance(head.position,hit.point);
+			yield return new WaitForSeconds(realDistance/(weapon.velocity/Formulas.VELOCITY_SCALER));
 		}
 		
 		if(Physics.Raycast(head.position, lineDir, out hit))
@@ -259,7 +260,7 @@ public class Stats : MonoBehaviour
 				//if(!aimed)
 					//Debug.Log("lucky shot"); //LOG?
 				
-				hit.collider.GetComponent<BodyPart>().Hit(weapon.power); //damage formula
+				hit.collider.GetComponent<BodyPart>().Hit(Formulas.EffectiveRange(weapon,realDistance*2));
 			}
 			Destroy(line);
 		}
@@ -268,22 +269,46 @@ public class Stats : MonoBehaviour
 		
 	public virtual void Injury(int dmg, part bodyPart)
 	{
-		//TODO: armor, bodypart
-		hp-=dmg;
+		float dmgMultiplier = 1f; 
+		float armorDecreaser = 1f;
+		int armorFlat = 0;
 		string stringPart = "";
 		if(bodyPart==part.head)
 		{
 			stringPart = "head";
+			dmgMultiplier = 2f;
+			if(helmet)
+			{
+				armorDecreaser = Formulas.DefenseFormula(helmet.defense, dmg);
+				armorFlat = helmet.flatDefense;
+			}
 		}
 		else if(bodyPart==part.chest)
 		{
 			stringPart = "chest";
+			if(armor)
+			{
+				armorDecreaser = Formulas.DefenseFormula(armor.defense, dmg);
+				armorFlat = armor.flatDefense;
+			}
 		}
 		else if(bodyPart==part.legs)
 		{
 			stringPart = "legs";
+			dmgMultiplier = 0.3f;
+			if(armor)
+			{
+				if(armor.protectLegs)
+				{
+					armorDecreaser = Formulas.DefenseFormula(armor.defense, dmg);
+					armorFlat = armor.flatDefense;
+				}
+			}
 		}
 		
+		dmg = Formulas.DamageFormula(dmg, dmgMultiplier, armorDecreaser, armorFlat);
+		
+		hp-=dmg;
 		log.Send(nickname + " was hit in the "+stringPart+" for " + dmg + " HP");
 		
 		if(hp<1)
@@ -292,7 +317,7 @@ public class Stats : MonoBehaviour
 
 			//TODO death
 			UnequipEverything();
-			GameController.RemoveFromList(gameObject); //enemy only!!! TODO
+			GameController.RemoveFromList(gameObject);
 			GameObject dropped = Instantiate(drop, transform.position, Quaternion.identity);
 			PickupItem d = dropped.GetComponent<PickupItem>();
 			for(int i = 0; i < inv.items.Count; i++)

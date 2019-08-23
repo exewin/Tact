@@ -381,8 +381,8 @@ MonoBehaviour:
   m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_DecelerationRate: 0
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 710673964}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 856528188}
@@ -556,7 +556,7 @@ Prefab:
         type: 2}
       propertyPath: startItems.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 1333b8532a6d4704ba0a3d83e3e053c1,
+      objectReference: {fileID: 11400000, guid: 59849cccc46f5c64c85ffa82c87b061d,
         type: 2}
     - target: {fileID: 114593350548517352, guid: f941f32bbbe567d40886389c49f8a2ae,
         type: 2}

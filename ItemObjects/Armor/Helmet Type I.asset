@@ -18,3 +18,4 @@ MonoBehaviour:
   stackable: 0
   _quantity: 1
   defense: 25
+  flatDefense: 3

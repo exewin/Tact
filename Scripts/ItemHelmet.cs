@@ -7,5 +7,6 @@ public class ItemHelmet : Item
 {
 	
 	public int defense;
+	public int flatDefense;
 	
 }

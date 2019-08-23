@@ -18,3 +18,5 @@ MonoBehaviour:
   stackable: 0
   _quantity: 1
   defense: 30
+  flatDefense: 3
+  protectLegs: 0
