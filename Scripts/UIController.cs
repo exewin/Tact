@@ -32,7 +32,6 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Button UIBurstSingle;
 	[SerializeField] private Button UIBurstBurst;
 	[SerializeField] private Button UIBurstAuto;
-	
 	[SerializeField] private Text UIBurstSingleText;
 	[SerializeField] private Text UIBurstBurstText;
 	[SerializeField] private Text UIBurstAutoText;
@@ -139,33 +138,44 @@ public class UIController : MonoBehaviour
 		UIStatAgility.text = mercScript.agility + "";
 		UIStatReflex.text = mercScript.reflex + "";
 		
-		UIBurstSingleText.color = Color.white;
-		UIBurstBurstText.color = Color.white;
-		UIBurstAutoText.color = Color.white;
-		UIBurstSingle.interactable = false;
-		UIBurstBurst.interactable = false;
-		UIBurstAuto.interactable = false;
-		
 		if(mercScript.weapon)
 		{
 			UIWeapon.sprite = mercScript.weapon.image;
 			UIWeaponCapacity.text = mercScript.weapon.bulletsLeft + "/" + mercScript.weapon.capacity;
 			if(mercScript.weapon.single)
 				UIBurstSingle.interactable = true;
+			else
+				UIBurstSingle.interactable = false;
 
 			if(mercScript.weapon.burst)
 				UIBurstBurst.interactable = true;
+			else
+				UIBurstBurst.interactable = false;
 		
 			if(mercScript.weapon.auto)
 				UIBurstAuto.interactable = true;
+			else
+				UIBurstAuto.interactable = false;
 
 			
 			if(mercScript.weapon.mode == burstMode.single)
+			{
 				UIBurstSingleText.color = Color.red;
+				UIBurstBurstText.color = Color.white;
+				UIBurstAutoText.color = Color.white;
+			}
 			else if(mercScript.weapon.mode == burstMode.burst)
+			{
+				UIBurstSingleText.color = Color.white;
 				UIBurstBurstText.color = Color.red;
+				UIBurstAutoText.color = Color.white;
+			}
 			else if(mercScript.weapon.mode == burstMode.auto)
+			{
+				UIBurstSingleText.color = Color.white;
+			UIBurstBurstText.color = Color.white;
 				UIBurstAutoText.color = Color.red;
+			}
 		}
 		else
 		{

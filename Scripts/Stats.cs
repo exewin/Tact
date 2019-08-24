@@ -28,7 +28,7 @@ public class Stats : MonoBehaviour
 	
 	private Transform currentTarget;
 	
-	public float burnOut = 0;
+	private float burnOut = 0;
 	
 	//equipment
 	[HideInInspector] public ItemWeapon weapon;
@@ -39,10 +39,11 @@ public class Stats : MonoBehaviour
 	[SerializeField] private AudioClip emptyGun;
 	
 	//UIs
-	[SerializeField] protected Log log;
+	protected Log log;
 	
 	protected void Start()
 	{
+		log = GameObject.Find("LOG CONTROLLER").GetComponent<Log>();
 		audioSource = GetComponent<AudioSource>();
 		inv = GetComponent<Inventory>();
 		hp = maxHp;
@@ -183,7 +184,7 @@ public class Stats : MonoBehaviour
 			else
 			{
 				transform.LookAt(target); // look at
-				audioSource.PlayOneShot(emptyGun);
+				AudioSource.PlayClipAtPoint(emptyGun, transform.position);
 				burnOut = 1;
 				SetTarget(null);
 			}
@@ -216,7 +217,7 @@ public class Stats : MonoBehaviour
 		{
 			if(weapon.bulletsLeft == 0)
 			{
-				audioSource.PlayOneShot(emptyGun);
+				AudioSource.PlayClipAtPoint(emptyGun, transform.position);
 				break;
 			}
 			SingleShoot(target,accuracyModifer);
@@ -227,7 +228,7 @@ public class Stats : MonoBehaviour
 	protected virtual void SingleShoot(Transform target, float accuracyModifer)
 	{
 		transform.LookAt(target);
-		audioSource.PlayOneShot(weapon.shootSound);
+		AudioSource.PlayClipAtPoint(weapon.shootSound, transform.position,1f);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);

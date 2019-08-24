@@ -7,7 +7,7 @@ public class Visibility : MonoBehaviour
 	public int id;
 	[SerializeField] private LayerMask layers;
 	[SerializeField] private Transform head;
-	[SerializeField] public Transform[] bodyParts;
+	public Transform[] bodyParts;
 	public List<Visibility> humans = new List<Visibility>();
 	
 	public void SetID(int i, List<Visibility> list)

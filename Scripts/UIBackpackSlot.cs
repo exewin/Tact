@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
-	int index;
-	public Image icon; //UI Content
-	Item info; //Scriptable Object info
-	public Text quantity; //Item quantity
-	InventoryController inv;
-
+	private int index;
+	private Item info;
+	private InventoryController inv;
+	
+	[SerializeField] private Image icon;
+	[SerializeField] private Text quantity;
 	
 	public void Assign(Item item, int i)
 	{

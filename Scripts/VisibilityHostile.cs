@@ -6,7 +6,7 @@ public class VisibilityHostile : Visibility
 {
 
 	private Renderer rend;
-	float hideTimer = 0;
+	private float hideTimer = 0;
 	
 	private void Start()
 	{

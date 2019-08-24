@@ -8,6 +8,7 @@ public class Formulas : MonoBehaviour
 	public static float VELOCITY_SCALER = 14f;
 	public static float RANGE_SCALER = 14f;
 	public static float DMG_PERCENTAGE_RANDOM = 10;
+	public static int LOG_LIMIT = 30;
 	
 	
 	public static float Distance(Transform a, Transform b)
@@ -42,7 +43,6 @@ public class Formulas : MonoBehaviour
 	
 	public static int EffectiveRange(ItemWeapon weapon, float distance)
 	{
-		Debug.Log("EffectiveRange:"+weapon.effectiveRange/RANGE_SCALER+" / "+"Range:"+distance);
 		if(weapon.effectiveRange / RANGE_SCALER >= distance)
 			return weapon.power;
 		else
@@ -71,8 +71,12 @@ public class Formulas : MonoBehaviour
 	
 	public static int DamageFormula(int dmg, float dmgMultiplier, float armorDecreaser, int armorFlat)
 	{
-		dmg = Formulas.BaseDamageRandomizer(dmg);
-		return (int)(dmg * dmgMultiplier / armorDecreaser - armorFlat);
+		float fdmg = Formulas.BaseDamageRandomizer(dmg);
+		dmg = (int)(fdmg * dmgMultiplier / armorDecreaser - armorFlat);
+		
+		if(dmg<0)
+			dmg = 0;
+		return dmg;
 	}
 
 }

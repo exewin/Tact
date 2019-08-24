@@ -12,9 +12,6 @@ public class InventoryController : MonoBehaviour
 	private List<GameObject> backpackSlots = new List<GameObject>();
 	[SerializeField] private UIController UIControl;
 	
-	bool autoEquipAmmo; //TODO button
-	
-	
 	//UI
 	[SerializeField] private Text item_name;
 	[SerializeField] private Image item_icon;
@@ -100,7 +97,7 @@ public class InventoryController : MonoBehaviour
 				weight+=equiped[i].weight;
 			}
 			
-		total_weight.text = weight + " / " + Formulas.Weight(stats) + "kg"; //F2? TODO
+		total_weight.text = weight + " / " + Formulas.Weight(stats).ToString("F2") + "kg";
 		
 		if(weight > Formulas.Weight(stats))
 		{
@@ -204,7 +201,7 @@ public class InventoryController : MonoBehaviour
 	}
 	public void ReloadWeaponButton()
 	{
-		if(stats.weapon&&stats.weapon.ammoUsed!=null && stats.weapon.ammoUsed.quantity > 0)
+		if(stats.weapon&&stats.weapon.ammoUsed!=null && stats.weapon.ammoUsed.quantity > 0 && stats.weapon.bulletsLeft != stats.weapon.capacity)
 		{
 			stats.ReloadWeapon(stats.weapon.ammoUsed);
 			UpdateInventory();
@@ -239,7 +236,7 @@ public class InventoryController : MonoBehaviour
 		item_name.text = info.name;
 		item_icon.sprite = info.image;
 		item_desc.text = info.desc;
-		item_stat1.text = "Weight: "+(info.weight*info.quantity)+" kg";
+		item_stat1.text = "Weight: "+(info.weight*info.quantity).ToString("F2")+" kg";
 		
 		if(info.stackable)
 			item_statA.text = ""+info.quantity;
@@ -273,53 +270,29 @@ public class InventoryController : MonoBehaviour
 	{
 		
 		if(ammo==ammoType.a_9x19mmParabellum)
-		{
 			return "9x19mm Parabellum";
-		}
 		else if(ammo==ammoType.a_7_65x21mmParabellum)
-		{
 			return "7.65x21mm Parabellum";
-		}
 		else if(ammo==ammoType.a_32_ACP)
-		{
 			return ".32 ACP";
-		}
 		else if(ammo==ammoType.a_357_Magnum)
-		{
 			return ".357 Magnum";
-		}
 		else if(ammo==ammoType.a_38_Special)
-		{
 			return ".38 Special";
-		}
 		else if(ammo==ammoType.a_44_Magnum)
-		{
 			return ".44 Magnum";
-		}
 		else if(ammo==ammoType.a_50ActionExpress)
-		{
 			return ".50 AE";
-		}
 		else if(ammo==ammoType.a_5_56x45mm)
-		{
 			return "5.56x45mm";
-		}
 		else if(ammo==ammoType.a_5_7x28mm)
-		{
 			return "5.7x28mm";
-		}
 		else if(ammo==ammoType.a_7_62x39mm)
-		{
 			return "7.62x39mm";
-		}
 		else if(ammo==ammoType.a_7_62x54mmR)
-		{
 			return "7.62x54mmR";
-		}
 		else if(ammo==ammoType.a_7_62x51mm)
-		{
 			return "7.62x51mm";
-		}
 		else
 			return "unknown";
 	}

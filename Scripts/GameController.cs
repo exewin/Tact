@@ -31,4 +31,5 @@ public class GameController : MonoBehaviour
 	{
 		humans.Remove(g.GetComponent<Visibility>());
 	}
+	
 }
