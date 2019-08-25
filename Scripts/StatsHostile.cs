@@ -5,9 +5,9 @@ using UnityEngine;
 public class StatsHostile : Stats 
 {
 
-	void Start()
+	protected void Awake()
 	{
-		base.Start();
+		base.Awake();
 		AutoEquipLazy();
 	}
 	

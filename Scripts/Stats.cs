@@ -39,11 +39,13 @@ public class Stats : MonoBehaviour
 	[SerializeField] private AudioClip emptyGun;
 	
 	//UIs
-	protected Log log;
+	protected LogController log;
+	protected SoundController sound;
 	
-	protected void Start()
+	protected void Awake()
 	{
-		log = GameObject.Find("LOG CONTROLLER").GetComponent<Log>();
+		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
+		sound = GameObject.Find("SOUND CONTROLLER").GetComponent<SoundController>();
 		audioSource = GetComponent<AudioSource>();
 		inv = GetComponent<Inventory>();
 		hp = maxHp;
@@ -111,7 +113,6 @@ public class Stats : MonoBehaviour
 				}
 			}
 		}
-		Debug.Log("I DID NOT FIND AMMO FOR THIS WEAPON!");
 	}
 	
 	public void UnequipWeapon()
@@ -184,7 +185,7 @@ public class Stats : MonoBehaviour
 			else
 			{
 				transform.LookAt(target); // look at
-				AudioSource.PlayClipAtPoint(emptyGun, transform.position);
+				sound.PlayEmpty(transform);
 				burnOut = 1;
 				SetTarget(null);
 			}
@@ -217,7 +218,7 @@ public class Stats : MonoBehaviour
 		{
 			if(weapon.bulletsLeft == 0)
 			{
-				AudioSource.PlayClipAtPoint(emptyGun, transform.position);
+				sound.PlayEmpty(transform);
 				break;
 			}
 			SingleShoot(target,accuracyModifer);
@@ -228,7 +229,7 @@ public class Stats : MonoBehaviour
 	protected virtual void SingleShoot(Transform target, float accuracyModifer)
 	{
 		transform.LookAt(target);
-		AudioSource.PlayClipAtPoint(weapon.shootSound, transform.position,1f);
+		sound.PlayAtPoint(weapon.shootSound, transform);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);
@@ -366,7 +367,7 @@ public class Stats : MonoBehaviour
 			ammo = null;
 		}
 		
-		audioSource.PlayOneShot(weapon.reloadSound);
+		sound.PlayAtPoint(weapon.reloadSound, transform);
 	}
 	
 	public virtual void EjectAmmo(ItemAmmo ammo)
@@ -381,7 +382,7 @@ public class Stats : MonoBehaviour
 		weapon.weight -= (weapon.bulletsLeft*ammo.weight);
 		weapon.bulletsLeft = 0;
 		
-		audioSource.PlayOneShot(weapon.reloadSound);
+		sound.PlayAtPoint(weapon.reloadSound, transform);
 	}
 	
 	public void SwitchWeaponMode(burstMode mode)

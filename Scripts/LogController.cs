@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Log : MonoBehaviour 
+public class LogController : MonoBehaviour 
 {
 	
 	[SerializeField] private GameObject singleText;
