@@ -41,17 +41,6 @@ public class Formulas : MonoBehaviour
 		return a.strength/2;
 	}
 	
-	public static int EffectiveRange(ItemWeapon weapon, float distance)
-	{
-		if(weapon.effectiveRange / RANGE_SCALER >= distance)
-			return weapon.power;
-		else
-		{
-			float modified = (float)weapon.power / (distance/(weapon.effectiveRange / RANGE_SCALER));
-			return (int) modified;
-		}
-	}
-	
 	public static float DefenseFormula(int defense, int dmg)
 	{
 		if(dmg >= (float)defense * 2f) //100% penetration
@@ -62,7 +51,19 @@ public class Formulas : MonoBehaviour
 		}
 	}
 	
-	public static int BaseDamageRandomizer(int dmg)
+	#region DMG FORMS
+	public static int EffectiveRangePowerModifer(float weaponEffectiveRange, int weaponPower, float distance)
+	{
+		if(weaponEffectiveRange / RANGE_SCALER >= distance)
+			return weaponPower;
+		else
+		{
+			float modified = (float)weaponPower / (distance/(weaponEffectiveRange / RANGE_SCALER));
+			return (int) modified;
+		}
+	}
+	
+	public static int DamageRandomizer(int dmg)
 	{
 		float rand = Random.Range(-DMG_PERCENTAGE_RANDOM, DMG_PERCENTAGE_RANDOM) / 100;
 		rand *= (float)dmg;
@@ -71,12 +72,12 @@ public class Formulas : MonoBehaviour
 	
 	public static int DamageFormula(int dmg, float dmgMultiplier, float armorDecreaser, int armorFlat)
 	{
-		float fdmg = Formulas.BaseDamageRandomizer(dmg);
+		float fdmg = Formulas.DamageRandomizer(dmg);
 		dmg = (int)(fdmg * dmgMultiplier / armorDecreaser - armorFlat);
 		
 		if(dmg<0)
 			dmg = 0;
 		return dmg;
 	}
-
+	#endregion
 }

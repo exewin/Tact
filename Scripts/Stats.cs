@@ -8,6 +8,7 @@ public class Stats : MonoBehaviour
 	//necessary gameObjects
 	public Transform head;
 	[SerializeField] private GameObject drop;
+	[SerializeField] private GameObject shot;
 	protected Inventory inv;
 	
 	//personal info
@@ -234,58 +235,24 @@ public class Stats : MonoBehaviour
 		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);
 		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer), weapon, target.GetComponent<BodyPart>().bodyPart);
-		Color col;
 		Vector3 lineDir;
-		bool aimed;
 		
 		if(chanceToHit>=Random.Range(1,100))
 		{
-			col = Color.green;
 			lineDir = target.position - head.position;
-			aimed = true;
 		}
 		else
 		{
-			col = Color.yellow;
-			Vector3 missedShot = new Vector3(Random.Range(-1f,1f),Random.Range(-0.3f,0.3f),Random.Range(-1f,1f));
+			Vector3 missedShot = new Vector3(Random.Range(-1f,1f),Random.Range(-0.3f,0.3f),Random.Range(-1f,1f)); //??? TODO
 			lineDir = target.position - head.position - missedShot;
-			aimed = false;
 		}
-		StartCoroutine(ShotDelay(lineDir,distance));
-	}
-	
-	private IEnumerator ShotDelay(Vector3 lineDir,float distance)
-	{
-		GameObject line = Instantiate(weapon.trace,head.position,transform.rotation);
-		line.transform.forward = lineDir;
-		line.GetComponent<Trace>().Info(weapon.velocity/Formulas.VELOCITY_SCALER);
-		RaycastHit hit;
-		float realDistance = 0;
-		
-		//real distance ray
-		if(Physics.Raycast(head.position, lineDir, out hit))
-		{
-			realDistance = Vector3.Distance(head.position,hit.point);
-			yield return new WaitForSeconds(realDistance/(weapon.velocity/Formulas.VELOCITY_SCALER));
-		}
-		
-		if(Physics.Raycast(head.position, lineDir, out hit))
-		{
-			if(hit.collider.tag=="Shootable")
-			{
-				
-				//if(!aimed)
-					//Debug.Log("lucky shot"); //LOG?
-				
-				hit.collider.GetComponent<BodyPart>().Hit(Formulas.EffectiveRange(weapon,realDistance*2));
-			}
-			Destroy(line);
-		}
+		GameObject s = Instantiate(shot, head.transform.position, transform.rotation);
+		s.GetComponent<RealShoot>().Info(lineDir,distance,weapon);
 	}
 	#endregion
 		
 	public virtual void Injury(int dmg, part bodyPart)
-	{
+	{ //wsadz to w formule TODO
 		float dmgMultiplier = 1f; 
 		float armorDecreaser = 1f;
 		int armorFlat = 0;

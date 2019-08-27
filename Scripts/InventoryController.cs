@@ -97,7 +97,7 @@ public class InventoryController : MonoBehaviour
 				weight+=equiped[i].weight;
 			}
 			
-		total_weight.text = weight + " / " + Formulas.Weight(stats).ToString("F2") + "kg";
+		total_weight.text = weight.ToString("F2") + " / " + Formulas.Weight(stats).ToString("F2") + "kg";
 		
 		if(weight > Formulas.Weight(stats))
 		{
