@@ -6,6 +6,12 @@ public class StatsMerc : Stats
 {
 	
 	[SerializeField] private UIController UIControl;
+	
+	protected override void Update()
+	{
+		base.Update();
+		UIControl.UIAp();
+	}
 
 	public override void ReloadWeapon(ItemAmmo ammo)
 	{

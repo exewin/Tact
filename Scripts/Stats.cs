@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum state{ stand, crouch, crawl }
+
 public class Stats : MonoBehaviour 
 {
 	//necessary gameObjects
@@ -43,6 +45,8 @@ public class Stats : MonoBehaviour
 	protected LogController log;
 	protected SoundController sound;
 	
+	public state statePos;
+	
 	protected void Awake()
 	{
 		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
@@ -52,7 +56,7 @@ public class Stats : MonoBehaviour
 		hp = maxHp;
 	}
 	
-	protected void Update()
+	protected virtual void Update()
 	{
 		if(burnOut>0)
 			burnOut-=Time.deltaTime*1;
@@ -355,6 +359,11 @@ public class Stats : MonoBehaviour
 	public void SwitchWeaponMode(burstMode mode)
 	{
 		weapon.mode = mode;
+	}
+	
+	public void SwitchState(state mode)
+	{
+		statePos = mode;
 	}
 	#endregion
 }

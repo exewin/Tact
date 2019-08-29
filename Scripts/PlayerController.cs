@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 	
 	void LateUpdate()
 	{
-		if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon)
+		if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) //rotate immediately
 		{
 			transform.rotation = Quaternion.LookRotation(navMeshAgent.velocity.normalized);
 		}

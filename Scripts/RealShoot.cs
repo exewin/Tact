@@ -37,7 +37,6 @@ public class RealShoot : MonoBehaviour
 		{
 			if(hit.collider.tag=="Shootable")
 			{
-				
 				hit.collider.GetComponent<BodyPart>().Hit(Formulas.EffectiveRangePowerModifer(weaponEffectiveRange, weaponPower, realDistance));
 			}
 			

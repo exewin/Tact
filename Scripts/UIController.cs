@@ -15,7 +15,9 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Text UINickname;
 	[SerializeField] private Image UIPortrait;
 	[SerializeField] private Text UIHpText;
-	[SerializeField] private RectTransform UIHpBar;
+	[SerializeField] private RectTransform UIHpBar;	
+	[SerializeField] private Text UIApText;
+	[SerializeField] private RectTransform UIApBar;
 	
 	//UI Stats
 	[SerializeField] private Text UIStatStrength;
@@ -35,6 +37,10 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Text UIBurstSingleText;
 	[SerializeField] private Text UIBurstBurstText;
 	[SerializeField] private Text UIBurstAutoText;
+	
+	[SerializeField] private Button UIStand;
+	[SerializeField] private Button UICrouch;
+	[SerializeField] private Button UICrawl;
 
 	
 	[SerializeField] private Sprite transparent;
@@ -124,7 +130,6 @@ public class UIController : MonoBehaviour
 	//Update UI
 	public void UIControl()
 	{
-		
 		GetComponent<InventoryController>().UpdateInventory();
 		
 		UINickname.text = mercScript.nickname;
@@ -190,7 +195,12 @@ public class UIController : MonoBehaviour
 			UIHelmet.sprite = mercScript.helmet.image;
 		else
 			UIHelmet.sprite = transparent;
-		
+	}
+	
+	public void UIAp()
+	{
+		UIApText.text = mercScript.ap.ToString("F0") + "/" + mercScript.maxAp;
+		UIApBar.localScale = new Vector3((float)mercScript.ap/(float)mercScript.maxAp,1f,1f);
 	}
 	
 }

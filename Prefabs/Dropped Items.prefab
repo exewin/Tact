@@ -124,14 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9f378a00a26f34ab3bc4d5aa979ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startItems:
-  - {fileID: 11400000, guid: 4928e590d0c23e941b170a454587800d, type: 2}
-  - {fileID: 11400000, guid: 39e1d4c6171fdf3489adbd88bbd4cf69, type: 2}
-  - {fileID: 11400000, guid: ed55606ed23690b498c209a439d1ced9, type: 2}
-  - {fileID: 11400000, guid: 59849cccc46f5c64c85ffa82c87b061d, type: 2}
-  - {fileID: 11400000, guid: 24f72d068df6767479d89e9c121c2a34, type: 2}
-  - {fileID: 11400000, guid: 9ea819f61bf731849af4619f2dc45700, type: 2}
-  - {fileID: 11400000, guid: aade16328b924d64da1894c9005bfbe0, type: 2}
-  - {fileID: 11400000, guid: aade16328b924d64da1894c9005bfbe0, type: 2}
-  - {fileID: 11400000, guid: aade16328b924d64da1894c9005bfbe0, type: 2}
+  startItems: []
   items: []

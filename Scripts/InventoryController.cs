@@ -212,6 +212,12 @@ public class InventoryController : MonoBehaviour
 		stats.SwitchWeaponMode((burstMode)mode);
 		UIControl.UIControl();
 	}
+	
+	public void StateButton(int mode)
+	{
+		stats.SwitchState((state)mode);
+		UIControl.UIControl();
+	}
 	#endregion
 	
 	#region find
