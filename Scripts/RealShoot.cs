@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RealShoot : MonoBehaviour 
 {
-	public void Info(Vector3 lineDir, float distance, ItemWeapon weapon)
+	public void Info(Vector3 lineDir, ItemWeapon weapon)
 	{
 		
 		GameObject line = Instantiate(weapon.trace,transform.position,transform.rotation);
@@ -17,26 +17,32 @@ public class RealShoot : MonoBehaviour
 		{
 			realDistance = Formulas.Distance(transform, hit.transform);
 		}
-		StartCoroutine(Delay(lineDir ,realDistance, weapon, line));
+		StartCoroutine(Delay(lineDir, realDistance, weapon, line));
 	}
 	
 	private IEnumerator Delay(Vector3 lineDir, float realDistance, ItemWeapon weapon, GameObject line)
 	{
-		//set this due to unequiping bug
+		
+		if(realDistance == 0)
+		{
+			realDistance = weapon.effectiveRange/Formulas.RANGE_SCALER*10;
+		}
+		
 		float weaponEffectiveRange = weapon.effectiveRange;
 		int weaponPower = weapon.power;
-		//
 		
-		yield return new WaitForSeconds(realDistance/2/(weapon.velocity/Formulas.VELOCITY_SCALER));
+		yield return new WaitForSeconds(realDistance/(weapon.velocity/Formulas.VELOCITY_SCALER));
 		RaycastHit hit;
-		if(Physics.Raycast(transform.position, lineDir, out hit))
+		if(Physics.Raycast(transform.position, lineDir, out hit, realDistance))
 		{
 			if(hit.collider.tag=="Shootable")
 			{
 				
 				hit.collider.GetComponent<BodyPart>().Hit(Formulas.EffectiveRangePowerModifer(weaponEffectiveRange, weaponPower, realDistance));
 			}
-			Destroy(line);
+			
 		}
+		Destroy(line);
+		Destroy(gameObject);
 	}
 }

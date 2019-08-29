@@ -243,11 +243,11 @@ public class Stats : MonoBehaviour
 		}
 		else
 		{
-			Vector3 missedShot = new Vector3(Random.Range(-1f,1f),Random.Range(-0.3f,0.3f),Random.Range(-1f,1f)); //??? TODO
+			Vector3 missedShot = Formulas.MissedShotRandomizer(chanceToHit, distance);
 			lineDir = target.position - head.position - missedShot;
 		}
 		GameObject s = Instantiate(shot, head.transform.position, transform.rotation);
-		s.GetComponent<RealShoot>().Info(lineDir,distance,weapon);
+		s.GetComponent<RealShoot>().Info(lineDir, weapon);
 	}
 	#endregion
 		

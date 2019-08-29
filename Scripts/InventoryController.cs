@@ -102,7 +102,6 @@ public class InventoryController : MonoBehaviour
 		if(weight > Formulas.Weight(stats))
 		{
 			//TODO
-			Debug.Log(stats.nickname+" is overloaded");
 		}
 	}
 	#endregion

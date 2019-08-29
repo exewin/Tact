@@ -15,14 +15,14 @@ public class GameController : MonoBehaviour
 		{
 			Visibility e = g.GetComponent<Visibility>();
 			humans.Add(e);
-			e.SetID(idAllocator, humans);
+			e.SetID(idAllocator);
 			idAllocator++;
 		}
 		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Hostile"))
 		{
 			Visibility e = g.GetComponent<Visibility>();
 			humans.Add(e);
-			e.SetID(idAllocator, humans);
+			e.SetID(idAllocator);
 			idAllocator++;
 		}
 	}

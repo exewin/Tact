@@ -8,11 +8,9 @@ public class Visibility : MonoBehaviour
 	[SerializeField] private LayerMask layers;
 	[SerializeField] private Transform head;
 	public Transform[] bodyParts;
-	public List<Visibility> humans = new List<Visibility>();
 	
-	public void SetID(int i, List<Visibility> list)
+	public void SetID(int i)
 	{
-		humans = list;
 		id = i;
 	}
 
@@ -21,24 +19,24 @@ public class Visibility : MonoBehaviour
 	{
 		if(id!=0)
 		{
-			for(int i = 0; i<humans.Count;i++)
+			for(int i = 0; i<GameController.humans.Count;i++)
 			{
-				Visibility human = humans[i].GetComponent<Visibility>();
+				Visibility human = GameController.humans[i].GetComponent<Visibility>();
 				bool canSee = false;
 				if(id==human.id)
 					continue;
 				
 				for(int j = 0; j<3; j++)
 				{
-					if (!Physics.Linecast(head.transform.position, humans[i].bodyParts[j].transform.position,layers))
+					if (!Physics.Linecast(head.transform.position, GameController.humans[i].bodyParts[j].transform.position,layers))
 					{
 						canSee = true;
 					}
 				}
 				if(canSee)
-					ActionTrue(humans[i]);
+					ActionTrue(GameController.humans[i]);
 				else
-					ActionFalse(humans[i]);
+					ActionFalse(GameController.humans[i]);
 			}
 		}
 	}

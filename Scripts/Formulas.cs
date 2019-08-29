@@ -13,12 +13,15 @@ public class Formulas : MonoBehaviour
 	
 	public static float Distance(Transform a, Transform b)
 	{
-		float distance = 2 * Vector3.Distance(a.position, b.position); //x2 convert to meters
+		float distance = Vector3.Distance(a.position, b.position);
 		return distance;
 	}
 	
 	public static float ChanceToHit(float distance, int accuracy, ItemWeapon weapon, part bodyPart)
 	{
+		if((weapon.effectiveRange / RANGE_SCALER) * 10 < distance)
+			return 0;
+			
 		float chanceToHit = (((float)weapon.accuracy/100+1) * accuracy*4) / (distance/7); 
 		
 		if(weapon.effectiveRange / RANGE_SCALER < distance)
@@ -33,6 +36,11 @@ public class Formulas : MonoBehaviour
 			chanceToHit = 95;
 		
 		return chanceToHit;
+	}
+	
+	public static Vector3 MissedShotRandomizer(float cth, float distance)
+	{
+		return new Vector3(Random.Range(-4f+(cth/25),4f+(cth/25)),Random.Range(-0.5f+(cth/200),0.5f+(cth/200)),Random.Range(-4f+(cth/25),4f+(cth/25)));
 	}
 	
 	public static int Weight(Stats a)
