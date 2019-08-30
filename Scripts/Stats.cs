@@ -12,6 +12,7 @@ public class Stats : MonoBehaviour
 	[SerializeField] private GameObject drop;
 	[SerializeField] private GameObject shot;
 	protected Inventory inv;
+	[SerializeField] protected Visibility vis;
 	
 	//personal info
 	public string nickname;
@@ -30,22 +31,19 @@ public class Stats : MonoBehaviour
 	public int maxAp;
 	
 	private Transform currentTarget;
-	
 	private float burnOut = 0;
+	
+	[HideInInspector] public state statePos;
 	
 	//equipment
 	[HideInInspector] public ItemWeapon weapon;
 	[HideInInspector] public ItemArmor armor;
 	[HideInInspector] public ItemHelmet helmet;
 	
+	//controllers
 	protected AudioSource audioSource;
-	[SerializeField] private AudioClip emptyGun;
-	
-	//UIs
 	protected LogController log;
 	protected SoundController sound;
-	
-	public state statePos;
 	
 	protected void Awake()
 	{
@@ -185,7 +183,7 @@ public class Stats : MonoBehaviour
 			{
 				ReloadWeapon(weapon.ammoUsed);
 				burnOut = 1.5f; //TODO reload cost and burn out
-				ap-=weapon.apCost;
+				
 			}
 			else
 			{
@@ -233,12 +231,27 @@ public class Stats : MonoBehaviour
 	
 	protected virtual void SingleShoot(Transform target, float accuracyModifer)
 	{
+		
+		int accuracyFlat = 0;
+		if(statePos == state.stand)
+		{
+			accuracyFlat = 0;
+		}
+		else if(statePos == state.crouch)
+		{
+			accuracyFlat = Formulas.crouchBonus;
+		}
+		else if(statePos == state.crawl)
+		{
+			accuracyFlat = Formulas.crawlBonus;
+		}
+		
 		transform.LookAt(target);
 		sound.PlayAtPoint(weapon.shootSound, transform);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
 		float distance = Formulas.Distance(head, target);
-		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer), weapon, target.GetComponent<BodyPart>().bodyPart);
+		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer+accuracyFlat), weapon, target.GetComponent<BodyPart>().bodyPart);
 		Vector3 lineDir;
 		
 		if(chanceToHit>=Random.Range(1,100))
@@ -264,7 +277,7 @@ public class Stats : MonoBehaviour
 		if(bodyPart==part.head)
 		{
 			stringPart = "head";
-			dmgMultiplier = 2f;
+			dmgMultiplier = Formulas.headDmgMultiplier;
 			if(helmet)
 			{
 				armorDecreaser = Formulas.DefenseFormula(helmet.defense, dmg);
@@ -283,7 +296,7 @@ public class Stats : MonoBehaviour
 		else if(bodyPart==part.legs)
 		{
 			stringPart = "legs";
-			dmgMultiplier = 0.3f;
+			dmgMultiplier = Formulas.legsDmgMultiplier;
 			if(armor)
 			{
 				if(armor.protectLegs)
@@ -321,24 +334,27 @@ public class Stats : MonoBehaviour
 	#region reload/eject/bursts
 	public virtual void ReloadWeapon(ItemAmmo ammo)
 	{
-		if(!weapon)
-			return;
-		
-		if(ammo.ammo != weapon.ammo)
-			return;
-		
-		weapon.ammoUsed = ammo;
-		int need = weapon.capacity - weapon.bulletsLeft;
-		int have = Mathf.Min(ammo.quantity,need);
-		weapon.weight += (have*ammo.weight);
-		weapon.bulletsLeft += have;
-		ammo.quantity -= have;
-		if(ammo.quantity==0)
+		if(ap>=weapon.apCost)
 		{
-			ammo = null;
+			if(!weapon)
+				return;
+			
+			if(ammo.ammo != weapon.ammo)
+				return;
+			
+			weapon.ammoUsed = ammo;
+			int need = weapon.capacity - weapon.bulletsLeft;
+			int have = Mathf.Min(ammo.quantity,need);
+			weapon.weight += (have*ammo.weight);
+			weapon.bulletsLeft += have;
+			ammo.quantity -= have;
+			if(ammo.quantity==0)
+			{
+				ammo = null;
+			}
+			ap-=weapon.apCost;
+			sound.PlayAtPoint(weapon.reloadSound, transform);
 		}
-		
-		sound.PlayAtPoint(weapon.reloadSound, transform);
 	}
 	
 	public virtual void EjectAmmo(ItemAmmo ammo)
@@ -360,10 +376,20 @@ public class Stats : MonoBehaviour
 	{
 		weapon.mode = mode;
 	}
+	#endregion
 	
 	public void SwitchState(state mode)
 	{
-		statePos = mode;
+		if(statePos != mode)
+		{
+			statePos = mode;
+			vis.BodyPartsResize(mode);
+			//movement? TODO
+		}
 	}
-	#endregion
+	
 }
+
+
+
+

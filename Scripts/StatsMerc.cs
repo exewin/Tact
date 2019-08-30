@@ -16,6 +16,10 @@ public class StatsMerc : Stats
 	public override void ReloadWeapon(ItemAmmo ammo)
 	{
 		base.ReloadWeapon(ammo);
+		if(ap<weapon.apCost)
+		{
+			//sound :)
+		}
 		UIControl.UIControl();
 	}
 	

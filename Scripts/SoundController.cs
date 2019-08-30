@@ -19,8 +19,8 @@ public class SoundController : MonoBehaviour
 		AudioSource a = g.AddComponent<AudioSource>();
 		a.spatialBlend = 0;
 		a.clip = sound;
-		a.Play(); // start the sound
-        Destroy(g, a.clip.length); //
+		a.Play();
+		Destroy(g, a.clip.length);
 	}
 	
 	

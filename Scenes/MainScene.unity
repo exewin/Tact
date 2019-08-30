@@ -821,7 +821,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282840815}
-        m_MethodName: BurstModeButton
+        m_MethodName: StateButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -976,7 +976,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4361318184552812, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 114593350548517352, guid: f941f32bbbe567d40886389c49f8a2ae,
         type: 2}
@@ -1309,7 +1309,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282840815}
-        m_MethodName: BurstModeButton
+        m_MethodName: StateButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1959,7 +1959,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241881234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 803254805}
@@ -1991,7 +1991,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.05, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &246047251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,6 +2534,9 @@ MonoBehaviour:
   UIBurstSingleText: {fileID: 1257868810}
   UIBurstBurstText: {fileID: 404728772}
   UIBurstAutoText: {fileID: 1061216363}
+  UIStand: {fileID: 0}
+  UICrouch: {fileID: 0}
+  UICrawl: {fileID: 0}
   transparent: {fileID: 21300000, guid: 72ac498b9f2479e44959a8cb1755a2cb, type: 3}
   highlight: {fileID: 121537415}
   backpack: {fileID: 2011987746}
@@ -2880,7 +2883,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280556711647030, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
         type: 2}
@@ -3169,7 +3172,7 @@ Transform:
   - {fileID: 30050725}
   - {fileID: 270008859}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &444050873
 GameObject:
@@ -3520,6 +3523,63 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 464204281}
+--- !u!1 &465922314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 465922316}
+  - component: {fileID: 465922315}
+  m_Layer: 0
+  m_Name: NavMeshCrouch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &465922315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 465922314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294965759
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.2
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 23800000, guid: c3f0001ee9597fe48b73b986fb09b366, type: 2}
+--- !u!4 &465922316
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 465922314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &481560572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4454,7 +4514,7 @@ RectTransform:
   - {fileID: 2011987747}
   - {fileID: 1510125340}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5231,7 +5291,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282840815}
-        m_MethodName: BurstModeButton
+        m_MethodName: StateButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5602,7 +5662,7 @@ Transform:
   - {fileID: 241881235}
   - {fileID: 274948121}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &803254807
 MonoBehaviour:
@@ -5618,6 +5678,7 @@ MonoBehaviour:
   head: {fileID: 1808139268}
   drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
   shot: {fileID: 1814977646438734, guid: 10fc4524067c9c846972289e6e6e8dbe, type: 2}
+  vis: {fileID: 803254802}
   nickname: Robert
   portrait: {fileID: 21300000, guid: 156c38ed2b1ee4842963b2d018ed08d3, type: 3}
   desc: 
@@ -5629,11 +5690,10 @@ MonoBehaviour:
   agility: 67
   ap: 999999
   maxAp: 100
+  statePos: 0
   weapon: {fileID: 0}
   armor: {fileID: 0}
   helmet: {fileID: 0}
-  emptyGun: {fileID: 8300000, guid: 83ded76a09a49864aa85e965f9c0dcb7, type: 3}
-  statePos: 0
   UIControl: {fileID: 282840812}
 --- !u!114 &803254808
 MonoBehaviour:
@@ -6087,7 +6147,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280556711647030, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
         type: 2}
@@ -6393,6 +6453,7 @@ MonoBehaviour:
   head: {fileID: 1804600163}
   drop: {fileID: 1664972139836648, guid: f941f32bbbe567d40886389c49f8a2ae, type: 2}
   shot: {fileID: 1814977646438734, guid: 10fc4524067c9c846972289e6e6e8dbe, type: 2}
+  vis: {fileID: 870471679}
   nickname: Brad
   portrait: {fileID: 21300000, guid: 8f6411dd5cd150340be3e6a399fad31d, type: 3}
   desc: 
@@ -6404,11 +6465,10 @@ MonoBehaviour:
   agility: 59
   ap: 100
   maxAp: 100
+  statePos: 0
   weapon: {fileID: 0}
   armor: {fileID: 0}
   helmet: {fileID: 0}
-  emptyGun: {fileID: 8300000, guid: 83ded76a09a49864aa85e965f9c0dcb7, type: 3}
-  statePos: 0
   UIControl: {fileID: 282840812}
 --- !u!114 &870471682
 MonoBehaviour:
@@ -6517,7 +6577,7 @@ Transform:
   - {fileID: 1201227841}
   - {fileID: 2078240857}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918053472
 GameObject:
@@ -7120,7 +7180,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280556711647030, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
@@ -7557,7 +7617,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1201227840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 870471688}
@@ -7589,7 +7649,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.05, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1213795632
 GameObject:
   m_ObjectHideFlags: 0
@@ -9201,7 +9261,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280556711647030, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
         type: 2}
@@ -9344,7 +9404,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1551871690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.92, y: 3.52, z: 6.57}
+  m_LocalPosition: {x: -6.92, y: 2.76, z: 6.57}
   m_LocalScale: {x: 3.5269444, y: 0.1, z: 2}
   m_Children: []
   m_Father: {fileID: 430302146}
@@ -9941,7 +10001,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280556711647030, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
         type: 2}
@@ -11339,7 +11399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280556711647030, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
         type: 2}
@@ -11437,7 +11497,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2078240856
 GameObject:

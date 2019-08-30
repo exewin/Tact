@@ -10,6 +10,13 @@ public class Formulas : MonoBehaviour
 	public static float DMG_PERCENTAGE_RANDOM = 10;
 	public static int LOG_LIMIT = 30;
 	
+	public static int crouchBonus = 5;
+	public static int crawlBonus = 7;
+	
+	public static float legsDmgMultiplier = 0.3f;
+	public static float headDmgMultiplier = 2.0f;
+	
+	
 	
 	public static float Distance(Transform a, Transform b)
 	{

@@ -178,12 +178,15 @@ public class UIController : MonoBehaviour
 			else if(mercScript.weapon.mode == burstMode.auto)
 			{
 				UIBurstSingleText.color = Color.white;
-			UIBurstBurstText.color = Color.white;
+				UIBurstBurstText.color = Color.white;
 				UIBurstAutoText.color = Color.red;
 			}
 		}
 		else
 		{
+			UIBurstBurst.interactable = false;
+			UIBurstSingle.interactable = false;
+			UIBurstAuto.interactable = false;
 			UIWeapon.sprite = transparent;
 			UIWeaponCapacity.text = "";
 		}
