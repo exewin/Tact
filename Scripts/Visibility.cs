@@ -19,20 +19,20 @@ public class Visibility : MonoBehaviour
 		if(mode == state.stand)
 		{
 			bodyParts[0].GetComponent<BoxCollider>().size = new Vector3(1, 0.2f, 1);
-			bodyParts[0].transform.localPosition = new Vector3(1, 0.4f, 1);
+			bodyParts[0].transform.localPosition = new Vector3(0, 0.4f, 0);
 			bodyParts[1].GetComponent<BoxCollider>().size = new Vector3(1, 0.5f, 1);
-			bodyParts[1].transform.localPosition = new Vector3(1, 0.05f, 1);
+			bodyParts[1].transform.localPosition = new Vector3(0, 0.05f, 0);
 			bodyParts[2].GetComponent<BoxCollider>().size = new Vector3(1, 0.3f, 1);
-			bodyParts[2].transform.localPosition = new Vector3(1, -0.35f, 1);
+			bodyParts[2].transform.localPosition = new Vector3(0, -0.35f, 0);
 		}
 		else if(mode == state.crouch)
 		{
 			bodyParts[0].GetComponent<BoxCollider>().size = new Vector3(1, 0.2f, 1);
-			bodyParts[0].transform.localPosition = new Vector3(1, 0.1f, 1);
+			bodyParts[0].transform.localPosition = new Vector3(0, 0.1f, 0);
 			bodyParts[1].GetComponent<BoxCollider>().size = new Vector3(1, 0.2f, 1);
-			bodyParts[1].transform.localPosition = new Vector3(1, -0.1f, 1);
+			bodyParts[1].transform.localPosition = new Vector3(0, -0.1f, 0);
 			bodyParts[2].GetComponent<BoxCollider>().size = new Vector3(1, 0.3f, 1);
-			bodyParts[2].transform.localPosition = new Vector3(1, -0.35f, 1);
+			bodyParts[2].transform.localPosition = new Vector3(0, -0.35f, 0);
 		}
 		else if(mode == state.crawl) // nie jest zrobione
 		{

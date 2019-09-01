@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114645463333640426}
   - component: {fileID: 114909174925621686}
   - component: {fileID: 114557039484043392}
+  - component: {fileID: 225123381483507832}
   m_Layer: 5
   m_Name: UIBackpackSlot
   m_TagString: Untagged
@@ -57,6 +58,7 @@ GameObject:
   - component: {fileID: 224159558309769842}
   - component: {fileID: 222760918825196976}
   - component: {fileID: 114385822556018640}
+  - component: {fileID: 114070052484687260}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -64,6 +66,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114070052484687260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1616006602214772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114385822556018640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 114385822556018640}
   quantity: {fileID: 114749486444767906}
+  area: {fileID: 0}
 --- !u!222 &222044372049193222
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -248,7 +265,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1034576184811314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -16.74777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224159558309769842}
@@ -258,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2, y: -2}
+  m_AnchoredPosition: {x: 1.1000462, y: 1}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224994773879272706
@@ -279,3 +296,14 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 0}
+--- !u!225 &225123381483507832
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034576184811314}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

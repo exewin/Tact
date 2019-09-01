@@ -20,7 +20,7 @@ public class CursorController : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
-			if(Physics.Raycast(ray, out hit,Mathf.Infinity,mouseLayers))
+			if(Physics.Raycast(ray, out hit, Mathf.Infinity, mouseLayers))
 			{
 				if(hit.transform.tag=="Shootable")
 				{
@@ -36,16 +36,16 @@ public class CursorController : MonoBehaviour
 					{
 						Vector3 screenPoint = Camera.main.WorldToScreenPoint (hit.point);
 						UIChance.transform.position = screenPoint;
-						int CtH;
+						float CtH;
 						if(Physics.Linecast(mercs[GameController.mercActive].GetComponent<Stats>().head.position, hit.transform.position,chanceToHitLayers))
 						{
 							CtH = 0;
 						}
 						else
 						{
-							CtH = 45;
+							CtH = Formulas.ChanceToHit(mercs[GameController.mercActive].GetComponent<Stats>(), hit.transform);
 						}
-						UIChance.GetComponent<Text>().text = hit.collider.name + "\nCtH:"+CtH+"%";
+						UIChance.GetComponent<Text>().text = hit.collider.name + "\nCtH:"+CtH.ToString("F0")+"%";
 					}
 				}
 				else

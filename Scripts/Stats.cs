@@ -385,8 +385,8 @@ public class Stats : MonoBehaviour
 		
 		if(statePos == state.stand)
 		{
-			accuracyStateBonus = 0;
-			defenseStateBonus = 0;
+			accuracyStateBonus = 1f;
+			defenseStateBonus = 1f;
 		}
 		else if(statePos == state.crouch)
 		{

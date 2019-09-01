@@ -5,7 +5,7 @@ using UnityEngine;
 public class StatsHostile : Stats 
 {
 
-	protected void Awake()
+	void Awake()
 	{
 		base.Awake();
 		AutoEquipLazy();

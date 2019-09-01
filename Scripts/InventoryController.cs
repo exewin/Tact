@@ -9,6 +9,8 @@ public class InventoryController : MonoBehaviour
 	[HideInInspector] public StatsMerc stats;
 	[SerializeField] private GameObject slotPrefab;
 	[SerializeField] private Transform gridParent;
+	[SerializeField] private Transform draggingArea;
+	[SerializeField] private RectTransform weaponArea;
 	private List<GameObject> backpackSlots = new List<GameObject>();
 	[SerializeField] private UIController UIControl;
 	
@@ -71,7 +73,7 @@ public class InventoryController : MonoBehaviour
 		{
 			GameObject slot = Instantiate(slotPrefab);
 			slot.transform.SetParent(gridParent,false);
-			slot.GetComponent<UIBackpackSlot>().Assign(items[i], i);
+			slot.GetComponent<UIBackpackSlot>().Assign(this, items[i], i, draggingArea, weaponArea);
 			backpackSlots.Add(slot);
 		}
 	}
