@@ -43,8 +43,7 @@ public class CursorController : MonoBehaviour
 						}
 						else
 						{
-							CtH = (int)Formulas.ChanceToHit(Formulas.Distance(mercs[GameController.mercActive].GetComponent<Stats>().head, hit.transform),
-							mercs[GameController.mercActive].accuracy,mercs[GameController.mercActive].weapon, hit.transform.GetComponent<BodyPart>().bodyPart);
+							CtH = 45;
 						}
 						UIChance.GetComponent<Text>().text = hit.collider.name + "\nCtH:"+CtH+"%";
 					}

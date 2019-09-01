@@ -8,10 +8,17 @@ public class Formulas : MonoBehaviour
 	public static float VELOCITY_SCALER = 14f;
 	public static float RANGE_SCALER = 14f;
 	public static float DMG_PERCENTAGE_RANDOM = 10;
+	
 	public static int LOG_LIMIT = 30;
 	
-	public static int crouchBonus = 5;
-	public static int crawlBonus = 7;
+	public static float accuracyBurstPenalty = 0.8f;
+	public static float accuracyAutoPenalty = 0.5f;
+	
+	public static float accuracyCrouchBonus = 1.05f;
+	public static float accuracyCrawlBonus = 1.07f;
+	
+	public static float defenseCrouchBonus = 0.92f;
+	public static float defenseCrawlBonus = 0.85f;
 	
 	public static float legsDmgMultiplier = 0.3f;
 	public static float headDmgMultiplier = 2.0f;
@@ -24,19 +31,35 @@ public class Formulas : MonoBehaviour
 		return distance;
 	}
 	
-	public static float ChanceToHit(float distance, int accuracy, ItemWeapon weapon, part bodyPart)
+	public static float ChanceToHit(Stats attacker, Transform defenderPart)
 	{
+		float distance = Distance(attacker.head.transform, defenderPart);
+		ItemWeapon weapon = attacker.weapon;
+		part bodyPart = defenderPart.GetComponent<BodyPart>().bodyPart;
+		Stats defender = defenderPart.GetComponent<BodyPart>().owner;
+		
+		float modeP = attacker.accuracyModePenalty;
+		float stateB = attacker.accuracyStateBonus;
+		float stateP = defender.defenseStateBonus;
+
+		
+		//STEP 1: out of range
 		if((weapon.effectiveRange / RANGE_SCALER) * 10 < distance)
 			return 0;
 			
-		float chanceToHit = (((float)weapon.accuracy/100+1) * accuracy*4) / (distance/7); 
+		//STEP 2: formula
+		float chanceToHit;
+		chanceToHit = (attacker.accuracy*4 * ((float)weapon.accuracy/100+1) / (distance/7)) * modeP * stateB * stateP; 
 		
+		//STEP 3: 1/2 cth if out of effectiveRange 
 		if(weapon.effectiveRange / RANGE_SCALER < distance)
 			chanceToHit /= 2;
 		
+		//STEP 4: 1/2 cth if head
 		if(bodyPart == part.head)
 			chanceToHit /= 2;
 		
+		//STEP 5: minor window for miss if cth < 200
 		if(chanceToHit > 200)
 			chanceToHit = 100;
 		else if(chanceToHit > 95)

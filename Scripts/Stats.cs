@@ -45,6 +45,11 @@ public class Stats : MonoBehaviour
 	protected LogController log;
 	protected SoundController sound;
 	
+	
+	[HideInInspector] public float accuracyStateBonus = 1f;
+	[HideInInspector] public float defenseStateBonus = 1f;
+	[HideInInspector] public float accuracyModePenalty = 1f;
+	
 	protected void Awake()
 	{
 		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
@@ -62,7 +67,7 @@ public class Stats : MonoBehaviour
 		if(currentTarget)
 		{
 			if(burnOut<=0)
-				ShootCheck(currentTarget);
+				ShootCheck();
 		}
 		
 		if(ap<maxAp)
@@ -168,9 +173,8 @@ public class Stats : MonoBehaviour
 	
 	
 	#region shooting
-	public void ShootCheck(Transform target)
+	public void ShootCheck()
 	{
-		float accuracyModifer = 1;
 		if(!weapon)
 		{
 			Debug.Log("Merc has no weapon!"); //?
@@ -187,35 +191,35 @@ public class Stats : MonoBehaviour
 			}
 			else
 			{
-				transform.LookAt(target); // look at
+				transform.LookAt(currentTarget); // look at
 				sound.PlayEmpty(transform);
 				burnOut = 1;
 				SetTarget(null);
 			}
 			return;
 		}
+		
+		
 		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
 		{
-			StartCoroutine(Burst(target,accuracyModifer));
+			StartCoroutine(Burst());
 			burnOut = 1.2f;
 			ap-=weapon.apCost*2.5f;
-			accuracyModifer = 0.8f;
 		}
 		else if(weapon.mode == burstMode.single && ap>=weapon.apCost)
 		{
-			SingleShoot(target,accuracyModifer);
+			SingleShoot();
 			burnOut = 1;
 			ap-=weapon.apCost;
 		}
 		else if(weapon.mode == burstMode.auto && ap>=weapon.apCost/5)
 		{
-			SingleShoot(target,accuracyModifer);
+			SingleShoot();
 			burnOut = 60/weapon.rateOfFire;
 			ap-=weapon.apCost/5;
-			accuracyModifer = 0.2f;
 		}
 	}
-	public IEnumerator Burst(Transform target, float accuracyModifer)
+	public IEnumerator Burst()
 	{
 		for(int i = 0; i < 3; i++)
 		{
@@ -224,44 +228,28 @@ public class Stats : MonoBehaviour
 				sound.PlayEmpty(transform);
 				break;
 			}
-			SingleShoot(target,accuracyModifer);
+			SingleShoot();
 			yield return new WaitForSeconds(0.1f); //fire rate? TODO
 		}
 	}
-	
-	protected virtual void SingleShoot(Transform target, float accuracyModifer)
+
+	protected virtual void SingleShoot()
 	{
-		
-		int accuracyFlat = 0;
-		if(statePos == state.stand)
-		{
-			accuracyFlat = 0;
-		}
-		else if(statePos == state.crouch)
-		{
-			accuracyFlat = Formulas.crouchBonus;
-		}
-		else if(statePos == state.crawl)
-		{
-			accuracyFlat = Formulas.crawlBonus;
-		}
-		
-		transform.LookAt(target);
+		transform.LookAt(currentTarget);
 		sound.PlayAtPoint(weapon.shootSound, transform);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
-		float distance = Formulas.Distance(head, target);
-		float chanceToHit = Formulas.ChanceToHit(distance, (int)(accuracy*accuracyModifer+accuracyFlat), weapon, target.GetComponent<BodyPart>().bodyPart);
+		float chanceToHit = Formulas.ChanceToHit(this, currentTarget);
 		Vector3 lineDir;
 		
 		if(chanceToHit>=Random.Range(1,100))
 		{
-			lineDir = target.position - head.position;
+			lineDir = currentTarget.position - head.position;
 		}
 		else
 		{
-			Vector3 missedShot = Formulas.MissedShotRandomizer(chanceToHit, distance);
-			lineDir = target.position - head.position - missedShot;
+			Vector3 missedShot = Formulas.MissedShotRandomizer(chanceToHit, Formulas.Distance(head.transform, currentTarget));
+			lineDir = currentTarget.position - head.position - missedShot;
 		}
 		GameObject s = Instantiate(shot, head.transform.position, transform.rotation);
 		s.GetComponent<RealShoot>().Info(lineDir, weapon);
@@ -375,6 +363,14 @@ public class Stats : MonoBehaviour
 	public void SwitchWeaponMode(burstMode mode)
 	{
 		weapon.mode = mode;
+		
+		if(mode == burstMode.single)
+			accuracyModePenalty = 1f;	
+		else if(mode == burstMode.burst)
+			accuracyModePenalty = Formulas.accuracyBurstPenalty;
+		else if(mode == burstMode.auto)
+			accuracyModePenalty = Formulas.accuracyAutoPenalty;
+		
 	}
 	#endregion
 	
@@ -385,6 +381,22 @@ public class Stats : MonoBehaviour
 			statePos = mode;
 			vis.BodyPartsResize(mode);
 			//movement? TODO
+		}
+		
+		if(statePos == state.stand)
+		{
+			accuracyStateBonus = 0;
+			defenseStateBonus = 0;
+		}
+		else if(statePos == state.crouch)
+		{
+			accuracyStateBonus = Formulas.accuracyCrouchBonus;
+			defenseStateBonus = Formulas.defenseCrouchBonus;
+		}
+		else if(statePos == state.crawl)
+		{
+			accuracyStateBonus = Formulas.accuracyCrawlBonus;
+			defenseStateBonus = Formulas.defenseCrawlBonus;
 		}
 	}
 	

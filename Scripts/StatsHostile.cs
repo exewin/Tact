@@ -24,9 +24,9 @@ public class StatsHostile : Stats
 		}
 	}
 
-	protected override void SingleShoot(Transform target, float accuracyModifer)
+	protected override void SingleShoot()
 	{
-		base.SingleShoot(target, accuracyModifer);
+		base.SingleShoot();
 		if(weapon.bulletsLeft == 0);
 		{
 			AutoEquipLazy();
