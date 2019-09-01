@@ -2507,6 +2507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorControl: {fileID: 1239999440}
+  invetoryControl: {fileID: 282840815}
   UITeam:
   - {fileID: 2014528511}
   - {fileID: 254676161}
@@ -2604,8 +2605,7 @@ MonoBehaviour:
   stats: {fileID: 0}
   slotPrefab: {fileID: 1034576184811314, guid: 85af3e73afb14414fa5d3a2e78960ebb, type: 2}
   gridParent: {fileID: 1413494031}
-  draggingArea: {fileID: 310235510}
-  weaponArea: {fileID: 375346776}
+  draggingArea: {fileID: 645868730}
   UIControl: {fileID: 282840812}
   item_name: {fileID: 511472636}
   item_icon: {fileID: 1259805181}
@@ -2618,6 +2618,17 @@ MonoBehaviour:
   item_stat5: {fileID: 1754084433}
   transparent: {fileID: 21300000, guid: 72ac498b9f2479e44959a8cb1755a2cb, type: 3}
   total_weight: {fileID: 1262092787}
+  weaponArea: {fileID: 2092565618}
+  armorArea: {fileID: 166539983}
+  helmetArea: {fileID: 544710187}
+  mercArea:
+  - {fileID: 2014528510}
+  - {fileID: 254676160}
+  - {fileID: 212418163}
+  - {fileID: 704080000}
+  - {fileID: 799738932}
+  - {fileID: 2038386544}
+  mercs: []
 --- !u!1 &296658658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,7 +2971,6 @@ GameObject:
   - component: {fileID: 375346776}
   - component: {fileID: 375346778}
   - component: {fileID: 375346777}
-  - component: {fileID: 375346779}
   m_Layer: 5
   m_Name: Weapon
   m_TagString: Untagged
@@ -3019,17 +3029,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 375346775}
---- !u!114 &375346779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 375346775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e762d924274b408478d63f0e0928e85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &404728770
 GameObject:
   m_ObjectHideFlags: 0
@@ -11624,8 +11623,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 0
+  m_sendNavigationEvents: 0
+  m_DragThreshold: 5
 --- !u!4 &2068600190
 Transform:
   m_ObjectHideFlags: 0
@@ -11709,7 +11708,6 @@ GameObject:
   - component: {fileID: 2092565620}
   - component: {fileID: 2092565619}
   - component: {fileID: 2092565621}
-  - component: {fileID: 2092565622}
   m_Layer: 5
   m_Name: WeaponTile
   m_TagString: Untagged
@@ -11822,17 +11820,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &2092565622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2092565617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e762d924274b408478d63f0e0928e85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2112297646
 GameObject:
   m_ObjectHideFlags: 0

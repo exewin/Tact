@@ -15,11 +15,10 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	[SerializeField] private Image icon;
 	[SerializeField] private Text quantity;
 	
-	public RectTransform area;
+	private bool isDragging;
 	
-	public void Assign(InventoryController controller, Item item, int i, Transform drag, RectTransform weaponT)
+	public void Assign(InventoryController controller, Item item, int i, Transform drag)
 	{
-		area = weaponT;
 		draggingArea = drag;
 		inv = controller;
 		index = i;
@@ -35,8 +34,8 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	
 	public void OnBeginDrag(PointerEventData eventData)
     {
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
 		icon.transform.SetParent(draggingArea);
+		isDragging = true;
     }
 
 	public void OnDrag(PointerEventData eventData)
@@ -46,21 +45,44 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		GetComponent<CanvasGroup>().blocksRaycasts = true;
+		EndDrag();
+	}
+	
+	private void EndDrag()
+	{
+		isDragging = false;
 		
-		if(RectTransformUtility.RectangleContainsScreenPoint(area, Input.mousePosition, null))
+		for(int i = 0; i<6; i++)
 		{
-			Debug.Log("yes");
+			if(RectTransformUtility.RectangleContainsScreenPoint(inv.mercArea[i], Input.mousePosition, null))
+			{
+				Destroy(icon);
+				inv.GiveItem(index, i);
+				return;
+			}
+		}
+		
+		if(RectTransformUtility.RectangleContainsScreenPoint(inv.weaponArea, Input.mousePosition, null) && info is ItemWeapon
+		|| RectTransformUtility.RectangleContainsScreenPoint(inv.armorArea, Input.mousePosition, null) && info is ItemArmor
+		|| RectTransformUtility.RectangleContainsScreenPoint(inv.helmetArea, Input.mousePosition, null) && info is ItemHelmet)
+		{
 			Destroy(icon);
 			inv.EquipItem(index);
 		}
 		else
 		{
-			Debug.Log("no");
 			icon.transform.SetParent(transform);
 			icon.transform.localPosition = iconPos;
 		}
 	}
 	
+	private void Update()
+	{
+		if(Input.GetMouseButtonUp(0) && isDragging)
+		{
+			Debug.Log("jestem tutaj zeby ratowac sytuacje bo debile z unity zjebali OnEndDrag");
+			EndDrag();
+		}
+	}
 
 }

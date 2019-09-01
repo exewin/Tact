@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
 	private List<GameObject> mercs = new List<GameObject>();
 	private StatsMerc mercScript;
 	[SerializeField] private CursorController cursorControl;
+	[SerializeField] private InventoryController invetoryControl;
 	
 	//UI
 	[SerializeField] private Image[] UITeam = new Image[6];
@@ -38,11 +39,12 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Text UIBurstBurstText;
 	[SerializeField] private Text UIBurstAutoText;
 	
+	//UI State
 	[SerializeField] private Button UIStand;
 	[SerializeField] private Button UICrouch;
 	[SerializeField] private Button UICrawl;
 
-	
+	//UI necessary gos
 	[SerializeField] private Sprite transparent;
 	[SerializeField] private GameObject highlight;
 	[SerializeField] private GameObject backpack;
@@ -58,6 +60,7 @@ public class UIController : MonoBehaviour
 			UITeam[i].sprite = mercScript.portrait;
 			i++;
 		}
+		invetoryControl.mercs = mercs;
 		SelectMerc(0);
 		UIControl();
 	}
@@ -122,7 +125,7 @@ public class UIController : MonoBehaviour
 	
 	private void SendMerc()
 	{
-		GetComponent<InventoryController>().GetMerc(mercs[GameController.mercActive]);
+		invetoryControl.GetMerc(mercs[GameController.mercActive]);
 	}
 	
 
@@ -130,7 +133,7 @@ public class UIController : MonoBehaviour
 	//Update UI
 	public void UIControl()
 	{
-		GetComponent<InventoryController>().UpdateInventory();
+		invetoryControl.UpdateInventory();
 		
 		UINickname.text = mercScript.nickname;
 		UIPortrait.sprite = mercScript.portrait;

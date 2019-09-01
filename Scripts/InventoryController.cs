@@ -10,7 +10,6 @@ public class InventoryController : MonoBehaviour
 	[SerializeField] private GameObject slotPrefab;
 	[SerializeField] private Transform gridParent;
 	[SerializeField] private Transform draggingArea;
-	[SerializeField] private RectTransform weaponArea;
 	private List<GameObject> backpackSlots = new List<GameObject>();
 	[SerializeField] private UIController UIControl;
 	
@@ -26,6 +25,12 @@ public class InventoryController : MonoBehaviour
 	[SerializeField] private Text item_stat5;
 	[SerializeField] private Sprite transparent;
 	[SerializeField] private Text total_weight;
+	
+	public RectTransform weaponArea;
+	public RectTransform armorArea;
+	public RectTransform helmetArea;
+	public RectTransform[] mercArea = new RectTransform[6];
+	[HideInInspector] public List<GameObject> mercs = new List<GameObject>();
 	
 	private void Start()
 	{
@@ -73,9 +78,15 @@ public class InventoryController : MonoBehaviour
 		{
 			GameObject slot = Instantiate(slotPrefab);
 			slot.transform.SetParent(gridParent,false);
-			slot.GetComponent<UIBackpackSlot>().Assign(this, items[i], i, draggingArea, weaponArea);
+			slot.GetComponent<UIBackpackSlot>().Assign(this, items[i], i, draggingArea);
 			backpackSlots.Add(slot);
 		}
+	}
+	
+	private void RemoveItem(int index)
+	{
+		items.RemoveAt(index);
+		RemoveSlot(index);
 	}
 	
 	private void RemoveSlot(int index)
@@ -107,6 +118,12 @@ public class InventoryController : MonoBehaviour
 		}
 	}
 	#endregion
+	
+	public void GiveItem(int index, int toWho)
+	{
+		mercs[toWho].GetComponent<Inventory>().AddItem(items[index]);
+		RemoveItem(index);
+	}
 	
 	public void TakeItem(List<Item> takenItems)
 	{
