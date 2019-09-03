@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
 
 	[SerializeField] private List<Item> startItems = new List<Item>();
-	 public List<Item> items = new List<Item>();
+	public List<Item> items = new List<Item>();
 	
 	private void Awake()
 	{
@@ -51,9 +51,8 @@ public class Inventory : MonoBehaviour
 	{
 		items.Remove(item);
 	}
-	
-		#region find
-	private bool FindItemInInventory(string s)
+
+	public bool FindItemInInventory(string s)
 	{
 		for(int i = 0; i < items.Count; i++)
 		{
@@ -64,5 +63,23 @@ public class Inventory : MonoBehaviour
 		}
 		return false;
 	}
-	#endregion	
+	
+	public Item GetItem(string s)
+	{
+		for(int i = 0; i < items.Count; i++)
+		{
+			if(items[i].name == s)
+			{
+				return items[i];
+			}
+		}
+		return null;
+	}
+	
+	public Item CreateItem(Item s)
+	{
+		Item j = Instantiate(s);
+		return j;
+	}
+
 }

@@ -37,7 +37,7 @@ public class Visibility : MonoBehaviour
 		else if(mode == state.crawl) // nie jest zrobione
 		{
 			bodyParts[0].GetComponent<BoxCollider>().size = new Vector3(1, 0.2f, 1);
-			bodyParts[0].transform.localPosition = new Vector3(1, 0.4f, 1);
+			bodyParts[0].transform.localPosition = new Vector3(1, 0.4f, 1); //pamietaj ze tu jest 1, x ,1
 			bodyParts[1].GetComponent<BoxCollider>().size = new Vector3(1, 0.5f, 1);
 			bodyParts[1].transform.localPosition = new Vector3(1, 0.05f, 1);
 			bodyParts[2].GetComponent<BoxCollider>().size = new Vector3(1, 0.3f, 1);

@@ -115,7 +115,7 @@ public class Stats : MonoBehaviour
 			if(inv.items[i] is ItemAmmo)
 			{
 				ItemAmmo item = (ItemAmmo)inv.items[i];
-				if(item.ammo == weapon.ammo)
+				if(item.ammo == weapon.ammoUsed.ammo)
 				{
 					weapon.ammoUsed = item;
 				}
@@ -185,7 +185,7 @@ public class Stats : MonoBehaviour
 		{
 			if(weapon.ammoUsed && weapon.ammoUsed.quantity>0)
 			{
-				ReloadWeapon(weapon.ammoUsed);
+				ReloadWeapon();
 				burnOut = 1.5f; //TODO reload cost and burn out
 				
 			}
@@ -320,42 +320,43 @@ public class Stats : MonoBehaviour
 	}
 	
 	#region reload/eject/bursts
-	public virtual void ReloadWeapon(ItemAmmo ammo)
+	public virtual void ReloadWeapon()
 	{
 		if(ap>=weapon.apCost)
 		{
-			if(!weapon)
+			if(!weapon || weapon.bulletsLeft == weapon.capacity) // nie ma broni lub bron pelna
 				return;
 			
-			if(ammo.ammo != weapon.ammo)
+			if(!inv.FindItemInInventory(weapon.ammoUsed.name)) // nie ma amunicji
 				return;
 			
-			weapon.ammoUsed = ammo;
+			Item ammo = (ItemAmmo)inv.GetItem(weapon.ammoUsed.name); // wez ref do amunicji
 			int need = weapon.capacity - weapon.bulletsLeft;
-			int have = Mathf.Min(ammo.quantity,need);
-			weapon.weight += (have*ammo.weight);
+			int have = Mathf.Min(ammo.quantity, need);
+			weapon.weight += (have * ammo.weight);
 			weapon.bulletsLeft += have;
 			ammo.quantity -= have;
 			if(ammo.quantity==0)
 			{
-				ammo = null;
+				inv.RemoveItem(ammo);
 			}
 			ap-=weapon.apCost;
 			sound.PlayAtPoint(weapon.reloadSound, transform);
 		}
 	}
 	
-	public virtual void EjectAmmo(ItemAmmo ammo)
+	public virtual void EjectAmmo()
 	{
-		if(!weapon)
+		if(!weapon || weapon.bulletsLeft == 0) // nie ma broni lub bron jest pusta
 			return;
 		
-		if(ammo.ammo!=weapon.ammo)
-			return;
+		Item ammo = (ItemAmmo)inv.CreateItem(weapon.ammoUsed); // stworz item jesli nie ma
 		
-		ammo.quantity += weapon.bulletsLeft;
+		ammo.quantity = weapon.bulletsLeft;
 		weapon.weight -= (weapon.bulletsLeft*ammo.weight);
 		weapon.bulletsLeft = 0;
+		
+		inv.AddItem(ammo);
 		
 		sound.PlayAtPoint(weapon.reloadSound, transform);
 	}

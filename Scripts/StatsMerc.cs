@@ -13,9 +13,9 @@ public class StatsMerc : Stats
 		UIControl.UIAp();
 	}
 
-	public override void ReloadWeapon(ItemAmmo ammo)
+	public override void ReloadWeapon()
 	{
-		base.ReloadWeapon(ammo);
+		base.ReloadWeapon();
 		if(ap<weapon.apCost)
 		{
 			//sound :)
@@ -23,9 +23,9 @@ public class StatsMerc : Stats
 		UIControl.UIControl();
 	}
 	
-	public override void EjectAmmo(ItemAmmo ammo)
+	public override void EjectAmmo()
 	{
-		base.EjectAmmo(ammo);
+		base.EjectAmmo();
 		UIControl.UIControl();
 	}
 	

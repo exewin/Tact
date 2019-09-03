@@ -12,8 +12,6 @@ public class ItemWeapon : Item
 	public int accuracy = 0;
 	public int apCost = 20;
 	
-	public ammoType ammo;
-	
 	public float velocity = 400;
 	public float rateOfFire = 40;
 	public float effectiveRange = 350;
@@ -28,7 +26,7 @@ public class ItemWeapon : Item
 	public bool burst;
 	public bool auto;
 	
-	[HideInInspector] public ItemAmmo ammoUsed; 
+	public ItemAmmo ammoUsed; 
 	public GameObject trace;
 	
 }

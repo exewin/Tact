@@ -122,7 +122,6 @@ public class InventoryController : MonoBehaviour
 	public void GiveItem(int index, int toWho)
 	{
 		mercs[toWho].GetComponent<Inventory>().AddItem(items[index]);
-		//RemoveItem(index);
 	}
 	
 	public void TakeItem(List<Item> takenItems)
@@ -147,12 +146,22 @@ public class InventoryController : MonoBehaviour
 		else if(items[index] is ItemHelmet)
 		{
 			stats.EquipHelmet(items[index]);
+		}		
+		else if(items[index] is ItemAmmo)
+		{
+			ManualReload((ItemAmmo)(items[index]));
 		}
 		else //Other objects TODO
 			return;
 		
 		RemoveSlot(index);
 		UIControl.UIControl();
+	}
+	
+	public void ManualReload(ItemAmmo ammo)
+	{
+		if(stats.weapon.ammoUsed.ammo == ammo.ammo)
+			ReloadWeaponButton();
 	}
 	
 	#region buttons
@@ -188,19 +197,13 @@ public class InventoryController : MonoBehaviour
 	
 	public void EjectAmmoButton()
 	{
-		if(stats.weapon&&stats.weapon.ammoUsed!=null && stats.weapon.bulletsLeft > 0)
-		{
-			stats.EjectAmmo(stats.weapon.ammoUsed);
-			UpdateInventory();
-		}
+		stats.EjectAmmo();
+		UpdateInventory();
 	}
 	public void ReloadWeaponButton()
 	{
-		if(stats.weapon&&stats.weapon.ammoUsed!=null && stats.weapon.ammoUsed.quantity > 0 && stats.weapon.bulletsLeft != stats.weapon.capacity)
-		{
-			stats.ReloadWeapon(stats.weapon.ammoUsed);
-			UpdateInventory();
-		}
+		stats.ReloadWeapon();
+		UpdateInventory();
 	}
 	
 	public void BurstModeButton(int mode)
@@ -233,7 +236,7 @@ public class InventoryController : MonoBehaviour
 		{
 			ItemWeapon weapon = (ItemWeapon) info;
 			item_statA.text = weapon.bulletsLeft +" / "+weapon.capacity;
-			item_stat2.text = "Caliber: "+ConvertAmmoTypeToString(weapon.ammo);
+			item_stat2.text = "Caliber: "+ConvertAmmoTypeToString(weapon.ammoUsed.ammo);
 			item_stat3.text = "Power: "+weapon.power;
 			item_stat4.text = "Accuracy Bonus: "+weapon.accuracy+"%";
 			item_stat5.text = "Velocity: "+weapon.velocity+"m/s";

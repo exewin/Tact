@@ -22,7 +22,6 @@ MonoBehaviour:
   bulletsLeft: 0
   accuracy: 45
   apCost: 25
-  ammo: 6
   velocity: 470
   rateOfFire: 40
   effectiveRange: 201
@@ -33,5 +32,5 @@ MonoBehaviour:
   single: 1
   burst: 0
   auto: 0
-  ammoUsed: {fileID: 0}
+  ammoUsed: {fileID: 11400000, guid: 288a47a29b0428f4587af4ddbe180ce4, type: 2}
   trace: {fileID: 1151471528821504, guid: e271db98780c8794b8dd81b770faf955, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	private int index;
 	private Item info;
@@ -32,6 +32,19 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 		}
 	}
 	
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		inv.HoverItemInfo(info);
+	}
+	
+	public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.clickCount == 2) 
+		{
+			inv.EquipItem(index);
+        }
+    }
+	
 	public void OnBeginDrag(PointerEventData eventData)
     {
 		icon.transform.SetParent(draggingArea);
@@ -51,6 +64,8 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	private void EndDrag()
 	{
 		isDragging = false;
+		icon.transform.SetParent(transform);
+		icon.transform.localPosition = iconPos;
 		
 		for(int i = 0; i<6; i++)
 		{
@@ -70,10 +85,9 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 			Destroy(icon);
 			inv.EquipItem(index);
 		}
-		else
+		else if(RectTransformUtility.RectangleContainsScreenPoint(inv.weaponArea, Input.mousePosition, null) && info is ItemAmmo) // manual drag reload
 		{
-			icon.transform.SetParent(transform);
-			icon.transform.localPosition = iconPos;
+			inv.ManualReload((ItemAmmo)info);
 		}
 	}
 	
