@@ -58,6 +58,7 @@ public class UIBackpackSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 			{
 				Destroy(icon);
 				inv.GiveItem(index, i);
+				inv.RemoveItem(index);
 				return;
 			}
 		}

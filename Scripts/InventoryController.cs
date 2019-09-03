@@ -83,7 +83,7 @@ public class InventoryController : MonoBehaviour
 		}
 	}
 	
-	private void RemoveItem(int index)
+	public void RemoveItem(int index)
 	{
 		items.RemoveAt(index);
 		RemoveSlot(index);
@@ -122,37 +122,14 @@ public class InventoryController : MonoBehaviour
 	public void GiveItem(int index, int toWho)
 	{
 		mercs[toWho].GetComponent<Inventory>().AddItem(items[index]);
-		RemoveItem(index);
+		//RemoveItem(index);
 	}
 	
 	public void TakeItem(List<Item> takenItems)
 	{
 		for(int i = 0; i < takenItems.Count; i++)
 		{
-			if(takenItems[i].stackable)
-			{
-				if(FindItemInInventory(takenItems[i].name))
-				{
-					for(int j = 0; j < items.Count; j++)
-					{
-						if(items[j].name == takenItems[i].name)
-						{
-							items[j].quantity+=takenItems[i].quantity;
-							break;
-						}
-					}
-				}
-				else
-				{
-					Item j = Instantiate(takenItems[i]);
-					items.Add(j);
-				}
-			}
-			else
-			{
-				Item j = Instantiate(takenItems[i]);
-				items.Add(j);
-			}
+			stats.GetComponent<Inventory>().AddItem(takenItems[i]);
 		}
 		UpdateInventory();
 	}
@@ -238,20 +215,6 @@ public class InventoryController : MonoBehaviour
 		UIControl.UIControl();
 	}
 	#endregion
-	
-	#region find
-	private bool FindItemInInventory(string s)
-	{
-		for(int i = 0; i < items.Count; i++)
-		{
-			if(items[i].name == s)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	#endregion	
 	
 	public void HoverItemInfo(Item info)
 	{
