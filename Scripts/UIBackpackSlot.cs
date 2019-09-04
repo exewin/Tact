@@ -11,15 +11,13 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClick
 	private InventoryController inv;
 	
 	private Vector3 iconPos;
-	private Transform draggingArea;
 	[SerializeField] private Image icon;
 	[SerializeField] private Text quantity;
 	
 	private bool isDragging;
 	
-	public void Assign(InventoryController controller, Item item, int i, Transform drag)
+	public void Assign(InventoryController controller, Item item, int i)
 	{
-		draggingArea = drag;
 		inv = controller;
 		index = i;
 		info = item;
@@ -47,7 +45,7 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClick
 	
 	public void OnBeginDrag(PointerEventData eventData)
     {
-		icon.transform.SetParent(draggingArea);
+		icon.transform.SetParent(inv.draggingArea);
 		isDragging = true;
     }
 
@@ -91,11 +89,11 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClick
 		}
 	}
 	
+	//dragging is bugged for crappy mouses, this reduces chance of bug
 	private void Update()
 	{
 		if(Input.GetMouseButtonUp(0) && isDragging)
 		{
-			Debug.Log("jestem tutaj zeby ratowac sytuacje bo debile z unity zjebali OnEndDrag");
 			EndDrag();
 		}
 	}

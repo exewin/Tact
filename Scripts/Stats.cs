@@ -302,55 +302,59 @@ public class Stats : MonoBehaviour
 		
 		if(hp<1)
 		{
-			log.Send(nickname + " was killed");
-
-			//TODO death
-			UnequipEverything();
-			GameController.RemoveFromList(gameObject);
-			GameObject dropped = Instantiate(drop, transform.position, Quaternion.identity);
-			PickupItem d = dropped.GetComponent<PickupItem>();
-			for(int i = 0; i < inv.items.Count; i++)
-			{
-				d.items.Add(inv.items[i]);
-			}
-			
-			
-			Destroy(gameObject);
+			Death();
 		}
 	}
+	
+	protected void Death()
+	{
+		log.Send(nickname + " was killed");
+		UnequipEverything();
+		GameController.RemoveFromList(gameObject);
+		GameObject dropped = Instantiate(drop, transform.position, Quaternion.identity);
+		PickupItem d = dropped.GetComponent<PickupItem>();
+		for(int i = 0; i < inv.items.Count; i++)
+		{
+			d.items.Add(inv.items[i]);
+		}
+		DeathAction();
+		Destroy(gameObject);
+	}
+	
+	protected virtual void DeathAction(){ }
 	
 	#region reload/eject/bursts
 	public virtual void ReloadWeapon()
 	{
-		if(ap>=weapon.apCost)
+		if(!weapon || weapon.bulletsLeft == weapon.capacity)
+			return;
+		
+		if(ap<weapon.apCost)
+			return;
+		
+		if(!inv.FindItemInInventory(weapon.ammoUsed.name))
+			return;
+		
+		Item ammo = (ItemAmmo)inv.GetItem(weapon.ammoUsed.name);
+		int need = weapon.capacity - weapon.bulletsLeft;
+		int have = Mathf.Min(ammo.quantity, need);
+		weapon.weight += (have * ammo.weight);
+		weapon.bulletsLeft += have;
+		ammo.quantity -= have;
+		if(ammo.quantity==0)
 		{
-			if(!weapon || weapon.bulletsLeft == weapon.capacity) // nie ma broni lub bron pelna
-				return;
-			
-			if(!inv.FindItemInInventory(weapon.ammoUsed.name)) // nie ma amunicji
-				return;
-			
-			Item ammo = (ItemAmmo)inv.GetItem(weapon.ammoUsed.name); // wez ref do amunicji
-			int need = weapon.capacity - weapon.bulletsLeft;
-			int have = Mathf.Min(ammo.quantity, need);
-			weapon.weight += (have * ammo.weight);
-			weapon.bulletsLeft += have;
-			ammo.quantity -= have;
-			if(ammo.quantity==0)
-			{
-				inv.RemoveItem(ammo);
-			}
-			ap-=weapon.apCost;
-			sound.PlayAtPoint(weapon.reloadSound, transform);
+			inv.RemoveItem(ammo);
 		}
+		ap-=weapon.apCost;
+		sound.PlayAtPoint(weapon.reloadSound, transform);
 	}
 	
 	public virtual void EjectAmmo()
 	{
-		if(!weapon || weapon.bulletsLeft == 0) // nie ma broni lub bron jest pusta
+		if(!weapon || weapon.bulletsLeft == 0)
 			return;
 		
-		Item ammo = (ItemAmmo)inv.CreateItem(weapon.ammoUsed); // stworz item jesli nie ma
+		Item ammo = (ItemAmmo)inv.CreateItem(weapon.ammoUsed);
 		
 		ammo.quantity = weapon.bulletsLeft;
 		weapon.weight -= (weapon.bulletsLeft*ammo.weight);

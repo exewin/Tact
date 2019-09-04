@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class UIController : MonoBehaviour 
 {
-	private List<GameObject> mercs = new List<GameObject>();
 	private StatsMerc mercScript;
 	[SerializeField] private CursorController cursorControl;
 	[SerializeField] private InventoryController invetoryControl;
@@ -49,28 +48,22 @@ public class UIController : MonoBehaviour
 	[SerializeField] private GameObject highlight;
 	[SerializeField] private GameObject backpack;
 	
-	void Start()
+	private void Start()
 	{
 		int i = 0;
 		foreach(GameObject e in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			mercs.Add(e);
 			mercScript = e.GetComponent<StatsMerc>();
 			cursorControl.mercs[i]=mercScript;
 			UITeam[i].sprite = mercScript.portrait;
 			i++;
 		}
-		invetoryControl.mercs = mercs;
 		SelectMerc(0);
 		UIControl();
 	}
 	
-	public void RemoveMerc(GameObject g)
-	{
-		mercs.Remove(g);
-	}
-	
-	void Update()
+
+	private void Update()
 	{
 		//Select merc by numeric keypad
 		for(int i=0;i<6;i++)
@@ -95,10 +88,14 @@ public class UIController : MonoBehaviour
 	
 	private void SelectMerc(int i)
 	{
-		if(i>=mercs.Count)
+		if(i>=GameController.mercs.Count)
 			return;
+		
+		if(GameController.mercs[i] == null)
+			return;
+		
 		GameController.mercActive=i;
-		mercScript=mercs[i].GetComponent<StatsMerc>();
+		mercScript=GameController.mercs[i].GetComponent<StatsMerc>();
 		SetActiveMercHighlight(i);
 	}
 	
@@ -125,10 +122,13 @@ public class UIController : MonoBehaviour
 	
 	private void SendMerc()
 	{
-		invetoryControl.GetMerc(mercs[GameController.mercActive]);
+		invetoryControl.GetMerc(GameController.mercs[GameController.mercActive]);
 	}
 	
-
+	public void MercDeath(int id)
+	{
+		UITeam[id].sprite = null; // CZACHA??? TODO
+	}
 	
 	//Update UI
 	public void UIControl()

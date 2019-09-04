@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
 	public static int mercActive = 0;
 	public static List<Visibility> humans = new List<Visibility>();
+	public static List<GameObject> mercs = new List<GameObject>();
 	private int idAllocator=1;
 		
 	void Awake()
@@ -13,6 +14,8 @@ public class GameController : MonoBehaviour
 		Application.targetFrameRate = 60;
 		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Player"))
 		{
+			mercs.Add(g);
+			g.GetComponent<StatsMerc>().SetID(idAllocator-1);
 			Visibility e = g.GetComponent<Visibility>();
 			humans.Add(e);
 			e.SetID(idAllocator);

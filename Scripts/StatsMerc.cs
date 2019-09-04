@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class StatsMerc : Stats
 {
-	
+	private int id;
 	[SerializeField] private UIController UIControl;
+	
+	public void SetID(int i)
+	{
+		id = i;
+	}
 	
 	protected override void Update()
 	{
@@ -16,10 +21,6 @@ public class StatsMerc : Stats
 	public override void ReloadWeapon()
 	{
 		base.ReloadWeapon();
-		if(ap<weapon.apCost)
-		{
-			//sound :)
-		}
 		UIControl.UIControl();
 	}
 	
@@ -32,11 +33,12 @@ public class StatsMerc : Stats
 	public override void Injury(int dmg, part bodyPart)
 	{
 		base.Injury(dmg, bodyPart);
-		if(hp<1)
-		{
-			UIControl.RemoveMerc(gameObject);
-		}
 		UIControl.UIControl();
+	}
+	
+	protected override void DeathAction()
+	{
+		UIControl.MercDeath(id);
 	}
 	
 	protected override void SingleShoot()

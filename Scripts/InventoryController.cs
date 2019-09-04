@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour 
 {
-	[HideInInspector] public List<Item> items = new List<Item>();
+	[HideInInspector] public List<GameObject> mercs = new List<GameObject>();
 	[HideInInspector] public StatsMerc stats;
+	
+	[HideInInspector] public List<Item> items = new List<Item>();
+	
 	[SerializeField] private GameObject slotPrefab;
-	[SerializeField] private Transform gridParent;
-	[SerializeField] private Transform draggingArea;
 	private List<GameObject> backpackSlots = new List<GameObject>();
+	[SerializeField] private Transform gridParent;
+	
 	[SerializeField] private UIController UIControl;
 	
 	//UI
@@ -26,11 +29,12 @@ public class InventoryController : MonoBehaviour
 	[SerializeField] private Sprite transparent;
 	[SerializeField] private Text total_weight;
 	
+	public Transform draggingArea;
 	public RectTransform weaponArea;
 	public RectTransform armorArea;
 	public RectTransform helmetArea;
 	public RectTransform[] mercArea = new RectTransform[6];
-	[HideInInspector] public List<GameObject> mercs = new List<GameObject>();
+	
 	
 	private void Start()
 	{
@@ -78,7 +82,7 @@ public class InventoryController : MonoBehaviour
 		{
 			GameObject slot = Instantiate(slotPrefab);
 			slot.transform.SetParent(gridParent,false);
-			slot.GetComponent<UIBackpackSlot>().Assign(this, items[i], i, draggingArea);
+			slot.GetComponent<UIBackpackSlot>().Assign(this, items[i], i);
 			backpackSlots.Add(slot);
 		}
 	}
@@ -121,7 +125,7 @@ public class InventoryController : MonoBehaviour
 	
 	public void GiveItem(int index, int toWho)
 	{
-		mercs[toWho].GetComponent<Inventory>().AddItem(items[index]);
+		GameController.mercs[toWho].GetComponent<Inventory>().AddItem(items[index]);
 	}
 	
 	public void TakeItem(List<Item> takenItems)
