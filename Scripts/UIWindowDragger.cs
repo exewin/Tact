@@ -7,11 +7,10 @@ public class UIWindowDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
 	
 	[SerializeField] private RectTransform toDrag;
-	private Vector2 startPos;
 
 	public void OnBeginDrag(PointerEventData eventData)
     {
-		startPos = toDrag.position;
+		//may be useful?
     }
 
 	public void OnDrag(PointerEventData eventData)

@@ -7,6 +7,7 @@ public class StatsMerc : Stats
 	private int id;
 	[SerializeField] private UIController UIControl;
 	
+
 	public void SetID(int i)
 	{
 		id = i;
@@ -46,6 +47,7 @@ public class StatsMerc : Stats
 		base.SingleShoot();
 		UIControl.UIControl();
 	}
+	
 	
 	
 }

@@ -11,24 +11,35 @@ public class Formulas : MonoBehaviour
 	
 	public static int LOG_LIMIT = 30;
 	
-	public static float accuracyBurstPenalty = 0.8f;
-	public static float accuracyAutoPenalty = 0.5f;
+	public static float BASE_SPEED = 5f;
+	public static float CROUCH_SPEED = 3f;
+	public static float CRAWL_SPEED = 1.3f;
 	
-	public static float accuracyCrouchBonus = 1.05f;
-	public static float accuracyCrawlBonus = 1.07f;
+	public static float ACCURACY_BURST_PENALTY = 0.8f;
+	public static float ACCURACY_AUTO_PENALTY = 0.5f;
 	
-	public static float defenseCrouchBonus = 0.92f;
-	public static float defenseCrawlBonus = 0.85f;
+	public static float ACCURACY_CROUCH_BONUS = 1.05f;
+	public static float ACCURACY_CRAWL_BONUS = 1.07f;
 	
-	public static float legsDmgMultiplier = 0.3f;
-	public static float headDmgMultiplier = 2.0f;
+	public static float DEFENSE_CROUCH_BONUS = 0.92f;
+	public static float DEFENSE_CRAWL_BONUS = 0.85f;
+	
+	public static float LEG_DMG_MULTIPLIER = 0.3f;
+	public static float HEAD_DMG_MULTIPLIER = 2.0f;
+	
+	
 	
 	
 	
 	public static float Distance(Transform a, Transform b)
 	{
-		float distance = Vector3.Distance(a.position, b.position);
-		return distance;
+		if(a&&b) //make sure both are alive?
+		{
+			float distance = Vector3.Distance(a.position, b.position);
+			return distance;
+		}
+		else 
+			return 0;
 	}
 	
 	public static float ChanceToHit(Stats attacker, Transform defenderPart)
@@ -85,7 +96,7 @@ public class Formulas : MonoBehaviour
 			return 1f;
 		else
 		{
-			return (float)defense / 100 + 1;
+			return (float)defense / 100f + 1;
 		}
 	}
 	
@@ -103,7 +114,7 @@ public class Formulas : MonoBehaviour
 	
 	public static int DamageRandomizer(int dmg)
 	{
-		float rand = Random.Range(-DMG_PERCENTAGE_RANDOM, DMG_PERCENTAGE_RANDOM) / 100;
+		float rand = Random.Range(-DMG_PERCENTAGE_RANDOM, DMG_PERCENTAGE_RANDOM) / 100f;
 		rand *= (float)dmg;
 		return (int)(dmg + rand);
 	}

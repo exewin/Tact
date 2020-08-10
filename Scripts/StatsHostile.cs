@@ -5,7 +5,7 @@ using UnityEngine;
 public class StatsHostile : Stats 
 {
 
-	void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 		AutoEquipLazy();
@@ -27,7 +27,7 @@ public class StatsHostile : Stats
 	protected override void SingleShoot()
 	{
 		base.SingleShoot();
-		if(weapon.bulletsLeft == 0);
+		if(weapon.bulletsLeft == 0)
 		{
 			AutoEquipLazy();
 		}

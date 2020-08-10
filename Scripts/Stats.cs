@@ -7,12 +7,20 @@ public enum state{ stand, crouch, crawl }
 
 public class Stats : MonoBehaviour 
 {
+	
+	//tests
+	private Vector3 previousPosition;
+	public float curSpeed;
+	
 	//necessary gameObjects
 	public Transform head;
 	[SerializeField] private GameObject drop;
 	[SerializeField] private GameObject shot;
 	protected Inventory inv;
 	[SerializeField] protected Visibility vis;
+	public  NavMeshAgent navMeshAgent; //change this later
+	
+	
 	
 	//personal info
 	public string nickname;
@@ -44,14 +52,16 @@ public class Stats : MonoBehaviour
 	protected AudioSource audioSource;
 	protected LogController log;
 	protected SoundController sound;
-	
+	public  Animator animator;
 	
 	[HideInInspector] public float accuracyStateBonus = 1f;
 	[HideInInspector] public float defenseStateBonus = 1f;
 	[HideInInspector] public float accuracyModePenalty = 1f;
 	
-	protected void Awake()
+	protected virtual void Awake()
 	{
+		animator = gameObject.GetComponentInChildren<Animator>();
+		navMeshAgent = GetComponent<NavMeshAgent>();
 		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
 		sound = GameObject.Find("SOUND CONTROLLER").GetComponent<SoundController>();
 		audioSource = GetComponent<AudioSource>();
@@ -72,6 +82,14 @@ public class Stats : MonoBehaviour
 		
 		if(ap<maxAp)
 			ap+=Time.deltaTime*10; //? TODO
+		
+		
+		
+		Vector3 curMove = transform.position - previousPosition;
+		curSpeed = curMove.magnitude / Time.deltaTime;
+		animator.SetFloat("speed", curSpeed);
+		previousPosition = transform.position;
+
 	}
 	
 	public void SetTarget(Transform target)
@@ -235,7 +253,8 @@ public class Stats : MonoBehaviour
 
 	protected virtual void SingleShoot()
 	{
-		transform.LookAt(currentTarget);
+		if(currentTarget) //fix bug with bursting on death target
+			transform.LookAt(currentTarget);
 		sound.PlayAtPoint(weapon.shootSound, transform);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
@@ -265,7 +284,7 @@ public class Stats : MonoBehaviour
 		if(bodyPart==part.head)
 		{
 			stringPart = "head";
-			dmgMultiplier = Formulas.headDmgMultiplier;
+			dmgMultiplier = Formulas.HEAD_DMG_MULTIPLIER;
 			if(helmet)
 			{
 				armorDecreaser = Formulas.DefenseFormula(helmet.defense, dmg);
@@ -284,7 +303,7 @@ public class Stats : MonoBehaviour
 		else if(bodyPart==part.legs)
 		{
 			stringPart = "legs";
-			dmgMultiplier = Formulas.legsDmgMultiplier;
+			dmgMultiplier = Formulas.LEG_DMG_MULTIPLIER;
 			if(armor)
 			{
 				if(armor.protectLegs)
@@ -372,9 +391,9 @@ public class Stats : MonoBehaviour
 		if(mode == burstMode.single)
 			accuracyModePenalty = 1f;	
 		else if(mode == burstMode.burst)
-			accuracyModePenalty = Formulas.accuracyBurstPenalty;
+			accuracyModePenalty = Formulas.ACCURACY_BURST_PENALTY;
 		else if(mode == burstMode.auto)
-			accuracyModePenalty = Formulas.accuracyAutoPenalty;
+			accuracyModePenalty = Formulas.ACCURACY_AUTO_PENALTY;
 		
 	}
 	#endregion
@@ -390,21 +409,28 @@ public class Stats : MonoBehaviour
 		
 		if(statePos == state.stand)
 		{
+			navMeshAgent.agentTypeID = 0;
+			navMeshAgent.speed = Formulas.BASE_SPEED;
 			accuracyStateBonus = 1f;
 			defenseStateBonus = 1f;
 		}
 		else if(statePos == state.crouch)
 		{
-			accuracyStateBonus = Formulas.accuracyCrouchBonus;
-			defenseStateBonus = Formulas.defenseCrouchBonus;
+			navMeshAgent.agentTypeID = -1372625422;
+			navMeshAgent.speed = Formulas.CROUCH_SPEED;
+			accuracyStateBonus = Formulas.ACCURACY_CROUCH_BONUS;
+			defenseStateBonus = Formulas.DEFENSE_CROUCH_BONUS;
 		}
 		else if(statePos == state.crawl)
 		{
-			accuracyStateBonus = Formulas.accuracyCrawlBonus;
-			defenseStateBonus = Formulas.defenseCrawlBonus;
+			navMeshAgent.agentTypeID = -334000983;
+			navMeshAgent.speed = Formulas.CRAWL_SPEED;
+			accuracyStateBonus = Formulas.ACCURACY_CRAWL_BONUS;
+			defenseStateBonus = Formulas.DEFENSE_CRAWL_BONUS;
 		}
 	}
 	
+
 }
 
 
