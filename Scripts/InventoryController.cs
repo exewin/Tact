@@ -263,11 +263,7 @@ public class InventoryController : MonoBehaviour
 	private string ConvertAmmoTypeToString(ammoType ammo)
 	{
 		
-		if(ammo==ammoType.a_9x19mmParabellum)
-			return "9x19mm Parabellum";
-		else if(ammo==ammoType.a_7_65x21mmParabellum)
-			return "7.65x21mm Parabellum";
-		else if(ammo==ammoType.a_32_ACP)
+		if(ammo==ammoType.a_32_ACP)
 			return ".32 ACP";
 		else if(ammo==ammoType.a_357_Magnum)
 			return ".357 Magnum";
@@ -275,18 +271,30 @@ public class InventoryController : MonoBehaviour
 			return ".38 Special";
 		else if(ammo==ammoType.a_44_Magnum)
 			return ".44 Magnum";
-		else if(ammo==ammoType.a_50ActionExpress)
+		else if(ammo==ammoType.a_45_ACP)
+			return ".45 ACP";
+		else if(ammo==ammoType.a_50AE)
 			return ".50 AE";
+		else if(ammo==ammoType.a_50BMG)
+			return ".50 BMG";
+		else if(ammo==ammoType.a_12_Gauge)
+			return "12 Gauge";
+		else if(ammo==ammoType.a_20_Gauge)
+			return "20 Gauge";
+		else if(ammo==ammoType.a_5_45x39mm)
+			return "5.45x39mm";
 		else if(ammo==ammoType.a_5_56x45mm)
 			return "5.56x45mm";
-		else if(ammo==ammoType.a_5_7x28mm)
-			return "5.7x28mm";
+		else if(ammo==ammoType.a_7_62x25mmTokarev)
+			return "7.62x25mm Tokarev";
 		else if(ammo==ammoType.a_7_62x39mm)
 			return "7.62x39mm";
-		else if(ammo==ammoType.a_7_62x54mmR)
-			return "7.62x54mmR";
 		else if(ammo==ammoType.a_7_62x51mm)
 			return "7.62x51mm";
+		else if(ammo==ammoType.a_7_62x54mmR)
+			return "7.62x54mmR";
+		else if(ammo==ammoType.a_9x19mmParabellum)
+			return "9x19mm Parabellum";
 		else
 			return "unknown";
 	}
