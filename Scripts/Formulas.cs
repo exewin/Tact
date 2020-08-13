@@ -79,7 +79,7 @@ public class Formulas : MonoBehaviour
 		return chanceToHit;
 	}
 	
-	public static Vector3 MissedShotRandomizer(float cth, float distance)
+	public static Vector3 MissedShotRandomizer(float cth)
 	{
 		return new Vector3(Random.Range(-4f+(cth/25),4f+(cth/25)),Random.Range(-0.5f+(cth/200),0.5f+(cth/200)),Random.Range(-4f+(cth/25),4f+(cth/25)));
 	}

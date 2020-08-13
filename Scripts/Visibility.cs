@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Visibility : MonoBehaviour
 {
-	[HideInInspector] public int id;
+	 public int id;
 	[SerializeField] private LayerMask layers;
 	[SerializeField] private Transform head;
 	public Transform[] bodyParts;

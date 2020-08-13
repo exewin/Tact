@@ -30,7 +30,7 @@ public class VisibilityHostile : Visibility
 	{
 		if(human.tag == "Player")
 		{
-			GetComponent<StatsHostile>().SetTarget(human.bodyParts[1].transform); // chest
+			GetComponent<StatsHostile>().SetTarget(human.bodyParts[1]); // chest
 		}
 	}		
 	

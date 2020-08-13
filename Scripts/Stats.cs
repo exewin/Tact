@@ -8,17 +8,14 @@ public enum state{ stand, crouch, crawl }
 public class Stats : MonoBehaviour 
 {
 	
-	//tests
-	private Vector3 previousPosition;
-	public float curSpeed;
 	
 	//necessary gameObjects
 	public Transform head;
 	[SerializeField] private GameObject drop;
 	[SerializeField] private GameObject shot;
 	protected Inventory inv;
-	[SerializeField] protected Visibility vis;
-	public  NavMeshAgent navMeshAgent; //change this later
+	protected Visibility vis;
+	[HideInInspector] public NavMeshAgent navMeshAgent; //change this later
 	
 	
 	
@@ -38,10 +35,14 @@ public class Stats : MonoBehaviour
 	public float ap;
 	public int maxAp;
 	
+	private float chanceToHit = 0;
 	private Transform currentTarget;
+	private Vector3 currentTargetPoint;
 	private float burnOut = 0;
 	
 	[HideInInspector] public state statePos;
+	private Vector3 previousPosition;
+	private float curSpeed;
 	
 	//equipment
 	[HideInInspector] public ItemWeapon weapon;
@@ -52,7 +53,7 @@ public class Stats : MonoBehaviour
 	protected AudioSource audioSource;
 	protected LogController log;
 	protected SoundController sound;
-	public  Animator animator;
+	protected Animator animator;
 	
 	[HideInInspector] public float accuracyStateBonus = 1f;
 	[HideInInspector] public float defenseStateBonus = 1f;
@@ -60,6 +61,7 @@ public class Stats : MonoBehaviour
 	
 	protected virtual void Awake()
 	{
+		vis = gameObject.GetComponent<Visibility>();
 		animator = gameObject.GetComponentInChildren<Animator>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
@@ -95,6 +97,8 @@ public class Stats : MonoBehaviour
 	public void SetTarget(Transform target)
 	{
 		currentTarget = target;
+		if(target)
+			currentTargetPoint = target.position;
 	}
 	
 	#region equip/unequip
@@ -195,7 +199,6 @@ public class Stats : MonoBehaviour
 	{
 		if(!weapon)
 		{
-			Debug.Log("Merc has no weapon!"); //?
 			SetTarget(null);
 			return;
 		}
@@ -240,7 +243,9 @@ public class Stats : MonoBehaviour
 	public IEnumerator Burst()
 	{
 		for(int i = 0; i < 3; i++)
-		{
+		{	
+			if(!weapon)
+				break;
 			if(weapon.bulletsLeft == 0)
 			{
 				sound.PlayEmpty(transform);
@@ -253,22 +258,26 @@ public class Stats : MonoBehaviour
 
 	protected virtual void SingleShoot()
 	{
-		if(currentTarget) //fix bug with bursting on death target
-			transform.LookAt(currentTarget);
+		
+		
+		if(currentTarget)
+			chanceToHit = Formulas.ChanceToHit(this, currentTarget);
+		
+		transform.LookAt(currentTargetPoint);
 		sound.PlayAtPoint(weapon.shootSound, transform);
 		weapon.bulletsLeft--;
 		weapon.weight -= weapon.ammoUsed.weight;
-		float chanceToHit = Formulas.ChanceToHit(this, currentTarget);
+		
 		Vector3 lineDir;
 		
 		if(chanceToHit>=Random.Range(1,100))
 		{
-			lineDir = currentTarget.position - head.position;
+			lineDir = currentTargetPoint - head.position;
 		}
 		else
 		{
-			Vector3 missedShot = Formulas.MissedShotRandomizer(chanceToHit, Formulas.Distance(head.transform, currentTarget));
-			lineDir = currentTarget.position - head.position - missedShot;
+			Vector3 missedShot = Formulas.MissedShotRandomizer(chanceToHit);
+			lineDir = currentTargetPoint - head.position - missedShot;
 		}
 		GameObject s = Instantiate(shot, head.transform.position, transform.rotation);
 		s.GetComponent<RealShoot>().Info(lineDir, weapon);

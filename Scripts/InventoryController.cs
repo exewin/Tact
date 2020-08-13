@@ -164,8 +164,9 @@ public class InventoryController : MonoBehaviour
 	
 	public void ManualReload(ItemAmmo ammo)
 	{
-		if(stats.weapon.ammoUsed.ammo == ammo.ammo)
-			ReloadWeaponButton();
+		if(stats.weapon)
+			if(stats.weapon.ammoUsed.ammo == ammo.ammo)
+				ReloadWeaponButton();
 	}
 	
 	#region buttons

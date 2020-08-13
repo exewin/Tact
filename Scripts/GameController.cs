@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Player"))
 		{
 			mercs.Add(g);
-			g.GetComponent<StatsMerc>().SetID(idAllocator-1);
+			g.GetComponent<StatsMerc>().SetID(idAllocator);
 			Visibility e = g.GetComponent<Visibility>();
 			humans.Add(e);
 			e.SetID(idAllocator);
