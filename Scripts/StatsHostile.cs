@@ -24,6 +24,15 @@ public class StatsHostile : Stats
 		}
 	}
 
+	public override void ShootCheck()
+	{
+		base.ShootCheck();
+		if(!weapon)
+		{
+			AutoEquipLazy();
+		}
+	}
+
 	protected override void SingleShoot()
 	{
 		base.SingleShoot();

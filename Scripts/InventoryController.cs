@@ -217,9 +217,9 @@ public class InventoryController : MonoBehaviour
 		UIControl.UIControl();
 	}
 	
-	public void StateButton(int mode)
+	public void StateButton(int up)
 	{
-		stats.SwitchState((state)mode);
+		stats.SwitchState(up);
 		UIControl.UIControl();
 	}
 	#endregion

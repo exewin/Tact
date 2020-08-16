@@ -13,7 +13,7 @@ public class VisibilityMerc : Visibility
 			hostile.Visible();
 			if(id-1==GameController.mercActive)
 			{
-				hostile.ChangeColor(Color.red);
+				//hostile.ChangeColor(Color.red);
 			}
 		}
 	}	
@@ -25,7 +25,7 @@ public class VisibilityMerc : Visibility
 			if(human.tag == "Hostile")
 			{
 				VisibilityHostile hostile = (VisibilityHostile) human; 
-				hostile.ChangeColor(Color.black);
+				//hostile.ChangeColor(Color.black);
 			}
 		}
 	}

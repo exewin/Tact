@@ -40,14 +40,18 @@ public class Stats : MonoBehaviour
 	private Vector3 currentTargetPoint;
 	private float burnOut = 0;
 	
+	
 	[HideInInspector] public state statePos;
+	
+	//animation variables
+	//private bool heavyWeaponEquipped;
 	private Vector3 previousPosition;
 	private float curSpeed;
 	
 	//equipment
-	[HideInInspector] public ItemWeapon weapon;
-	[HideInInspector] public ItemArmor armor;
-	[HideInInspector] public ItemHelmet helmet;
+	 public ItemWeapon weapon;
+	 public ItemArmor armor;
+	 public ItemHelmet helmet;
 	
 	//controllers
 	protected AudioSource audioSource;
@@ -76,7 +80,7 @@ public class Stats : MonoBehaviour
 		if(burnOut>0)
 			burnOut-=Time.deltaTime*1;
 		
-		if(currentTarget)
+		if(currentTarget!=null)
 		{
 			if(burnOut<=0)
 				ShootCheck();
@@ -105,11 +109,18 @@ public class Stats : MonoBehaviour
 	public void EquipWeapon(Item item)
 	{
 		if(weapon)
-			UnequipWeapon();
+			UnequipWeapon(); //may cause autoequiplazy bug
 		
 		inv.RemoveItem(item);
 		weapon = (ItemWeapon)item;
 		FindAmmo();
+		
+		if(weapon&&weapon.type != weaponType.pistol) // heavy weapon animation
+		{
+			animator.SetBool("HWequiped", true);
+		}
+		else
+			animator.SetBool("HWequiped", false);
 	}
 	
 	public void EquipArmor(Item item)
@@ -151,6 +162,7 @@ public class Stats : MonoBehaviour
 			return;
 		
 		inv.AddItem(weapon);
+		animator.SetBool("HWequiped", false);
 		weapon=null;
 	}	
 	public void UnequipArmor()
@@ -195,7 +207,7 @@ public class Stats : MonoBehaviour
 	
 	
 	#region shooting
-	public void ShootCheck()
+	public virtual void ShootCheck()
 	{
 		if(!weapon)
 		{
@@ -219,6 +231,8 @@ public class Stats : MonoBehaviour
 			}
 			return;
 		}
+		
+		animator.SetTrigger("Shoot");
 		
 		
 		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
@@ -407,14 +421,20 @@ public class Stats : MonoBehaviour
 	}
 	#endregion
 	
-	public void SwitchState(state mode)
+	public void SwitchState(int addPose)
 	{
-		if(statePos != mode)
-		{
-			statePos = mode;
-			vis.BodyPartsResize(mode);
-			//movement? TODO
-		}
+		if(statePos == state.stand && addPose>0)
+			animator.SetTrigger("StandToCrouch");
+		else if(statePos == state.crouch && addPose>0)
+			animator.SetTrigger("CrouchToCrawl");
+		else if(statePos == state.crawl && addPose<0)
+			animator.SetTrigger("CrawlToCrouch");
+		else if(statePos == state.crouch && addPose<0)
+			animator.SetTrigger("CrouchToStand");
+		else 
+			return;
+		
+		statePos += addPose;
 		
 		if(statePos == state.stand)
 		{
@@ -437,6 +457,7 @@ public class Stats : MonoBehaviour
 			accuracyStateBonus = Formulas.ACCURACY_CRAWL_BONUS;
 			defenseStateBonus = Formulas.DEFENSE_CRAWL_BONUS;
 		}
+		vis.BodyPartsResize(statePos);
 	}
 	
 

@@ -63,10 +63,6 @@ public class VisibilityHostile : Visibility
 			bodyParts[i].gameObject.layer = 9;
 		}
 	}
-	
-	public void ChangeColor(Color c)
-	{
-		rend.material.color = c;
-	}
+
 
 }
