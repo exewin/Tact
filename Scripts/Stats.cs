@@ -91,15 +91,23 @@ public class Stats : MonoBehaviour
 		
 		
 		
+		
 		Vector3 curMove = transform.position - previousPosition;
 		curSpeed = curMove.magnitude / Time.deltaTime;
 		animator.SetFloat("speed", curSpeed);
 		previousPosition = transform.position;
+		
+		if(curSpeed>0)
+			SetTarget(null);
 
 	}
 	
 	public void SetTarget(Transform target)
 	{
+		if(target==null)
+		{
+			animator.SetTrigger("StopShoot");
+		}
 		currentTarget = target;
 		if(target)
 			currentTargetPoint = target.position;
