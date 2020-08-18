@@ -52,6 +52,7 @@ ModelImporter:
     100092: Cube_011
     100094: Cube_012
     100096: Weapon
+    100098: LightWeapon
     400000: Armature
     400002: Chest
     400004: Cube
@@ -101,6 +102,7 @@ ModelImporter:
     400092: Cube_011
     400094: Cube_012
     400096: Weapon
+    400098: LightWeapon
     2100000: Shirt
     2100002: Hlemet
     2100004: Beard
@@ -122,6 +124,7 @@ ModelImporter:
     4300022: Cube_010
     4300024: Cube_008
     4300026: Weapon
+    4300028: LightWeapon
     7400000: Default Take
     7400002: Idle
     7400004: Run
@@ -162,6 +165,7 @@ ModelImporter:
     13700022: Cube_011
     13700024: Cube_012
     13700026: Weapon
+    13700028: LightWeapon
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -595,7 +599,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -623,7 +627,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -651,7 +655,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -679,7 +683,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -707,7 +711,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

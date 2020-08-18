@@ -39,7 +39,7 @@ public class StatsMerc : Stats
 	
 	protected override void DeathAction()
 	{
-		UIControl.MercDeath(id);
+		UIControl.MercDeath(id-1);
 	}
 	
 	protected override void SingleShoot()

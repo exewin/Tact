@@ -37,7 +37,7 @@ public class CursorController : MonoBehaviour
 						Vector3 screenPoint = Camera.main.WorldToScreenPoint (hit.point);
 						UIChance.transform.position = screenPoint;
 						float CtH;
-						if(Physics.Linecast(mercs[GameController.mercActive].GetComponent<Stats>().head.position, hit.transform.position,chanceToHitLayers))
+						if(Physics.Linecast(mercs[GameController.mercActive].GetComponent<Stats>().shootPoint.position, hit.transform.position,chanceToHitLayers))
 						{
 							CtH = 0;
 						}

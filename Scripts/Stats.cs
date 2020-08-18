@@ -10,7 +10,7 @@ public class Stats : MonoBehaviour
 	
 	
 	//necessary gameObjects
-	public Transform head;
+	public Transform shootPoint;
 	[SerializeField] private GameObject drop;
 	[SerializeField] private GameObject shot;
 	protected Inventory inv;
@@ -44,7 +44,6 @@ public class Stats : MonoBehaviour
 	[HideInInspector] public state statePos;
 	
 	//animation variables
-	//private bool heavyWeaponEquipped;
 	private Vector3 previousPosition;
 	private float curSpeed;
 	
@@ -57,7 +56,7 @@ public class Stats : MonoBehaviour
 	protected AudioSource audioSource;
 	protected LogController log;
 	protected SoundController sound;
-	protected Animator animator;
+	public Animator animator;
 	
 	[HideInInspector] public float accuracyStateBonus = 1f;
 	[HideInInspector] public float defenseStateBonus = 1f;
@@ -66,7 +65,7 @@ public class Stats : MonoBehaviour
 	protected virtual void Awake()
 	{
 		vis = gameObject.GetComponent<Visibility>();
-		animator = gameObject.GetComponentInChildren<Animator>();
+		//animator = gameObject.GetComponentInChildren<Animator>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
 		sound = GameObject.Find("SOUND CONTROLLER").GetComponent<SoundController>();
@@ -97,17 +96,22 @@ public class Stats : MonoBehaviour
 		animator.SetFloat("speed", curSpeed);
 		previousPosition = transform.position;
 		
-		if(curSpeed>0)
+		if(curSpeed>0&&currentTarget&&Time.time>0.1) //first shot blockade
+		{
 			SetTarget(null);
-
+		}
+		
+		
 	}
 	
 	public void SetTarget(Transform target)
 	{
 		if(target==null)
-		{
 			animator.SetTrigger("StopShoot");
-		}
+		else
+			animator.SetTrigger("Shoot");
+		
+		
 		currentTarget = target;
 		if(target)
 			currentTargetPoint = target.position;
@@ -123,7 +127,7 @@ public class Stats : MonoBehaviour
 		weapon = (ItemWeapon)item;
 		FindAmmo();
 		
-		if(weapon&&weapon.type != weaponType.pistol) // heavy weapon animation
+		if(weapon&&weapon.type != weaponType.pistol)
 		{
 			animator.SetBool("HWequiped", true);
 		}
@@ -240,7 +244,7 @@ public class Stats : MonoBehaviour
 			return;
 		}
 		
-		animator.SetTrigger("Shoot");
+		
 		
 		
 		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
@@ -294,14 +298,14 @@ public class Stats : MonoBehaviour
 		
 		if(chanceToHit>=Random.Range(1,100))
 		{
-			lineDir = currentTargetPoint - head.position;
+			lineDir = currentTargetPoint - shootPoint.position;
 		}
 		else
 		{
 			Vector3 missedShot = Formulas.MissedShotRandomizer(chanceToHit);
-			lineDir = currentTargetPoint - head.position - missedShot;
+			lineDir = currentTargetPoint - shootPoint.position - missedShot;
 		}
-		GameObject s = Instantiate(shot, head.transform.position, transform.rotation);
+		GameObject s = Instantiate(shot, shootPoint.position, transform.rotation);
 		s.GetComponent<RealShoot>().Info(lineDir, weapon);
 	}
 	#endregion

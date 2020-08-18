@@ -5,14 +5,14 @@ using UnityEngine;
 public class Formulas : MonoBehaviour 
 {
 	
-	public static float VELOCITY_SCALER = 14f;
+	public static float VELOCITY_SCALER = 1f;
 	public static float RANGE_SCALER = 14f;
 	public static float DMG_PERCENTAGE_RANDOM = 10;
 	
 	public static int LOG_LIMIT = 30;
 	
 	public static float BASE_SPEED = 5f;
-	public static float CROUCH_SPEED = 3f;
+	public static float CROUCH_SPEED = 2.5f;
 	public static float CRAWL_SPEED = 1.3f;
 	
 	public static float ACCURACY_BURST_PENALTY = 0.8f;
@@ -44,7 +44,7 @@ public class Formulas : MonoBehaviour
 	
 	public static float ChanceToHit(Stats attacker, Transform defenderPart)
 	{
-		float distance = Distance(attacker.head.transform, defenderPart);
+		float distance = Distance(attacker.shootPoint.transform, defenderPart);
 		ItemWeapon weapon = attacker.weapon;
 		part bodyPart = defenderPart.GetComponent<BodyPart>().bodyPart;
 		Stats defender = defenderPart.GetComponent<BodyPart>().owner;
