@@ -56,7 +56,7 @@ public class Stats : MonoBehaviour
 	protected AudioSource audioSource;
 	protected LogController log;
 	protected SoundController sound;
-	public Animator animator;
+	protected Animator animator;
 	
 	[HideInInspector] public float accuracyStateBonus = 1f;
 	[HideInInspector] public float defenseStateBonus = 1f;
@@ -65,7 +65,7 @@ public class Stats : MonoBehaviour
 	protected virtual void Awake()
 	{
 		vis = gameObject.GetComponent<Visibility>();
-		//animator = gameObject.GetComponentInChildren<Animator>();
+		animator = gameObject.GetComponentInChildren<Animator>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		log = GameObject.Find("LOG CONTROLLER").GetComponent<LogController>();
 		sound = GameObject.Find("SOUND CONTROLLER").GetComponent<SoundController>();
@@ -109,12 +109,19 @@ public class Stats : MonoBehaviour
 		if(target==null)
 			animator.SetTrigger("StopShoot");
 		else
+		{
+			navMeshAgent.velocity = Vector3.zero;
+			navMeshAgent.ResetPath();
 			animator.SetTrigger("Shoot");
+		}
 		
 		
 		currentTarget = target;
 		if(target)
 			currentTargetPoint = target.position;
+		
+			
+		burnOut=0.2f;
 	}
 	
 	#region equip/unequip

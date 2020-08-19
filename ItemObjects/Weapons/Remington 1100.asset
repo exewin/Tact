@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -32,5 +33,5 @@ MonoBehaviour:
   single: 1
   burst: 0
   auto: 0
-  ammoUsed: {fileID: 11400000, guid: aade16328b924d64da1894c9005bfbe0, type: 2}
-  trace: {fileID: 1213462966147360, guid: 3a08413b83d8469498fcfd6594f015e2, type: 2}
+  ammoUsed: {fileID: 11400000, guid: 9f7d386644c07b24f866794517797b36, type: 2}
+  trace: {fileID: 1213462966147360, guid: 3a08413b83d8469498fcfd6594f015e2, type: 3}

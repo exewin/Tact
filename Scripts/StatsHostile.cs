@@ -16,11 +16,17 @@ public class StatsHostile : Stats
 		for(int i = 0; i<inv.items.Count;i++)
 		{
 			if(inv.items[i] is ItemWeapon)
+			{
 				EquipWeapon(inv.items[i]);
+			}
 			else if(inv.items[i] is ItemHelmet)
+			{
 				EquipHelmet(inv.items[i]);
+			}
 			else if(inv.items[i] is ItemArmor)
+			{
 				EquipArmor(inv.items[i]);
+			}
 		}
 	}
 
