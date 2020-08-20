@@ -5,7 +5,7 @@ using UnityEngine;
 public class Formulas : MonoBehaviour 
 {
 	
-	public static float VELOCITY_SCALER = 1f;
+	public static float VELOCITY_SCALER = 2f;
 	public static float RANGE_SCALER = 14f;
 	public static float DMG_PERCENTAGE_RANDOM = 10;
 	

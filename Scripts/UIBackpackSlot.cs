@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerExitHandler
 {
 	private int index;
 	private Item info;
@@ -33,6 +33,12 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClick
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		inv.HoverItemInfo(info);
+	}
+	
+	public void OnPointerExit(PointerEventData eventData)
+	{
+		Debug.Log("asd");
+		inv.ClearHover();
 	}
 	
 	public void OnPointerClick(PointerEventData eventData)

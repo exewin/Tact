@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d15f081f64b94b47b43109ecc9726e8, type: 3}
   m_Name: Ammo 20 gauge
   m_EditorClassIdentifier: 
-  name: 9x19mm Parabellum rounds
+  name: 20 gauge rounds
   desc: 
   image: {fileID: 0}
   weight: 0.01

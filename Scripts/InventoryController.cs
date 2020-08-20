@@ -248,7 +248,7 @@ public class InventoryController : MonoBehaviour
 		}
 	}
 	
-	private void ClearHover()
+	public void ClearHover()
 	{
 		item_name.text = "";
 		item_icon.sprite = transparent;

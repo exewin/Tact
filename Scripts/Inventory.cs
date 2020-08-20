@@ -56,9 +56,12 @@ public class Inventory : MonoBehaviour
 	{
 		for(int i = 0; i < items.Count; i++)
 		{
-			if(items[i].name == s)
+			if(items[i])
 			{
-				return true;
+				if(items[i].name == s)
+				{
+					return true;
+				}
 			}
 		}
 		return false;

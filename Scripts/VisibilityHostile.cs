@@ -30,6 +30,7 @@ public class VisibilityHostile : Visibility
 	{
 		if(human.tag == "Player")
 		{
+			if(!GetComponent<StatsHostile>().currentTarget)
 			GetComponent<StatsHostile>().SetTarget(human.bodyParts[1]); // chest
 		}
 	}		
@@ -38,7 +39,8 @@ public class VisibilityHostile : Visibility
 	{
 		if(human.tag == "Player")
 		{
-			//can't see one of the targets, send signal
+			if(GetComponent<StatsHostile>().currentTarget) //popraw te referencje
+				GetComponent<StatsHostile>().SetTarget(null);
 		}
 	}	
 	

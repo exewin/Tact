@@ -1,172 +1,512 @@
 fileFormatVersion: 2
 guid: 142edce0355f31941a2583562cf64f82
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: Armature
-    100002: Chest
-    100004: Cube
-    100006: Cube_001
-    100008: Cube_002
-    100010: Cube_003
-    100012: Cube_004
-    100014: Cube_005
-    100016: Cube_006
-    100018: Cube_007
-    100020: Cube_009
-    100022: Fingers01_L
-    100024: Fingers01_R
-    100026: Fingers02_L
-    100028: Fingers02_R
-    100030: Foot_L
-    100032: Foot_R
-    100034: Hand_L
-    100036: Hand_R
-    100038: Head
-    100040: Hips
-    100042: LowArm_L
-    100044: LowArm_R
-    100046: LowLeg_L
-    100048: LowLeg_R
-    100050: //RootNode
-    100052: Neck
-    100054: Shoulder_L
-    100056: Shoulder_R
-    100058: Spine
-    100060: Thumb01_L
-    100062: Thumb01_R
-    100064: Thumb02_L
-    100066: Thumb02_R
-    100068: Tits
-    100070: Tits2
-    100072: Toes_L
-    100074: Toes_R
-    100076: UpArm1_L
-    100078: UpArm1_R
-    100080: UpArm_L
-    100082: UpArm_R
-    100084: UpLeg_L
-    100086: UpLeg_R
-    100088: Cube_008
-    100090: Cube_010
-    100092: Cube_011
-    100094: Cube_012
-    100096: Weapon
-    100098: LightWeapon
-    400000: Armature
-    400002: Chest
-    400004: Cube
-    400006: Cube_001
-    400008: Cube_002
-    400010: Cube_003
-    400012: Cube_004
-    400014: Cube_005
-    400016: Cube_006
-    400018: Cube_007
-    400020: Cube_009
-    400022: Fingers01_L
-    400024: Fingers01_R
-    400026: Fingers02_L
-    400028: Fingers02_R
-    400030: Foot_L
-    400032: Foot_R
-    400034: Hand_L
-    400036: Hand_R
-    400038: Head
-    400040: Hips
-    400042: LowArm_L
-    400044: LowArm_R
-    400046: LowLeg_L
-    400048: LowLeg_R
-    400050: //RootNode
-    400052: Neck
-    400054: Shoulder_L
-    400056: Shoulder_R
-    400058: Spine
-    400060: Thumb01_L
-    400062: Thumb01_R
-    400064: Thumb02_L
-    400066: Thumb02_R
-    400068: Tits
-    400070: Tits2
-    400072: Toes_L
-    400074: Toes_R
-    400076: UpArm1_L
-    400078: UpArm1_R
-    400080: UpArm_L
-    400082: UpArm_R
-    400084: UpLeg_L
-    400086: UpLeg_R
-    400088: Cube_008
-    400090: Cube_010
-    400092: Cube_011
-    400094: Cube_012
-    400096: Weapon
-    400098: LightWeapon
-    2100000: Shirt
-    2100002: Hlemet
-    2100004: Beard
-    2100006: Boots
-    2100008: Pants_001
-    2100010: Skin
-    2100012: unnamed
-    4300000: Cube_001
-    4300002: Cube_009
-    4300004: Cube_007
-    4300006: Cube_004
-    4300008: Cube_003
-    4300010: Cube_002
-    4300012: Cube_006
-    4300014: Cube_005
-    4300016: Cube
-    4300018: Cube_012
-    4300020: Cube_011
-    4300022: Cube_010
-    4300024: Cube_008
-    4300026: Weapon
-    4300028: LightWeapon
-    7400000: Default Take
-    7400002: Idle
-    7400004: Run
-    7400006: Run_001
-    7400008: Run_002
-    7400010: Run_003
-    7400012: Walk
-    7400014: IdleWeapon
-    7400016: RunWeapon
-    7400018: ShootStandHeavy
-    7400020: Walk_001
-    7400022: Walk_002
-    7400024: WalkWeapon
-    7400026: CrawlIdle
-    7400028: CrouchIdle
-    7400030: ToCrawl
-    7400032: ToCrouch
-    7400034: CrawlWalk
-    7400036: CrouchWalk
-    7400038: ShootCrawlHeavy
-    7400040: ShootCrawlLight
-    7400042: ShootCrouchHeavy
-    7400044: ShootCrouchLight
-    7400046: ShootStandLight
-    9500000: //RootNode
-    11100000: //RootNode
-    13700000: Cube
-    13700002: Cube_001
-    13700004: Cube_002
-    13700006: Cube_003
-    13700008: Cube_004
-    13700010: Cube_005
-    13700012: Cube_006
-    13700014: Cube_007
-    13700016: Cube_009
-    13700018: Cube_008
-    13700020: Cube_010
-    13700022: Cube_011
-    13700024: Cube_012
-    13700026: Weapon
-    13700028: LightWeapon
-    2186277476908879412: ImportLogs
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Armature
+  - first:
+      1: 100002
+    second: Chest
+  - first:
+      1: 100004
+    second: Cube
+  - first:
+      1: 100006
+    second: Cube_001
+  - first:
+      1: 100008
+    second: Cube_002
+  - first:
+      1: 100010
+    second: Cube_003
+  - first:
+      1: 100012
+    second: Cube_004
+  - first:
+      1: 100014
+    second: Cube_005
+  - first:
+      1: 100016
+    second: Cube_006
+  - first:
+      1: 100018
+    second: Cube_007
+  - first:
+      1: 100020
+    second: Cube_009
+  - first:
+      1: 100022
+    second: Fingers01_L
+  - first:
+      1: 100024
+    second: Fingers01_R
+  - first:
+      1: 100026
+    second: Fingers02_L
+  - first:
+      1: 100028
+    second: Fingers02_R
+  - first:
+      1: 100030
+    second: Foot_L
+  - first:
+      1: 100032
+    second: Foot_R
+  - first:
+      1: 100034
+    second: Hand_L
+  - first:
+      1: 100036
+    second: Hand_R
+  - first:
+      1: 100038
+    second: Head
+  - first:
+      1: 100040
+    second: Hips
+  - first:
+      1: 100042
+    second: LowArm_L
+  - first:
+      1: 100044
+    second: LowArm_R
+  - first:
+      1: 100046
+    second: LowLeg_L
+  - first:
+      1: 100048
+    second: LowLeg_R
+  - first:
+      1: 100050
+    second: //RootNode
+  - first:
+      1: 100052
+    second: Neck
+  - first:
+      1: 100054
+    second: Shoulder_L
+  - first:
+      1: 100056
+    second: Shoulder_R
+  - first:
+      1: 100058
+    second: Spine
+  - first:
+      1: 100060
+    second: Thumb01_L
+  - first:
+      1: 100062
+    second: Thumb01_R
+  - first:
+      1: 100064
+    second: Thumb02_L
+  - first:
+      1: 100066
+    second: Thumb02_R
+  - first:
+      1: 100068
+    second: Tits
+  - first:
+      1: 100070
+    second: Tits2
+  - first:
+      1: 100072
+    second: Toes_L
+  - first:
+      1: 100074
+    second: Toes_R
+  - first:
+      1: 100076
+    second: UpArm1_L
+  - first:
+      1: 100078
+    second: UpArm1_R
+  - first:
+      1: 100080
+    second: UpArm_L
+  - first:
+      1: 100082
+    second: UpArm_R
+  - first:
+      1: 100084
+    second: UpLeg_L
+  - first:
+      1: 100086
+    second: UpLeg_R
+  - first:
+      1: 100088
+    second: Cube_008
+  - first:
+      1: 100090
+    second: Cube_010
+  - first:
+      1: 100092
+    second: Cube_011
+  - first:
+      1: 100094
+    second: Cube_012
+  - first:
+      1: 100096
+    second: Weapon
+  - first:
+      1: 100098
+    second: LightWeapon
+  - first:
+      4: 400000
+    second: Armature
+  - first:
+      4: 400002
+    second: Chest
+  - first:
+      4: 400004
+    second: Cube
+  - first:
+      4: 400006
+    second: Cube_001
+  - first:
+      4: 400008
+    second: Cube_002
+  - first:
+      4: 400010
+    second: Cube_003
+  - first:
+      4: 400012
+    second: Cube_004
+  - first:
+      4: 400014
+    second: Cube_005
+  - first:
+      4: 400016
+    second: Cube_006
+  - first:
+      4: 400018
+    second: Cube_007
+  - first:
+      4: 400020
+    second: Cube_009
+  - first:
+      4: 400022
+    second: Fingers01_L
+  - first:
+      4: 400024
+    second: Fingers01_R
+  - first:
+      4: 400026
+    second: Fingers02_L
+  - first:
+      4: 400028
+    second: Fingers02_R
+  - first:
+      4: 400030
+    second: Foot_L
+  - first:
+      4: 400032
+    second: Foot_R
+  - first:
+      4: 400034
+    second: Hand_L
+  - first:
+      4: 400036
+    second: Hand_R
+  - first:
+      4: 400038
+    second: Head
+  - first:
+      4: 400040
+    second: Hips
+  - first:
+      4: 400042
+    second: LowArm_L
+  - first:
+      4: 400044
+    second: LowArm_R
+  - first:
+      4: 400046
+    second: LowLeg_L
+  - first:
+      4: 400048
+    second: LowLeg_R
+  - first:
+      4: 400050
+    second: //RootNode
+  - first:
+      4: 400052
+    second: Neck
+  - first:
+      4: 400054
+    second: Shoulder_L
+  - first:
+      4: 400056
+    second: Shoulder_R
+  - first:
+      4: 400058
+    second: Spine
+  - first:
+      4: 400060
+    second: Thumb01_L
+  - first:
+      4: 400062
+    second: Thumb01_R
+  - first:
+      4: 400064
+    second: Thumb02_L
+  - first:
+      4: 400066
+    second: Thumb02_R
+  - first:
+      4: 400068
+    second: Tits
+  - first:
+      4: 400070
+    second: Tits2
+  - first:
+      4: 400072
+    second: Toes_L
+  - first:
+      4: 400074
+    second: Toes_R
+  - first:
+      4: 400076
+    second: UpArm1_L
+  - first:
+      4: 400078
+    second: UpArm1_R
+  - first:
+      4: 400080
+    second: UpArm_L
+  - first:
+      4: 400082
+    second: UpArm_R
+  - first:
+      4: 400084
+    second: UpLeg_L
+  - first:
+      4: 400086
+    second: UpLeg_R
+  - first:
+      4: 400088
+    second: Cube_008
+  - first:
+      4: 400090
+    second: Cube_010
+  - first:
+      4: 400092
+    second: Cube_011
+  - first:
+      4: 400094
+    second: Cube_012
+  - first:
+      4: 400096
+    second: Weapon
+  - first:
+      4: 400098
+    second: LightWeapon
+  - first:
+      21: 2100000
+    second: Shirt
+  - first:
+      21: 2100002
+    second: Hlemet
+  - first:
+      21: 2100004
+    second: Beard
+  - first:
+      21: 2100006
+    second: Boots
+  - first:
+      21: 2100008
+    second: Pants_001
+  - first:
+      21: 2100010
+    second: Skin
+  - first:
+      21: 2100012
+    second: unnamed
+  - first:
+      43: 4300000
+    second: Cube_001
+  - first:
+      43: 4300002
+    second: Cube_009
+  - first:
+      43: 4300004
+    second: Cube_007
+  - first:
+      43: 4300006
+    second: Cube_004
+  - first:
+      43: 4300008
+    second: Cube_003
+  - first:
+      43: 4300010
+    second: Cube_002
+  - first:
+      43: 4300012
+    second: Cube_006
+  - first:
+      43: 4300014
+    second: Cube_005
+  - first:
+      43: 4300016
+    second: Cube
+  - first:
+      43: 4300018
+    second: Cube_012
+  - first:
+      43: 4300020
+    second: Cube_011
+  - first:
+      43: 4300022
+    second: Cube_010
+  - first:
+      43: 4300024
+    second: Cube_008
+  - first:
+      43: 4300026
+    second: Weapon
+  - first:
+      43: 4300028
+    second: LightWeapon
+  - first:
+      74: 7400000
+    second: Default Take
+  - first:
+      74: 7400002
+    second: Idle
+  - first:
+      74: 7400004
+    second: Run
+  - first:
+      74: 7400006
+    second: Run_001
+  - first:
+      74: 7400008
+    second: Run_002
+  - first:
+      74: 7400010
+    second: Run_003
+  - first:
+      74: 7400012
+    second: Walk
+  - first:
+      74: 7400014
+    second: IdleWeapon
+  - first:
+      74: 7400016
+    second: RunWeapon
+  - first:
+      74: 7400018
+    second: ShootStandHeavy
+  - first:
+      74: 7400020
+    second: Walk_001
+  - first:
+      74: 7400022
+    second: Walk_002
+  - first:
+      74: 7400024
+    second: WalkWeapon
+  - first:
+      74: 7400026
+    second: CrawlIdle
+  - first:
+      74: 7400028
+    second: CrouchIdle
+  - first:
+      74: 7400030
+    second: ToCrawl
+  - first:
+      74: 7400032
+    second: ToCrouch
+  - first:
+      74: 7400034
+    second: CrawlWalk
+  - first:
+      74: 7400036
+    second: CrouchWalk
+  - first:
+      74: 7400038
+    second: ShootCrawlHeavy
+  - first:
+      74: 7400040
+    second: ShootCrawlLight
+  - first:
+      74: 7400042
+    second: ShootCrouchHeavy
+  - first:
+      74: 7400044
+    second: ShootCrouchLight
+  - first:
+      74: 7400046
+    second: ShootStandLight
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      111: 11100000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Cube
+  - first:
+      137: 13700002
+    second: Cube_001
+  - first:
+      137: 13700004
+    second: Cube_002
+  - first:
+      137: 13700006
+    second: Cube_003
+  - first:
+      137: 13700008
+    second: Cube_004
+  - first:
+      137: 13700010
+    second: Cube_005
+  - first:
+      137: 13700012
+    second: Cube_006
+  - first:
+      137: 13700014
+    second: Cube_007
+  - first:
+      137: 13700016
+    second: Cube_009
+  - first:
+      137: 13700018
+    second: Cube_008
+  - first:
+      137: 13700020
+    second: Cube_010
+  - first:
+      137: 13700022
+    second: Cube_011
+  - first:
+      137: 13700024
+    second: Cube_012
+  - first:
+      137: 13700026
+    second: Weapon
+  - first:
+      137: 13700028
+    second: LightWeapon
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
+  - first:
+      74: 8746220385265710739
+    second: ShootCrawlHeavyReload
+  - first:
+      74: -2817380196378947714
+    second: ShootCrawlLightReload
+  - first:
+      74: -4936248303029593580
+    second: ShootStandHeavyReload
+  - first:
+      74: 4364638651530445417
+    second: ShootStandLightReload
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -198,6 +538,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Default Take
       takeName: Default Take
+      internalID: 7400000
       firstFrame: 0
       lastFrame: 23
       wrapMode: 0
@@ -226,6 +567,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Idle
+      internalID: 7400002
       firstFrame: 0
       lastFrame: 99
       wrapMode: 0
@@ -254,6 +596,7 @@ ModelImporter:
     - serializedVersion: 16
       name: IdleWeapon
       takeName: IdleWeapon
+      internalID: 7400014
       firstFrame: 0
       lastFrame: 99
       wrapMode: 0
@@ -282,6 +625,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Run
+      internalID: 7400004
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
@@ -310,6 +654,7 @@ ModelImporter:
     - serializedVersion: 16
       name: RunWeapon
       takeName: RunWeapon
+      internalID: 7400016
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
@@ -338,6 +683,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ShootStandHeavy
       takeName: ShootStandHeavy
+      internalID: 7400018
       firstFrame: 0
       lastFrame: 9
       wrapMode: 0
@@ -366,6 +712,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Walk
+      internalID: 7400012
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -394,6 +741,7 @@ ModelImporter:
     - serializedVersion: 16
       name: WalkWeapon
       takeName: WalkWeapon
+      internalID: 7400024
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -422,6 +770,7 @@ ModelImporter:
     - serializedVersion: 16
       name: CrawlIdle
       takeName: CrawlIdle
+      internalID: 7400026
       firstFrame: 0
       lastFrame: 99
       wrapMode: 0
@@ -450,6 +799,7 @@ ModelImporter:
     - serializedVersion: 16
       name: CrouchIdle
       takeName: CrouchIdle
+      internalID: 7400028
       firstFrame: 0
       lastFrame: 99
       wrapMode: 0
@@ -478,6 +828,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ToCrawl
       takeName: ToCrawl
+      internalID: 7400030
       firstFrame: 0
       lastFrame: 39
       wrapMode: 0
@@ -506,6 +857,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ToCrouch
       takeName: ToCrouch
+      internalID: 7400032
       firstFrame: 0
       lastFrame: 38
       wrapMode: 0
@@ -534,6 +886,7 @@ ModelImporter:
     - serializedVersion: 16
       name: CrawlWalk
       takeName: CrawlWalk
+      internalID: 7400034
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -562,6 +915,7 @@ ModelImporter:
     - serializedVersion: 16
       name: CrouchWalk
       takeName: CrouchWalk
+      internalID: 7400036
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -590,6 +944,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ShootCrawlHeavy
       takeName: ShootCrawlHeavy
+      internalID: 7400038
       firstFrame: 0
       lastFrame: 8
       wrapMode: 0
@@ -618,6 +973,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ShootCrawlLight
       takeName: ShootCrawlLight
+      internalID: 7400040
       firstFrame: 0
       lastFrame: 8
       wrapMode: 0
@@ -646,6 +1002,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ShootCrouchHeavy
       takeName: ShootCrouchHeavy
+      internalID: 7400042
       firstFrame: 0
       lastFrame: 8
       wrapMode: 0
@@ -674,6 +1031,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ShootCrouchLight
       takeName: ShootCrouchLight
+      internalID: 7400044
       firstFrame: 0
       lastFrame: 8
       wrapMode: 0
@@ -702,6 +1060,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ShootStandLight
       takeName: ShootStandLight
+      internalID: 7400046
       firstFrame: 0
       lastFrame: 9
       wrapMode: 0
@@ -727,12 +1086,129 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootCrawlHeavyReload
+      takeName: ShootCrawlHeavyReload
+      internalID: 8746220385265710739
+      firstFrame: 0
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootCrawlLightReload
+      takeName: ShootCrawlLightReload
+      internalID: -2817380196378947714
+      firstFrame: 0
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootStandHeavyReload
+      takeName: ShootStandHeavyReload
+      internalID: -4936248303029593580
+      firstFrame: 0
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ShootStandLightReload
+      takeName: ShootStandLightReload
+      internalID: 4364638651530445417
+      firstFrame: 0
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 0.8
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -740,10 +1216,13 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
@@ -755,10 +1234,14 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -768,8 +1251,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.8
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

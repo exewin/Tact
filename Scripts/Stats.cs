@@ -36,7 +36,7 @@ public class Stats : MonoBehaviour
 	public int maxAp;
 	
 	private float chanceToHit = 0;
-	private Transform currentTarget;
+	[HideInInspector] public  Transform currentTarget;
 	private Vector3 currentTargetPoint;
 	private float burnOut = 0;
 	
@@ -46,11 +46,12 @@ public class Stats : MonoBehaviour
 	//animation variables
 	private Vector3 previousPosition;
 	private float curSpeed;
+	private bool isShooting;
 	
 	//equipment
-	 public ItemWeapon weapon;
-	 public ItemArmor armor;
-	 public ItemHelmet helmet;
+	[HideInInspector] public ItemWeapon weapon;
+	[HideInInspector] public ItemArmor armor;
+	[HideInInspector] public ItemHelmet helmet;
 	
 	//controllers
 	protected AudioSource audioSource;
@@ -77,9 +78,11 @@ public class Stats : MonoBehaviour
 	protected virtual void Update()
 	{
 		if(burnOut>0)
+		{
 			burnOut-=Time.deltaTime*1;
+		}
 		
-		if(currentTarget!=null)
+		if(currentTarget)
 		{
 			if(burnOut<=0)
 				ShootCheck();
@@ -96,7 +99,7 @@ public class Stats : MonoBehaviour
 		animator.SetFloat("speed", curSpeed);
 		previousPosition = transform.position;
 		
-		if(curSpeed>0&&currentTarget&&Time.time>0.1) //first shot blockade
+		if(curSpeed>0&&currentTarget&&Time.time<0.1) //first shot blockade
 		{
 			SetTarget(null);
 		}
@@ -107,20 +110,15 @@ public class Stats : MonoBehaviour
 	public void SetTarget(Transform target)
 	{
 		if(target==null)
-			animator.SetTrigger("StopShoot");
+			animator.SetBool("isShooting",false);
 		else
 		{
 			navMeshAgent.velocity = Vector3.zero;
 			navMeshAgent.ResetPath();
-			animator.SetTrigger("Shoot");
+			animator.SetBool("isShooting",true);
 		}
 		
-		
 		currentTarget = target;
-		if(target)
-			currentTargetPoint = target.position;
-		
-			
 		burnOut=0.2f;
 	}
 	
@@ -128,7 +126,7 @@ public class Stats : MonoBehaviour
 	public void EquipWeapon(Item item)
 	{
 		if(weapon)
-			UnequipWeapon(); //may cause autoequiplazy bug
+			UnequipWeapon();
 		
 		inv.RemoveItem(item);
 		weapon = (ItemWeapon)item;
@@ -228,6 +226,7 @@ public class Stats : MonoBehaviour
 	#region shooting
 	public virtual void ShootCheck()
 	{
+		
 		if(!weapon)
 		{
 			SetTarget(null);
@@ -243,7 +242,7 @@ public class Stats : MonoBehaviour
 			}
 			else
 			{
-				transform.LookAt(currentTarget); // look at
+				transform.LookAt(currentTargetPoint); // look at
 				sound.PlayEmpty(transform);
 				burnOut = 1;
 				SetTarget(null);
@@ -251,7 +250,8 @@ public class Stats : MonoBehaviour
 			return;
 		}
 		
-		
+		if(currentTarget)
+			currentTargetPoint = currentTarget.position;
 		
 		
 		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
@@ -369,6 +369,7 @@ public class Stats : MonoBehaviour
 	
 	protected void Death()
 	{
+		hp=0;
 		log.Send(nickname + " was killed");
 		UnequipEverything();
 		GameController.RemoveFromList(gameObject);
@@ -395,6 +396,9 @@ public class Stats : MonoBehaviour
 		
 		if(!inv.FindItemInInventory(weapon.ammoUsed.name))
 			return;
+		
+		
+		animator.SetTrigger("Reload");
 		
 		Item ammo = (ItemAmmo)inv.GetItem(weapon.ammoUsed.name);
 		int need = weapon.capacity - weapon.bulletsLeft;
