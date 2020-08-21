@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -25,12 +26,12 @@ MonoBehaviour:
   velocity: 850
   rateOfFire: 40
   effectiveRange: 800
-  shootSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 315613566e44c3c4b9d07ce8df1c8b31, type: 3}
+  reloadSound: {fileID: 8300000, guid: 1822efb89bf68a84db0098ed391dbe1c, type: 3}
   type: 3
   mode: 0
   single: 1
   burst: 0
   auto: 0
-  ammoUsed: {fileID: 0}
-  trace: {fileID: 0}
+  ammoUsed: {fileID: 11400000, guid: d808bb32a7da1184180e7bc5b25d6658, type: 2}
+  trace: {fileID: 1184904475076604, guid: 98649547f10b94b4b9b8919547c415ff, type: 3}

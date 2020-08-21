@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 5.45x39mm rounds
   desc: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 4402945d73b37c044aacd5842b9d7c96, type: 3}
   weight: 0.02
   stackable: 1
   _quantity: 15

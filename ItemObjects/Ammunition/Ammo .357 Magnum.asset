@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: .357 Magnum rounds
   desc: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 07a928b4b72700e4db1054529ef4e975, type: 3}
   weight: 0.01
   stackable: 1
   _quantity: 15

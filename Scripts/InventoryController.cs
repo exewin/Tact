@@ -50,6 +50,26 @@ public class InventoryController : MonoBehaviour
 		{
 			EjectAmmoButton();
 		}
+		if(Input.GetKeyDown(KeyCode.PageUp))
+		{
+			StateButton(1);
+		}
+		if(Input.GetKeyDown(KeyCode.PageDown))
+		{
+			StateButton(0);
+		}
+		if(Input.GetKeyDown(KeyCode.S))
+		{
+			BurstModeButton(0);
+		}
+		if(Input.GetKeyDown(KeyCode.B))
+		{
+			BurstModeButton(1);
+		}
+		if(Input.GetKeyDown(KeyCode.A))
+		{
+			BurstModeButton(2);
+		}
 	}
 	
 	
@@ -207,7 +227,7 @@ public class InventoryController : MonoBehaviour
 	}
 	public void ReloadWeaponButton()
 	{
-		stats.ReloadWeapon();
+		stats.SendAction(3);
 		UpdateInventory();
 	}
 	
@@ -219,7 +239,7 @@ public class InventoryController : MonoBehaviour
 	
 	public void StateButton(int up)
 	{
-		stats.SwitchState(up);
+		stats.SendAction(up);
 		UIControl.UIControl();
 	}
 	#endregion

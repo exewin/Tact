@@ -37,7 +37,6 @@ public class UIBackpackSlot : MonoBehaviour, IPointerEnterHandler, IPointerClick
 	
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		Debug.Log("asd");
 		inv.ClearHover();
 	}
 	

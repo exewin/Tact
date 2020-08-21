@@ -59,7 +59,8 @@ public class CursorController : MonoBehaviour
 			{
 				if(Physics.Raycast(ray, out hit))
 				{
-					mercs[GameController.mercActive].navMeshAgent.SetDestination(hit.point);
+					mercs[GameController.mercActive].SendAction(2);
+					mercs[GameController.mercActive].destination = hit.point;
 				}
 			}
 		}

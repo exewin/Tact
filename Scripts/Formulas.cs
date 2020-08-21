@@ -27,6 +27,17 @@ public class Formulas : MonoBehaviour
 	public static float LEG_DMG_MULTIPLIER = 0.3f;
 	public static float HEAD_DMG_MULTIPLIER = 2.0f;
 	
+	public static float BURNOUT_STAND_TO_CROUCH = .7f;
+	public static float BURNOUT_CROUCH_TO_STAND = .8f;
+	public static float BURNOUT_CROUCH_TO_CRAWL = 1.2f;
+	public static float BURNOUT_CRAWL_TO_CROUCH = 1.3f;
+	
+	public static float STAND_HEAVY_RELOAD_TIME = 2f;
+	public static float STAND_LIGHT_RELOAD_TIME = 1.5f;
+	public static float CROUCH_HEAVY_RELOAD_TIME = 1.8f;
+	public static float CROUCH_LIGHT_RELOAD_TIME = 1.3f;
+	public static float CRAWL_HEAVY_RELOAD_TIME = 2.7f;
+	public static float CRAWL_LIGHT_RELOAD_TIME = 2f;
 	
 	
 	

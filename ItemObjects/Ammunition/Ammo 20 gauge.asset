@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 20 gauge rounds
   desc: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 8554b3d2fd5a73a41b4386706a1fcc59, type: 3}
   weight: 0.01
   stackable: 1
   _quantity: 15

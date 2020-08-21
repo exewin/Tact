@@ -1114,7 +1114,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1717,7 +1717,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6879,6 +6879,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5f0d7a26c864da14e90d40458e7ea9e7,
         type: 3}
+    - target: {fileID: 114793190428124522, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: nextAction
+      value: 255
+      objectReference: {fileID: 0}
+    - target: {fileID: 114793190428124522, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: accuracy
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114793190428124522, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: helmetModel
+      value: 
+      objectReference: {fileID: 1554489046}
+    - target: {fileID: 114793190428124522, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: armorModel
+      value: 
+      objectReference: {fileID: 1044825829}
     - target: {fileID: 195336952759158676, guid: af39e9ba735bcf14eb72d84d3e7311a3,
         type: 3}
       propertyPath: m_AngularSpeed
@@ -6891,6 +6911,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114877498342854640, guid: af39e9ba735bcf14eb72d84d3e7311a3,
         type: 3}
+      propertyPath: startItems.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877498342854640, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
       propertyPath: startItems.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 954177b2b3c3c0640bfe23a769ba8f59,
@@ -6900,6 +6925,30 @@ PrefabInstance:
       propertyPath: startItems.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 31877365d85b6134e90eaa1f242dd2bd,
+        type: 2}
+    - target: {fileID: 114877498342854640, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: startItems.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0336e809fbe13b742a743cf483625995,
+        type: 2}
+    - target: {fileID: 114877498342854640, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: startItems.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3d9baa23ce8d5ae4b88ddb7042ec23c6,
+        type: 2}
+    - target: {fileID: 114877498342854640, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: startItems.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: deef85ae6e08cd0429ee186883449b93,
+        type: 2}
+    - target: {fileID: 114877498342854640, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: startItems.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: aade16328b924d64da1894c9005bfbe0,
         type: 2}
     - target: {fileID: 1712664585736964, guid: af39e9ba735bcf14eb72d84d3e7311a3, type: 3}
       propertyPath: m_IsActive
@@ -6915,7 +6964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1851544131681408, guid: af39e9ba735bcf14eb72d84d3e7311a3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 137922300167085000, guid: af39e9ba735bcf14eb72d84d3e7311a3,
         type: 3}
@@ -6926,7 +6975,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300028, guid: 142edce0355f31941a2583562cf64f82, type: 3}
+      objectReference: {fileID: 4300026, guid: 142edce0355f31941a2583562cf64f82, type: 3}
+    - target: {fileID: 137462516280245522, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300018, guid: 142edce0355f31941a2583562cf64f82, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af39e9ba735bcf14eb72d84d3e7311a3, type: 3}
 --- !u!1 &749784404
@@ -8036,6 +8090,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968638988}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &974130771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9144390698194752448, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 983440691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &983440691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8103,7 +8163,7 @@ PrefabInstance:
         type: 3}
       propertyPath: startItems.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 01bee9710b066714c928335ca242c402,
+      objectReference: {fileID: 11400000, guid: afad48f81ee67224d913accfb254a57c,
         type: 2}
     - target: {fileID: 114946029402432200, guid: 2b00ed92b19f07f46a48af116b1d67bc,
         type: 3}
@@ -8183,6 +8243,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300026, guid: 142edce0355f31941a2583562cf64f82, type: 3}
+    - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 3}
+      propertyPath: armorModel
+      value: 
+      objectReference: {fileID: 1744606449}
+    - target: {fileID: 114083275520735884, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 3}
+      propertyPath: helmetModel
+      value: 
+      objectReference: {fileID: 974130771}
+    - target: {fileID: 4268196399305335201, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b00ed92b19f07f46a48af116b1d67bc, type: 3}
 --- !u!1 &987836303
@@ -8581,6 +8656,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030990431}
   m_CullTransparentMesh: 0
+--- !u!1 &1044825829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1851544131681408, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 741227977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1061216361
 GameObject:
   m_ObjectHideFlags: 0
@@ -10849,6 +10930,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551871690}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1554489046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1866416744423662, guid: af39e9ba735bcf14eb72d84d3e7311a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 741227977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1557916643
 GameObject:
   m_ObjectHideFlags: 0
@@ -11592,12 +11679,17 @@ MonoBehaviour:
   maxAp: 100
   currentTarget: {fileID: 0}
   statePos: 0
+  destination: {x: 0, y: 0, z: 0}
   weapon: {fileID: 0}
   armor: {fileID: 0}
   helmet: {fileID: 0}
   accuracyStateBonus: 1
   defenseStateBonus: 1
   accuracyModePenalty: 1
+  helmetModel: {fileID: 0}
+  armorModel: {fileID: 0}
+  lwModel: {fileID: 0}
+  hwModel: {fileID: 0}
   UIControl: {fileID: 282840812}
 --- !u!195 &1651603213
 NavMeshAgent:
@@ -12267,6 +12359,12 @@ RectTransform:
   m_AnchoredPosition: {x: 96.499985, y: -94.999985}
   m_SizeDelta: {x: 50, y: 20}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1744606449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5953582283602641322, guid: 2b00ed92b19f07f46a48af116b1d67bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 983440691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1754084431
 GameObject:
   m_ObjectHideFlags: 0

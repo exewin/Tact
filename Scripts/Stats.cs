@@ -43,10 +43,11 @@ public class Stats : MonoBehaviour
 	
 	[HideInInspector] public state statePos;
 	
-	//animation variables
+	[HideInInspector] public Vector3 destination;
 	private Vector3 previousPosition;
 	private float curSpeed;
 	private bool isShooting;
+	private bool hwequiped;
 	
 	//equipment
 	[HideInInspector] public ItemWeapon weapon;
@@ -62,6 +63,18 @@ public class Stats : MonoBehaviour
 	[HideInInspector] public float accuracyStateBonus = 1f;
 	[HideInInspector] public float defenseStateBonus = 1f;
 	[HideInInspector] public float accuracyModePenalty = 1f;
+	
+	[SerializeField] private GameObject helmetModel;
+	[SerializeField] private GameObject armorModel;
+	[SerializeField] private GameObject lwModel;
+	[SerializeField] private GameObject hwModel;
+	
+	private int nextAction = 255;
+	//0posedown
+	//1poseup
+	//2move
+	//3reload
+	//4shoot
 	
 	protected virtual void Awake()
 	{
@@ -81,18 +94,12 @@ public class Stats : MonoBehaviour
 		{
 			burnOut-=Time.deltaTime*1;
 		}
+		else
+			DoAction();
 		
-		if(currentTarget)
-		{
-			if(burnOut<=0)
-				ShootCheck();
-		}
 		
 		if(ap<maxAp)
 			ap+=Time.deltaTime*10; //? TODO
-		
-		
-		
 		
 		Vector3 curMove = transform.position - previousPosition;
 		curSpeed = curMove.magnitude / Time.deltaTime;
@@ -104,22 +111,31 @@ public class Stats : MonoBehaviour
 			SetTarget(null);
 		}
 		
+		if(!currentTarget && isShooting)
+		{
+			SetTarget(null);
+		}
+		
 		
 	}
 	
 	public void SetTarget(Transform target)
 	{
 		if(target==null)
+		{
 			animator.SetBool("isShooting",false);
+			isShooting = false;
+		}
 		else
 		{
-			navMeshAgent.velocity = Vector3.zero;
-			navMeshAgent.ResetPath();
+			ResetPath();
 			animator.SetBool("isShooting",true);
+			isShooting = true;
+			burnOut=0.5f;
+			SendAction(4);
 		}
 		
 		currentTarget = target;
-		burnOut=0.2f;
 	}
 	
 	#region equip/unequip
@@ -135,9 +151,15 @@ public class Stats : MonoBehaviour
 		if(weapon&&weapon.type != weaponType.pistol)
 		{
 			animator.SetBool("HWequiped", true);
+			hwequiped = true;
+			hwModel.SetActive(true);
 		}
 		else
+		{
 			animator.SetBool("HWequiped", false);
+			hwequiped = false;
+			lwModel.SetActive(true);
+		}
 	}
 	
 	public void EquipArmor(Item item)
@@ -147,6 +169,7 @@ public class Stats : MonoBehaviour
 		
 		inv.RemoveItem(item);
 		armor = (ItemArmor)item;
+		armorModel.SetActive(true);
 	}
 	
 	public void EquipHelmet(Item item)
@@ -156,6 +179,7 @@ public class Stats : MonoBehaviour
 		
 		inv.RemoveItem(item);
 		helmet = (ItemHelmet)item;
+		helmetModel.SetActive(true);
 	}
 	
 	public void FindAmmo()
@@ -180,6 +204,11 @@ public class Stats : MonoBehaviour
 		
 		inv.AddItem(weapon);
 		animator.SetBool("HWequiped", false);
+		if(weapon.type != weaponType.pistol)
+			hwModel.SetActive(false);
+		else
+			lwModel.SetActive(false);
+		
 		weapon=null;
 	}	
 	public void UnequipArmor()
@@ -188,6 +217,7 @@ public class Stats : MonoBehaviour
 			return;
 		
 		inv.AddItem(armor);
+		armorModel.SetActive(false);
 		armor=null;
 	}	
 	public void UnequipHelmet()
@@ -196,7 +226,8 @@ public class Stats : MonoBehaviour
 			return;
 		
 		inv.AddItem(helmet);
-		helmet=null;
+		helmetModel.SetActive(false);
+		helmet=null;	
 	}
 	
 	public void UnequipEverything()
@@ -237,13 +268,12 @@ public class Stats : MonoBehaviour
 			if(weapon.ammoUsed && weapon.ammoUsed.quantity>0)
 			{
 				ReloadWeapon();
-				burnOut = 1.5f; //TODO reload cost and burn out
-				
 			}
 			else
 			{
 				transform.LookAt(currentTargetPoint); // look at
 				sound.PlayEmpty(transform);
+				animator.SetTrigger("Shoot");
 				burnOut = 1;
 				SetTarget(null);
 			}
@@ -252,6 +282,8 @@ public class Stats : MonoBehaviour
 		
 		if(currentTarget)
 			currentTargetPoint = currentTarget.position;
+		
+		destination = new Vector3(0,0,0);
 		
 		
 		if(weapon.mode == burstMode.burst && ap>=weapon.apCost*2.5f)
@@ -272,6 +304,9 @@ public class Stats : MonoBehaviour
 			burnOut = 60/weapon.rateOfFire;
 			ap-=weapon.apCost/5;
 		}
+		else 
+			return;
+		
 	}
 	public IEnumerator Burst()
 	{
@@ -302,6 +337,8 @@ public class Stats : MonoBehaviour
 		weapon.weight -= weapon.ammoUsed.weight;
 		
 		Vector3 lineDir;
+		
+		animator.SetTrigger("Shoot");
 		
 		if(chanceToHit>=Random.Range(1,100))
 		{
@@ -392,12 +429,30 @@ public class Stats : MonoBehaviour
 			return;
 		
 		if(ap<weapon.apCost)
+		{
+			log.Send("Not enough AP ("+weapon.apCost+")");
 			return;
+		}
 		
 		if(!inv.FindItemInInventory(weapon.ammoUsed.name))
 			return;
 		
 		
+		
+		if(statePos == state.stand && hwequiped)
+			burnOut = Formulas.STAND_HEAVY_RELOAD_TIME;
+		else if(statePos == state.stand && !hwequiped)
+			burnOut = Formulas.STAND_LIGHT_RELOAD_TIME;
+		else if(statePos == state.crouch && hwequiped)
+			burnOut = Formulas.CROUCH_HEAVY_RELOAD_TIME;
+		else if(statePos == state.crouch && !hwequiped)
+			burnOut = Formulas.CROUCH_LIGHT_RELOAD_TIME;
+		else if(statePos == state.crawl && hwequiped)
+			burnOut = Formulas.CRAWL_HEAVY_RELOAD_TIME;
+		else if(statePos == state.crawl && !hwequiped)
+			burnOut = Formulas.CRAWL_LIGHT_RELOAD_TIME;
+		
+		ResetPath();
 		animator.SetTrigger("Reload");
 		
 		Item ammo = (ItemAmmo)inv.GetItem(weapon.ammoUsed.name);
@@ -432,6 +487,18 @@ public class Stats : MonoBehaviour
 	
 	public void SwitchWeaponMode(burstMode mode)
 	{
+		if(!weapon)
+			return;
+		
+		if(mode == burstMode.single && !weapon.single)
+			return;
+		
+		if(mode == burstMode.burst && !weapon.burst)
+			return;
+		
+		if(mode == burstMode.auto && !weapon.auto)
+			return;
+		
 		weapon.mode = mode;
 		
 		if(mode == burstMode.single)
@@ -446,14 +513,27 @@ public class Stats : MonoBehaviour
 	
 	public void SwitchState(int addPose)
 	{
+		
 		if(statePos == state.stand && addPose>0)
+		{
 			animator.SetTrigger("StandToCrouch");
+			burnOut = Formulas.BURNOUT_STAND_TO_CROUCH;
+		}
 		else if(statePos == state.crouch && addPose>0)
+		{
 			animator.SetTrigger("CrouchToCrawl");
+			burnOut = Formulas.BURNOUT_CROUCH_TO_CRAWL;
+		}
 		else if(statePos == state.crawl && addPose<0)
+		{
 			animator.SetTrigger("CrawlToCrouch");
+			burnOut = Formulas.BURNOUT_CRAWL_TO_CROUCH;
+		}
 		else if(statePos == state.crouch && addPose<0)
+		{
 			animator.SetTrigger("CrouchToStand");
+			burnOut = Formulas.BURNOUT_CROUCH_TO_STAND;
+		}
 		else 
 			return;
 		
@@ -483,6 +563,51 @@ public class Stats : MonoBehaviour
 		vis.BodyPartsResize(statePos);
 	}
 	
+	
+	private void ResetPath()
+	{
+		
+		navMeshAgent.velocity = Vector3.zero;
+		navMeshAgent.ResetPath();
+	}
+	
+	public void SendAction(int actionType)
+	{
+		nextAction = actionType;
+	}
+	
+	private void DoAction()
+	{
+		if(nextAction==0)
+		{
+			SwitchState(1);
+		}
+		else if(nextAction==1)
+		{
+			SwitchState(-1);
+		}
+		else if(nextAction==2)
+		{
+			navMeshAgent.SetDestination(destination);
+			SetTarget(null);
+			//destination = new Vector3(0,0,0);
+		}
+		else if(nextAction==3)
+		{
+			ReloadWeapon();
+		}
+		else if(nextAction==4)
+		{
+			ShootCheck();
+		}
+		
+		if(destination != new Vector3(0,0,0) && nextAction != 4)
+			SendAction(2);
+		else if (currentTarget)
+			SendAction(4);
+		else
+			SendAction(255);
+	}
 
 }
 

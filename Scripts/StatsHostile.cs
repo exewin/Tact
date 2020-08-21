@@ -23,7 +23,7 @@ public class StatsHostile : Stats
 			if(inv.items[i] is ItemWeapon)
 			{
 				EquipWeapon(inv.items[i]);
-				ReloadWeapon();
+				SendAction(3);
 				continue;
 			}
 			if(inv.items[i] is ItemHelmet)
